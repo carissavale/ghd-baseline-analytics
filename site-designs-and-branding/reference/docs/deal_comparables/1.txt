@@ -1,0 +1,50 @@
+BASELINE ANALYTICS League-Wide Sports Tech
+Deal Comparables
+BASELINE ANALYTICS, INC. | Confidential | March 2026 baselineanalytics.net | Page 1
+How Major Leagues Price Technology Partnerships
+This document provides a comprehensive financial breakdown of every major league-wide technology deal across MLB, NBA, and NFL. Each entry includes
+the company background, deal structure, rollout methodology, measurable results, and all publicly available financial terms. These deals collectively inform the
+pricing architecture for deploying an AI-powered injury prevention system at the league level.
+MLB-Incubated Technology
+MLB-INCUBATED / ACQUIRED
+BAMTech / MLB Advanced Media $3.83B+ total
+2000-2022 | MLB-incubated tech company spun off and acquired by Disney | Now: Disney Streaming Services
+WHAT IT IS
+MLB Advanced Media (MLBAM) was created in 2000 by Commissioner Bud Selig to consolidate the digital media rights of all 30 MLB teams under one umbrella.
+What started as a website and ticket-selling operation evolved into the most advanced live video streaming technology in the world, years ahead of Netflix, YouTube,
+or any competitor. MLBAM developed proprietary streaming infrastructure that could deliver live video to millions of concurrent users with broadcast-level reliability.
+By 2014, it had streamed over 2 billion live games and powered platforms including WatchESPN, HBO Now, the 2014 FIFA World Cup, NHL, PGA Tour, and WWE
+Network. In 2015, the streaming technology division was spun off as BAMTech, which Disney ultimately acquired to power Disney+, Hulu, and ESPN+.
+ROLLOUT
+2000: Selig asks all 30 MLB teams to invest $1M/year for four years, creating a $120M funding target. Revenue came faster than expected, and only $77M of the
+original $120M was ever needed. 2002: First-ever MLB game streamed online (Yankees vs. Rangers, August 26). Three years before YouTube was founded. 2003:
+MLB.tv launched at $79.95/season, signing 100,000 subscribers. 2005: MLBAM acquires Tickets.com for $66M. 2008-2014: MLBAM expands to power streaming for
+CBS March Madness, WatchESPN, HBO Now, WWE Network, PGA Tour, and others. Forbes calls it 'the biggest media company you've never heard of' in 2014.
+February 2015: Streaming division spun off as BAMTech. August 2015: NHL signs 6-year, $600M deal with BAMTech, receiving a 10% equity stake. August 2016:
+Disney acquires 33% stake for $1B. August 2017: Disney acquires additional 42% for $1.58B, bringing total to 75% controlling stake. Bob Iger calls it 'the beginning
+of the reinvention of the Walt Disney Company.' BAMTech rebranded as Disney Streaming Services. August 2021: Disney buys NHL's 10% stake for $350M.
+November 2022: Disney buys MLB's remaining 15% stake for $900M. Disney now owns 100%.
+RESULT
+BAMTech became the technology backbone of the entire Disney streaming empire, powering Disney+, Hulu, and ESPN+. MLB's initial $77M investment across 30
+teams generated a return of approximately $2.55B+ in sale proceeds, roughly $85M per team and a 33x return on invested capital. Each MLB team received
+approximately $33M from the initial Disney investment (2016) and an additional ~$52M from the subsequent transactions. The BAMTech story represents the single
+most successful technology investment in the history of professional sports and fundamentally shaped MLB's approach to technology partnerships. It proved that
+league-incubated technology, when properly scaled, can generate returns that dwarf the original investment by orders of magnitude.
+WHY THIS MATTERS FOR ACIS
+BAMTech is the foundational case study for how MLB thinks about technology: build or invest early, retain equity, and capture upside. MLB will expect a similar
+dynamic in any ACIS partnership. They will want equity participation, not just a vendor-customer relationship. The BAMTech precedent also establishes that MLB is
+willing to act as a centralized technology buyer on behalf of all 30 teams, deploying league-wide infrastructure rather than leaving it to individual clubs. This is exactly
+the deployment model ACIS would use.
+KEY FINANCIALS
+MLB teams' initial investment (2000-2003) $77M total ($2.6M avg/team)
+Tickets.com acquisition (2005) $66M
+NHL deal with BAMTech (2015) $600M / 6 years + 10% equity
+Disney acquires 33% stake (Aug 2016) $1.0B
+Disney acquires add'l 42% to reach 75% (Aug 2017) $1.58B
+Implied BAMTech valuation at 75% deal ~$3.75B
+Disney acquires NHL's 10% (Aug 2021) $350M
+Disney acquires MLB's 15% (Nov 2022) $900M
+Total Disney acquisition cost $3.83B
+Per-team distribution to MLB owners ~$85M each (~$2.55B total)
+ROI on original $77M investment ~33x return
+AI Injury Prevention (Closest ACIS Comparables)

@@ -1,0 +1,60 @@
+PERKK Branding Studio
+Brand Colors
+Brand Colors
+2.0 Black Sunglow Shades
+Limed Oak White
+HEX: 
+RGB: 
+CMYK:
+HEX: 
+RGB: 
+CMYK:
+HEX: 
+RGB: 
+CMYK:
+HEX: 
+RGB: 
+CMYK:
+HEX: 
+RGB: 
+CMYK:
+HEX: 
+RGB: 
+CMYK:
+HEX: 
+RGB: 
+CMYK:
+HEX: 
+RGB: 
+CMYK:
+#000000 
+ 0, 0, 0 
+ 0, 0, 0, 100
+#FFFFFF 
+ 100, 100, 100 
+ 0, 0, 0, 0
+#FFC655 
+100, 78, 33 
+ 0, 22, 67, 0
+#F7BF51 
+97, 75, 32 
+ 0, 23, 67, 3
+#EFB94C 
+94, 73, 30 
+ 0, 23, 68, 6
+#E8B248 
+91, 70, 28 
+ 0, 23, 69, 9
+#E0AC44 
+88, 67, 27 
+ 0, 23, 70, 12
+#AE8E51 
+ 68, 56, 32 
+ 0, 18, 53, 32
+Mercury
+HEX: 
+RGB: 
+CMYK:
+#E5E5E5 
+ 90, 90, 90 
+ 0, 0, 0, 10

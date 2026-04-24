@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Baseline Analytics · Team</title>
+<style>
+ @font-face { font-family: 'GT America'; src: url('../../brand_source/fonts_2/GT-America-Standard-Light-Trial.otf') format('opentype'); font-weight: 300; }
+ @font-face { font-family: 'GT America'; src: url('../../brand_source/fonts_2/GT-America-Standard-Regular-Trial.otf') format('opentype'); font-weight: 400; }
+ @font-face { font-family: 'GT America'; src: url('../../brand_source/fonts_2/GT-America-Standard-Medium-Trial.otf') format('opentype'); font-weight: 500; }
+ @font-face { font-family: 'GT America Mono'; src: url('../../brand_source/fonts_1/GT-America-Mono-Regular-Trial.otf') format('opentype'); font-weight: 400; }
+ @font-face { font-family: 'GT America Mono'; src: url('../../brand_source/fonts_1/GT-America-Mono-Medium-Trial.otf') format('opentype'); font-weight: 500; }
+
+ :root {
+ --black: #000; --onyx: #121211; --onyx-2: #1a1916;
+ --gold: #FFC655; --gold-mid: #AE8E51; --gold-deep: #63553C;
+ --mercury: #E5E5E5; --mercury-dim: rgba(229,229,229,0.62);
+ --mercury-faint: rgba(229,229,229,0.32);
+ --hairline: rgba(229,229,229,0.08); --hairline-2: rgba(229,229,229,0.14);
+ }
+
+ * { box-sizing: border-box; margin: 0; padding: 0; }
+ html, body { background: var(--black); color: var(--mercury); font-family: 'GT America', -apple-system, sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; }
+ ::selection { background: var(--gold); color: var(--black); }
+
+ /* Top nav */
+ .topnav { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 16px 60px; border-bottom: 1px solid var(--hairline-2); background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); }
+ .topnav-brand { display: flex; align-items: center; gap: 12px; }
+ .topnav-brand .mark { width: 28px; height: 36px; display: flex; gap: 2px; align-items: flex-start; }
+ .topnav-brand .mark span { width: 3px; background: var(--gold); display: block; }
+ .topnav-brand .mark span:nth-child(1) { height: 22px; background: var(--gold-mid); }
+ .topnav-brand .mark span:nth-child(2) { height: 32px; }
+ .topnav-brand .mark span:nth-child(3) { height: 36px; }
+ .topnav-brand .mark span:nth-child(4) { height: 28px; }
+ .topnav-brand .mark span:nth-child(5) { height: 20px; background: var(--gold-mid); }
+ .topnav-brand .name { font-size: 13px; font-weight: 500; color: var(--mercury); }
+ .topnav-brand .sub { font-family: 'GT America Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: var(--gold-mid); text-transform: uppercase; margin-top: 2px; }
+ .topnav-links { display: flex; gap: 4px; align-items: center; }
+ .topnav-links a, .topnav-links .trigger { padding: 8px 16px; border-radius: 4px; text-decoration: none; font-size: 13px; color: var(--mercury-dim); transition: all 0.2s; cursor: pointer; }
+ .topnav-links a:hover, .topnav-links .trigger:hover { color: var(--mercury); }
+ .topnav-links a.active, .topnav-links .dropdown.active .trigger { color: var(--gold); background: rgba(255,198,85,0.08); }
+ .dropdown { position: relative; }
+ .dropdown .trigger { display: inline-flex; align-items: center; gap: 6px; background: transparent; border: none; font-family: inherit; font-size: 13px; }
+ .dropdown .trigger::after { content: ''; width: 6px; height: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); margin-top: -3px; transition: transform 0.2s; }
+ .dropdown:hover .trigger::after { transform: rotate(225deg); margin-top: 2px; }
+ .dropdown-menu { position: absolute; top: 100%; left: 0; min-width: 180px; padding: 8px 0; background: var(--onyx); border: 1px solid var(--hairline-2); opacity: 0; pointer-events: none; transform: translateY(-4px); transition: opacity 0.18s, transform 0.18s; margin-top: 0; z-index: 200; }
+ .dropdown:hover .dropdown-menu { opacity: 1; pointer-events: auto; transform: translateY(0); }
+ .dropdown-menu a { display: block; padding: 10px 18px; font-size: 13px; color: var(--mercury-dim); text-decoration: none; transition: all 0.15s; border-radius: 0; }
+ .dropdown-menu a:hover { background: rgba(255,198,85,0.08); color: var(--gold); }
+ .dropdown-menu a.active { color: var(--gold); }
+
+ .topnav-user { display: flex; align-items: center; gap: 8px; font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.16em; color: var(--mercury-dim); text-transform: uppercase; }
+ .topnav-user .avatar { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--gold-mid); display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--gold); font-weight: 500; }
+
+ .page { max-width: 1480px; margin: 0 auto; padding: 72px 60px 120px; }
+
+ .masthead { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 20px; border-bottom: 1px solid var(--hairline-2); margin-bottom: 56px; }
+ .masthead-left .dateline { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.26em; color: var(--gold-mid); text-transform: uppercase; margin-bottom: 8px; }
+ .masthead-left .pub { font-size: 13px; color: var(--mercury-dim); }
+ .masthead-right { text-align: right; font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--mercury-faint); text-transform: uppercase; }
+ .masthead-right .ed { color: var(--mercury-dim); }
+
+ .hero-kicker { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.28em; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; }
+ .hero-headline { font-size: 72px; font-weight: 300; line-height: 1.02; letter-spacing: -0.035em; color: var(--mercury); max-width: 1100px; margin-bottom: 28px; border-left: 3px solid var(--gold); padding-left: 24px; }
+ .hero-headline .em { color: var(--gold); font-weight: 400; }
+ .standfirst { max-width: 820px; font-size: 17px; line-height: 1.55; color: var(--mercury-dim); font-weight: 300; margin-bottom: 56px; letter-spacing: -0.005em; padding-left: 27px; }
+ .standfirst em { color: var(--mercury); font-style: normal; }
+
+ /* Section heading */
+ .section-heading { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 16px; border-bottom: 1px solid var(--hairline-2); margin-bottom: 28px; }
+ .section-heading .num { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.22em; color: var(--gold-mid); text-transform: uppercase; }
+ .section-heading .title { font-size: 22px; font-weight: 400; color: var(--mercury); letter-spacing: -0.01em; flex: 1; padding-left: 24px; }
+ .section-heading .meta { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: var(--mercury-dim); text-transform: uppercase; }
+
+ /* Stats */
+ .stat-line { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--hairline-2); border-bottom: 1px solid var(--hairline-2); margin-bottom: 56px; }
+ .stat { padding: 28px 32px; border-right: 1px solid var(--hairline); }
+ .stat:first-child { padding-left: 0; }
+ .stat:last-child { border-right: none; padding-right: 0; }
+ .stat .num { font-size: 56px; font-weight: 300; letter-spacing: -0.03em; line-height: 1; color: var(--mercury); font-variant-numeric: tabular-nums; }
+ .stat .num.accent { color: var(--gold); }
+ .stat .num.compact { font-size: 30px; padding-top: 10px; letter-spacing: -0.015em; }
+ .stat .label { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--mercury-faint); text-transform: uppercase; margin-top: 12px; }
+
+ /* Exec cards */
+ .exec-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 32px; }
+ .exec-card {
+ background: rgba(18,18,17,0.6); border: 1px solid var(--hairline-2);
+ padding: 28px 22px 24px; text-align: left;
+ transition: all 0.25s; min-height: 260px;
+ display: flex; flex-direction: column;
+ position: relative; overflow: hidden;
+ }
+ .exec-card:hover { border-color: var(--gold-mid); background: rgba(18,18,17,0.9); transform: translateY(-2px); }
+ .exec-card::before {
+ content: ''; position: absolute; top: 0; left: 0; right: 0;
+ height: 3px; background: var(--gold); opacity: 0; transition: opacity 0.2s;
+ }
+ .exec-card:hover::before { opacity: 1; }
+ .exec-card.founder::before { opacity: 1; }
+ .exec-eyebrow {
+ font-family: 'GT America Mono', monospace; font-size: 9px;
+ letter-spacing: 0.22em; color: var(--gold-mid); text-transform: uppercase;
+ margin-bottom: 16px;
+ }
+ .exec-card.founder .exec-eyebrow { color: var(--gold); }
+ .exec-name {
+ font-size: 19px; font-weight: 500; color: var(--mercury);
+ letter-spacing: -0.01em; line-height: 1.2; margin-bottom: 8px;
+ }
+ .exec-role {
+ font-family: 'GT America Mono', monospace; font-size: 10px;
+ letter-spacing: 0.16em; color: var(--gold); text-transform: uppercase;
+ line-height: 1.5; margin-bottom: 10px;
+ }
+ .exec-portal-role {
+ display: inline-block; padding: 4px 9px;
+ font-family: 'GT America Mono', monospace; font-size: 8.5px;
+ letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500;
+ color: var(--gold); border: 1px solid var(--gold);
+ background: rgba(255,198,85,0.08); align-self: flex-start;
+ margin-bottom: 14px;
+ }
+ .exec-bio {
+ font-size: 13px; line-height: 1.55; color: var(--mercury-dim);
+ font-weight: 300; flex: 1;
+ }
+ .exec-credentials {
+ font-family: 'GT America Mono', monospace; font-size: 9px;
+ letter-spacing: 0.14em; color: var(--mercury-faint); text-transform: uppercase;
+ padding-top: 14px; margin-top: 14px; border-top: 1px solid var(--hairline);
+ }
+
+ /* Governance block */
+ .governance {
+ display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+ margin-bottom: 48px;
+ }
+ .gov-card {
+ background: rgba(18,18,17,0.5); border: 1px solid var(--hairline-2);
+ padding: 24px 26px;
+ }
+ .gov-label {
+ font-family: 'GT America Mono', monospace; font-size: 9.5px;
+ letter-spacing: 0.22em; color: var(--gold-mid); text-transform: uppercase;
+ margin-bottom: 10px;
+ }
+ .gov-value {
+ font-size: 16px; font-weight: 500; color: var(--mercury);
+ letter-spacing: -0.005em; line-height: 1.35; margin-bottom: 6px;
+ }
+ .gov-meta {
+ font-family: 'GT America Mono', monospace; font-size: 9.5px;
+ letter-spacing: 0.14em; color: var(--mercury-faint); text-transform: uppercase;
+ line-height: 1.5;
+ }
+
+ /* Cross-link */
+ .cross-link {
+ text-align: center; margin: 16px 0 48px;
+ }
+ .cross-link a {
+ display: inline-flex; align-items: center; gap: 12px;
+ padding: 16px 32px; background: rgba(18,18,17,0.7);
+ border: 1px solid var(--gold-mid); color: var(--mercury);
+ font-family: 'GT America Mono', monospace; font-size: 11px;
+ letter-spacing: 0.22em; text-transform: uppercase; font-weight: 500;
+ text-decoration: none; transition: all 0.2s;
+ }
+ .cross-link a:hover { border-color: var(--gold); color: var(--gold); background: rgba(255,198,85,0.06); }
+ .cross-link a span { color: var(--gold); }
+
+ /* Confidential footer */
+ .confidential {
+ margin-top: 80px; padding: 22px 28px;
+ background: rgba(18,18,17,0.6); border: 1px solid var(--hairline-2);
+ border-left: 3px solid var(--gold);
+ display: flex; justify-content: space-between; align-items: center; gap: 24px;
+ font-family: 'GT America Mono', monospace;
+ }
+ .confidential-left { display: flex; align-items: center; gap: 14px; }
+ .confidential-left .lock {
+ display: inline-flex; align-items: center; justify-content: center;
+ width: 18px; height: 18px;
+ }
+ .confidential-left .label {
+ font-size: 11px; letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; font-weight: 500;
+ }
+ .confidential-left .meta {
+ font-size: 11px; letter-spacing: 0.12em; color: var(--mercury-dim); text-transform: none;
+ }
+ .confidential-right {
+ font-size: 10.5px; letter-spacing: 0.1em; color: var(--mercury-faint); max-width: 620px; text-align: right; line-height: 1.5;
+ }
+
+ /* Bottom */
+ .bottom { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--hairline-2); display: flex; justify-content: space-between; align-items: center; }
+ .tagline { font-size: 13px; color: var(--mercury-dim); }
+ .tagline em { color: var(--gold); font-style: normal; font-weight: 400; }
+ .bottom-mono { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--mercury-faint); text-transform: uppercase; }
+
+ @keyframes slideIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+ .fade { animation: slideIn 0.8s ease-out both; }
+
+ /* Brand asset pattern · vertical gold rules as section divider */
+ .brand-divider {
+ display: flex; gap: 3px; align-items: flex-end; height: 20px;
+ margin: 40px 0; padding: 0; opacity: 0.6;
+ }
+ .brand-divider span { width: 3px; background: var(--gold); display: block; }
+ .brand-divider span:nth-child(1) { height: 10px; background: var(--gold-mid); }
+ .brand-divider span:nth-child(2) { height: 16px; }
+ .brand-divider span:nth-child(3) { height: 20px; }
+ .brand-divider span:nth-child(4) { height: 14px; }
+ .brand-divider span:nth-child(5) { height: 8px; background: var(--gold-mid); }
+
+</style>
+</head>
+<body>
+
+<nav class="topnav fade">
+ <a class="topnav-brand" href="../mission/index.html" style="text-decoration:none; color:inherit;">
+ <div class="mark"><span></span><span></span><span></span><span></span><span></span></div>
+ <div>
+ <div class="name">Baseline Analytics</div>
+ <div class="sub">Investor Portal</div>
+ </div>
+ </a>
+ <div class="topnav-links">
+ <a href="../overview/index.html">Overview</a>
+ <a href="../deal_intel/index.html">Deal Intel</a>
+ <a href="../milestones/index.html">Milestones</a>
+ <a href="../meetings/index.html">Meetings</a>
+ <a href="../vault/index.html">Vault</a>
+ <a href="../buzz/index.html">Buzz</a>
+ <div class="dropdown">
+ <button class="trigger">About Us</button>
+ <div class="dropdown-menu">
+ <a href="../team/index.html" class="active">Meet the Team</a>
+ <a href="../advisory/index.html">Advisory Board</a>
+ </div>
+ </div>
+ <a href="../ask_portal/index.html">Ask</a>
+ </div>
+ <div class="topnav-user">
+ <div class="avatar">C</div>
+ <span>Chase</span>
+ </div>
+</nav>
+
+<div class="page">
+
+ <div class="masthead fade">
+ <div class="masthead-left">
+ <div class="dateline">Investor Portal · 23 April 2026</div>
+ <div class="pub">Baseline Analytics · Stakeholder Brief 05</div>
+ </div>
+ <div class="masthead-right">
+ <div class="ed">Team</div>
+ <div>Leadership · Cycle 04</div>
+ </div>
+ </div>
+
+ <div class="hero-kicker fade" style="animation-delay:0.1s">About Us · Leadership</div>
+ <h1 class="hero-headline">Executive Team<span class="em">.</span></h1>
+ <p class="standfirst fade" style="animation-delay:0.2s">
+ The team driving Baseline Analytics from <em>validation</em> to <em>market leadership</em>. Two co-founders, the executive chairman, the incoming CTO, and the lead engineer on the MLB deliverable.
+ </p>
+
+ <!-- Stats -->
+ <div class="stat-line fade" style="animation-delay:0.26s">
+ <div class="stat"><div class="num accent">5</div><div class="label">Executive Seats</div></div>
+ <div class="stat"><div class="num">2</div><div class="label">Co-Founders</div></div>
+ <div class="stat"><div class="num">3</div><div class="label">Key Portal Stakeholders</div></div>
+ <div class="stat"><div class="num compact">Wyoming</div><div class="label">C-Corporation</div></div>
+ </div>
+
+ <div class="fade" style="animation-delay:0.34s">
+ <div class="section-heading">
+ <span class="num">01</span>
+ <span class="title">Executive Leadership</span>
+ <span class="meta">5 Seats · Executive Leadership</span>
+ </div>
+
+ <div class="exec-grid">
+ <div class="exec-card founder">
+ <div class="exec-eyebrow">Founder · CEO</div>
+ <div class="exec-name">Chase Spivey</div>
+ <div class="exec-role">Chief Executive Officer</div>
+ <span class="exec-portal-role">Portal · Champion</span>
+ <div class="exec-bio">Founding CEO and primary portal content creator · drives case studies, strategy docs, and the MLB relationship. Owns capital strategy, league-office engagement, and commercial direction.</div>
+ <div class="exec-credentials">Co-Founder · Wyoming 2025</div>
+ </div>
+ <div class="exec-card founder">
+ <div class="exec-eyebrow">Founder · COO</div>
+ <div class="exec-name">Sheldon McClelland</div>
+ <div class="exec-role">Chief Operating Officer</div>
+ <span class="exec-portal-role">Portal · Positioning</span>
+ <div class="exec-bio">Founding COO. Creates positioning materials · Power Statement, Comparables Doc. Owns operational architecture, stakeholder program, and the cycle cadence that powers the portal.</div>
+ <div class="exec-credentials">Co-Founder · Wyoming 2025</div>
+ </div>
+ <div class="exec-card">
+ <div class="exec-eyebrow">Executive · Chairman</div>
+ <div class="exec-name">Jeff Newman</div>
+ <div class="exec-role">Executive Chairman</div>
+ <span class="exec-portal-role">Portal · Architect</span>
+ <div class="exec-bio">Executive Chairman. Defined the portal concept and Recent Buzz requirements. Capital-markets and SaaS governance operator; IAB architect. Anchors board strategy and investor introductions through the LOI window.</div>
+ <div class="exec-credentials">Onboarded 05 Mar 2026</div>
+ </div>
+ <div class="exec-card">
+ <div class="exec-eyebrow">Incoming · Technology</div>
+ <div class="exec-name">Ramesh Bobba</div>
+ <div class="exec-role">Chief Technology Officer</div>
+ <div class="exec-bio">Incoming CTO. Former Cisco; deep distributed-systems background. Leads the ACIS biomechanical pipeline and the TrackMan integration.</div>
+ <div class="exec-credentials">Spring Training 2026 · Technology Lead</div>
+ </div>
+ <div class="exec-card">
+ <div class="exec-eyebrow">Engineering</div>
+ <div class="exec-name">John Mendez</div>
+ <div class="exec-role">Lead Developer</div>
+ <div class="exec-bio">Lead engineer on the MLB deliverable. Owns the portal, the ingest layer, and the ACIS model integration across the cycle.</div>
+ <div class="exec-credentials">Platform · ACIS · Portal</div>
+ </div>
+ </div>
+ </div>
+
+ <!-- Governance block -->
+ <div class="fade" style="animation-delay:0.42s">
+ <div class="section-heading">
+ <span class="num">02</span>
+ <span class="title">Corporate &amp; Governance</span>
+ <span class="meta">Formation · Cycle · Counsel</span>
+ </div>
+
+ <div class="governance">
+ <div class="gov-card">
+ <div class="gov-label">Entity</div>
+ <div class="gov-value">Baseline Analytics, Inc.</div>
+ <div class="gov-meta">Wyoming C-Corporation · Formed Oct 2025</div>
+ </div>
+ <div class="gov-card">
+ <div class="gov-label">Legal Counsel</div>
+ <div class="gov-value">Fenwick &amp; West</div>
+ <div class="gov-meta">Kris Withrow, Partner · Corporate &amp; Securities</div>
+ </div>
+ <div class="gov-card">
+ <div class="gov-label">Cycle Cadence</div>
+ <div class="gov-value">Monthly Stakeholder Brief</div>
+ <div class="gov-meta">Cycle 04 · 24 Mar to 23 Apr 2026</div>
+ </div>
+ </div>
+ </div>
+
+ <div class="cross-link fade" style="animation-delay:0.5s">
+ <a href="../advisory/index.html">View Industry Advisory Board <span>→</span></a>
+ </div>
+
+ <!-- Confidential footer -->
+ <div class="confidential fade" style="animation-delay:0.5s">
+ <div class="confidential-left">
+ <span class="lock">
+ <svg viewBox="0 0 16 16" fill="none" style="width:14px;height:14px"><path d="M4 7V5a4 4 0 018 0v2M3 7h10v7H3V7z" stroke="#FFC655" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+ </span>
+ <span class="label">Confidential</span>
+ <span class="meta">Baseline Analytics, Inc. · Wyoming C-Corporation</span>
+ </div>
+ <div class="confidential-right">This portal contains proprietary and confidential information intended solely for authorized stakeholders.</div>
+ </div>
+
+ <div class="bottom">
+ <div class="tagline"><em>Every Athlete</em> Deserves a Baseline.</div>
+ <div class="bottom-mono">Baseline Analytics · Investor Portal · 05 · Team</div>
+ </div>
+
+</div>
+
+<script>
+ // Animated stat counters · numeric stats count up on scroll into view
+ (function() {
+ const selector = '.stat .num, .mission-stat strong, .comp-num, .pitch-stats strong';
+ const parseStat = (text) => {
+ const t = text.trim();
+ // $6B+, $641M, 1 in 3, 5×, etc. · handle dollar, suffix, separator
+ const m = t.match(/^([$])?([\d,.]+)(B\+?|M\+?|K|×|x|\+)?$/i);
+ if (!m) return null;
+ const prefix = m[1] || '';
+ const raw = m[2].replace(/,/g, '');
+ const suffix = m[3] || '';
+ const target = parseFloat(raw);
+ if (isNaN(target)) return null;
+ const decimals = (raw.split('.')[1] || '').length;
+ const hasComma = m[2].includes(',');
+ return { prefix, target, suffix, decimals, hasComma };
+ };
+ const fmt = (n, p) => {
+ let s = n.toFixed(p.decimals);
+ if (p.hasComma) s = parseFloat(s).toLocaleString('en-US', { minimumFractionDigits: p.decimals, maximumFractionDigits: p.decimals });
+ return p.prefix + s + p.suffix;
+ };
+ const animate = (el, p) => {
+ const dur = 1100;
+ const start = performance.now();
+ const step = (now) => {
+ const t = Math.min(1, (now - start) / dur);
+ const eased = 1 - Math.pow(1 - t, 3);
+ el.textContent = fmt(p.target * eased, p);
+ if (t < 1) requestAnimationFrame(step);
+ };
+ requestAnimationFrame(step);
+ };
+ const obs = new IntersectionObserver((entries) => {
+ entries.forEach(e => {
+ if (!e.isIntersecting) return;
+ const el = e.target;
+ const p = el._statParse;
+ if (p) animate(el, p);
+ obs.unobserve(el);
+ });
+ }, { threshold: 0.4 });
+ document.querySelectorAll(selector).forEach(el => {
+ const p = parseStat(el.textContent);
+ if (!p) return;
+ el._statParse = p;
+ el.textContent = fmt(0, p);
+ obs.observe(el);
+ });
+ })();
+</script>
+
+</body>
+</html>

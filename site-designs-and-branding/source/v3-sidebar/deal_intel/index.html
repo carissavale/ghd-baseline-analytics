@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Baseline Analytics — Deal Intel (V3)</title>
+<style>
+  @font-face { font-family: 'GT America'; src: url('../../brand_source/fonts_2/GT-America-Standard-Light-Trial.otf') format('opentype'); font-weight: 300; }
+  @font-face { font-family: 'GT America'; src: url('../../brand_source/fonts_2/GT-America-Standard-Regular-Trial.otf') format('opentype'); font-weight: 400; }
+  @font-face { font-family: 'GT America'; src: url('../../brand_source/fonts_2/GT-America-Standard-Medium-Trial.otf') format('opentype'); font-weight: 500; }
+  @font-face { font-family: 'GT America'; src: url('../../brand_source/fonts_2/GT-America-Standard-Bold-Trial.otf') format('opentype'); font-weight: 700; }
+  @font-face { font-family: 'GT America Mono'; src: url('../../brand_source/fonts_1/GT-America-Mono-Regular-Trial.otf') format('opentype'); font-weight: 400; }
+  @font-face { font-family: 'GT America Mono'; src: url('../../brand_source/fonts_1/GT-America-Mono-Medium-Trial.otf') format('opentype'); font-weight: 500; }
+
+  :root {
+    --black: #000; --onyx: #121211; --onyx-2: #1a1916; --onyx-3: #0a0a09;
+    --gold: #FFC655; --gold-mid: #AE8E51; --gold-deep: #63553C;
+    --mercury: #E5E5E5; --mercury-dim: rgba(229,229,229,0.62);
+    --mercury-faint: rgba(229,229,229,0.32);
+    --hairline: rgba(229,229,229,0.08); --hairline-2: rgba(229,229,229,0.14);
+    --sidebar-w: 220px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--black); color: var(--mercury); font-family: 'GT America', -apple-system, sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+  ::selection { background: var(--gold); color: var(--black); }
+
+  /* ========== SIDEBAR ========== */
+  .sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--onyx-3); border-right: 1px solid var(--hairline-2); display: flex; flex-direction: column; z-index: 50; padding: 24px 0; }
+  .sb-brand { padding: 4px 22px 28px; border-bottom: 1px solid var(--hairline); margin-bottom: 22px; display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+  .sb-mark { width: 24px; height: 32px; display: flex; gap: 2px; align-items: flex-start; }
+  .sb-mark span { width: 3px; background: var(--gold); display: block; }
+  .sb-mark span:nth-child(1) { height: 19px; background: var(--gold-mid); }
+  .sb-mark span:nth-child(2) { height: 28px; }
+  .sb-mark span:nth-child(3) { height: 32px; }
+  .sb-mark span:nth-child(4) { height: 24px; }
+  .sb-mark span:nth-child(5) { height: 17px; background: var(--gold-mid); }
+  .sb-brand .name { font-size: 12px; font-weight: 500; color: var(--mercury); letter-spacing: 0.02em; line-height: 1.2; }
+  .sb-brand .sub { font-family: 'GT America Mono', monospace; font-size: 8.5px; letter-spacing: 0.22em; color: var(--gold-mid); text-transform: uppercase; margin-top: 3px; }
+  .sb-section-label { font-family: 'GT America Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: var(--mercury-faint); text-transform: uppercase; padding: 0 22px; margin-bottom: 10px; }
+  .sb-nav { display: flex; flex-direction: column; gap: 1px; flex: 1; }
+  .sb-link { display: flex; align-items: center; gap: 12px; padding: 10px 22px; text-decoration: none; font-size: 13px; color: var(--mercury-dim); transition: all 0.15s; cursor: pointer; border: none; background: transparent; font-family: inherit; text-align: left; width: 100%; position: relative; }
+  .sb-link:hover { color: var(--mercury); background: rgba(255,255,255,0.02); }
+  .sb-link.active { color: var(--gold); background: rgba(255,198,85,0.06); }
+  .sb-link.active::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--gold); }
+  .sb-link .dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(229,229,229,0.2); flex-shrink: 0; }
+  .sb-link.active .dot { background: var(--gold); }
+  .sb-link:hover .dot { background: rgba(229,229,229,0.5); }
+  .sb-group { margin: 0; }
+  .sb-group-trigger .caret { margin-left: auto; width: 5px; height: 5px; border-right: 1.2px solid currentColor; border-bottom: 1.2px solid currentColor; transform: rotate(45deg); transition: transform 0.2s; margin-bottom: 2px; }
+  .sb-group.open .sb-group-trigger .caret { transform: rotate(225deg); margin-top: 2px; margin-bottom: 0; }
+  .sb-subnav { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.22s ease; }
+  .sb-group.open .sb-subnav { grid-template-rows: 1fr; }
+  .sb-subnav-inner { overflow: hidden; }
+  .sb-sublink { display: block; padding: 8px 22px 8px 42px; font-size: 12.5px; color: var(--mercury-dim); text-decoration: none; transition: all 0.15s; }
+  .sb-sublink:hover { color: var(--gold); background: rgba(255,198,85,0.04); }
+  .sb-sublink.active { color: var(--gold); }
+  .sb-divider { height: 1px; background: var(--hairline); margin: 18px 22px; }
+  .sb-user { padding: 16px 22px; border-top: 1px solid var(--hairline); display: flex; align-items: center; gap: 10px; }
+  .sb-user .avatar { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--gold-mid); display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--gold); font-weight: 500; font-family: 'GT America Mono', monospace; }
+  .sb-user .meta { display: flex; flex-direction: column; line-height: 1.2; }
+  .sb-user .name { font-size: 12px; color: var(--mercury); font-weight: 500; }
+  .sb-user .role { font-family: 'GT America Mono', monospace; font-size: 9px; letter-spacing: 0.16em; color: var(--mercury-faint); text-transform: uppercase; margin-top: 3px; }
+
+  /* ========== MAIN ========== */
+  .main { margin-left: var(--sidebar-w); min-height: 100vh; }
+  .main-head { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; padding: 16px 48px; background: rgba(0,0,0,0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--hairline); }
+  .main-head-left { display: flex; align-items: baseline; gap: 16px; font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; }
+  .main-head-left .crumb { color: var(--mercury-faint); }
+  .main-head-left .sep { color: var(--mercury-faint); }
+  .main-head-left .cur { color: var(--gold); }
+  .main-head-right { display: flex; align-items: center; gap: 24px; font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: var(--mercury-faint); text-transform: uppercase; }
+  .main-head-right .live { display: inline-flex; align-items: center; gap: 8px; color: var(--gold); }
+  .main-head-right .live::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .content { padding: 40px 48px 80px; }
+
+  /* ========== HERO ========== */
+  .hero { margin-bottom: 40px; }
+  .hero-kicker { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.28em; color: var(--gold); text-transform: uppercase; margin-bottom: 18px; }
+  .hero-head { font-size: 56px; font-weight: 400; line-height: 1.08; letter-spacing: -0.03em; color: var(--mercury); max-width: 900px; margin-bottom: 18px; }
+  .hero-head .em { color: var(--gold); font-weight: 400; font-style: italic; }
+  .hero-sub { max-width: 720px; font-size: 15px; line-height: 1.58; color: var(--mercury-dim); font-weight: 300; letter-spacing: -0.005em; }
+  .hero-sub em { color: var(--mercury); font-style: normal; }
+
+  /* ========== STATS ========== */
+  .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--hairline-2); border-bottom: 1px solid var(--hairline-2); margin-bottom: 40px; }
+  .stat { padding: 22px 28px; border-right: 1px solid var(--hairline); }
+  .stat:first-child { padding-left: 0; }
+  .stat:last-child { border-right: none; padding-right: 0; }
+  .stat .num { font-size: 46px; font-weight: 300; letter-spacing: -0.025em; line-height: 1; color: var(--mercury); font-variant-numeric: tabular-nums; }
+  .stat .num.accent { color: var(--gold); }
+  .stat .num.compact { font-size: 26px; padding-top: 10px; letter-spacing: -0.01em; }
+  .stat .label { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--mercury-faint); text-transform: uppercase; margin-top: 10px; }
+
+  /* ========== PANEL / SECTION ========== */
+  .panel { background: rgba(18,18,17,0.5); border: 1px solid var(--hairline-2); display: flex; flex-direction: column; margin-bottom: 28px; }
+  .panel-head { display: flex; align-items: baseline; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid var(--hairline); }
+  .panel-head-left { display: flex; align-items: baseline; gap: 12px; }
+  .panel-num { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.22em; color: var(--gold-mid); text-transform: uppercase; }
+  .panel-title { font-size: 15px; font-weight: 500; color: var(--mercury); letter-spacing: -0.005em; }
+  .panel-count { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.16em; color: var(--mercury-faint); text-transform: uppercase; }
+  .panel-all { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.22em; color: var(--gold); text-transform: uppercase; text-decoration: none; }
+  .panel-all:hover { color: #ffd37a; }
+
+  /* ========== TABLE ROWS (enterprise-tool pattern) ========== */
+  .data-table { display: flex; flex-direction: column; }
+  .data-row { display: grid; align-items: center; gap: 14px; padding: 14px 20px; border-bottom: 1px solid var(--hairline); text-decoration: none; color: inherit; transition: background 0.15s; cursor: pointer; }
+  .data-row:last-child { border-bottom: none; }
+  .data-row:hover { background: rgba(255,255,255,0.02); }
+  .cell-date { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: var(--mercury-faint); text-transform: uppercase; }
+  .cell-pill { display: inline-flex; justify-content: center; padding: 3px 8px; font-family: 'GT America Mono', monospace; font-size: 8.5px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; border: 1px solid; text-align: center; }
+  .cell-title { font-size: 13px; font-weight: 500; color: var(--mercury); letter-spacing: -0.005em; line-height: 1.3; }
+  .data-row:hover .cell-title { color: var(--gold); }
+  .cell-meta { font-family: 'GT America Mono', monospace; font-size: 9.5px; letter-spacing: 0.16em; color: var(--mercury-faint); text-transform: uppercase; }
+  .cell-actions { font-family: 'GT America Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; }
+
+  /* ========== ASK PERSIST (Overview only per spec) ========== */
+  .ask-persist { display: flex; align-items: center; gap: 14px; padding: 14px 18px; margin-bottom: 36px; background: var(--onyx); border: 1px solid var(--gold-mid); position: relative; }
+  .ask-persist::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gold); }
+  .ask-persist-label { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.24em; color: var(--gold); text-transform: uppercase; white-space: nowrap; }
+  .ask-persist-form { display: flex; gap: 8px; flex: 1; }
+  .ask-persist-input { flex: 1; background: rgba(0,0,0,0.5); border: 1px solid var(--hairline-2); color: var(--mercury); padding: 10px 14px; font-family: 'GT America', sans-serif; font-size: 14px; font-weight: 300; letter-spacing: -0.005em; outline: none; transition: border-color 0.2s; }
+  .ask-persist-input::placeholder { color: var(--mercury-faint); }
+  .ask-persist-input:focus { border-color: var(--gold); }
+  .ask-persist-send { background: var(--gold); color: #121211; border: none; padding: 0 20px; font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 500; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
+  .ask-persist-send:hover { background: #ffd37a; }
+  .ask-persist-chips { display: flex; gap: 6px; }
+  .ask-persist-chip { padding: 6px 10px; background: transparent; border: 1px solid var(--hairline-2); font-family: 'GT America Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mercury-dim); cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+  .ask-persist-chip:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ========== FOOT ========== */
+  .foot { padding-top: 24px; border-top: 1px solid var(--hairline-2); display: flex; justify-content: space-between; align-items: center; font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: var(--mercury-faint); text-transform: uppercase; }
+  .foot em { color: var(--gold); font-style: normal; font-weight: 400; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .fade { animation: fadeUp 0.8s ease-out both; }
+
+
+  .comparables-table .data-row { grid-template-columns: 80px 1fr 1.2fr 120px 80px; }
+  .cell-pill.acis { color: var(--gold); border-color: var(--gold); background: rgba(255,198,85,0.08); }
+  .cell-pill.med { color: var(--mercury-dim); border-color: rgba(229,229,229,0.3); }
+  .data-row.acis-row { background: rgba(255,198,85,0.04); border-left: 2px solid var(--gold); }
+  .data-row.header { background: rgba(0,0,0,0.4); cursor: default; }
+  .data-row.header:hover { background: rgba(0,0,0,0.4); }
+
+  .bar-row { display: grid; grid-template-columns: 200px 1fr 120px; gap: 20px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--hairline); }
+  .bar-row:last-child { border-bottom: none; }
+  .bar-row.acis { padding: 16px 0; }
+  .bar-label { font-size: 13px; font-weight: 500; color: var(--mercury); line-height: 1.4; }
+  .bar-meta { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: var(--mercury-faint); text-transform: uppercase; font-weight: 400; }
+  .bar-track { height: 8px; background: rgba(229,229,229,0.05); position: relative; }
+  .bar-fill { height: 100%; }
+  .bar-value { font-family: 'GT America Mono', monospace; font-size: 11px; letter-spacing: 0.14em; color: var(--mercury); text-transform: uppercase; text-align: right; font-variant-numeric: tabular-nums; }
+
+  .insight-callout { background: rgba(255,198,85,0.04); border: 1px solid var(--gold-mid); border-left: 3px solid var(--gold); padding: 28px 32px; margin-bottom: 32px; }
+  .insight-eyebrow { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.24em; color: var(--gold); text-transform: uppercase; margin-bottom: 14px; }
+  .insight-text { font-size: 17px; font-weight: 400; color: var(--mercury); line-height: 1.5; letter-spacing: -0.01em; }
+  .insight-text em { color: var(--gold); font-style: italic; font-weight: 500; }
+
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <a class="sb-brand" href="../overview/index.html">
+    <div class="sb-mark"><span></span><span></span><span></span><span></span><span></span></div>
+    <div>
+      <div class="name">Baseline Analytics</div>
+      <div class="sub">Investor Portal</div>
+    </div>
+  </a>
+  <div class="sb-section-label">Portal</div>
+  <nav class="sb-nav">
+    <a href="../overview/index.html" class="sb-link"><span class="dot"></span>Overview</a>
+    <a href="../deal_intel/index.html" class="sb-link active"><span class="dot"></span>Deal Intel</a>
+    <a href="../milestones/index.html" class="sb-link"><span class="dot"></span>Milestones</a>
+    <a href="../meetings/index.html" class="sb-link"><span class="dot"></span>Meetings</a>
+    <a href="../vault/index.html" class="sb-link"><span class="dot"></span>Vault</a>
+    <a href="../buzz/index.html" class="sb-link"><span class="dot"></span>Buzz</a>
+    <div class="sb-group " id="aboutGroup">
+      <button class="sb-link sb-group-trigger" id="aboutTrigger">
+        <span class="dot"></span>About Us<span class="caret"></span>
+      </button>
+      <div class="sb-subnav">
+        <div class="sb-subnav-inner">
+          <a href="../team/index.html" class="sb-sublink">Meet the Team</a>
+          <a href="../advisory/index.html" class="sb-sublink">Advisory Board</a>
+        </div>
+      </div>
+    </div>
+    <div class="sb-divider"></div>
+    <a href="../ask_portal/index.html" class="sb-link"><span class="dot"></span>Ask the Portal</a>
+  </nav>
+  <div class="sb-user">
+    <div class="avatar">C</div>
+    <div class="meta">
+      <span class="name">Chase</span>
+      <span class="role">Founder · CEO</span>
+    </div>
+  </div>
+</aside>
+
+<main class="main">
+  <div class="main-head">
+    <div class="main-head-left">
+      <span class="crumb">Baseline Analytics</span>
+      <span class="sep">/</span>
+      <span class="cur">Deal Intel</span>
+    </div>
+    <div class="main-head-right">
+      <span>Cycle 04 · 24 Mar to 23 Apr 2026</span>
+      <span class="live">Live</span>
+    </div>
+  </div>
+  <div class="content">
+
+    <div class="hero fade">
+      <div class="hero-kicker">Investor Portal · Deal Intel</div>
+      <h1 class="hero-head">The only <span class="em">league-wide AI-powered</span> pitcher injury prevention system.</h1>
+      <p class="hero-sub">Sports-tech comparables have cleared <em>$6B+ in documented transactions</em>. Baseline positions ACIS against BAMTech, NFL Digital Athlete, Second Spectrum, and Hawk-Eye — the operating layer the category has been missing.</p>
+    </div>
+
+    <div class="stat-row fade" style="animation-delay:0.1s">
+      <div class="stat"><div class="num accent">$6B+</div><div class="label">Aggregate Comparables</div></div>
+      <div class="stat"><div class="num">$641M</div><div class="label">Annual MLB Pitcher IL Cost</div></div>
+      <div class="stat"><div class="num">$15–50M</div><div class="label">ACIS Annual Target</div></div>
+      <div class="stat"><div class="num">17%</div><div class="label">NFL Concussion Reduction Benchmark</div></div>
+    </div>
+
+    <section class="panel fade" style="animation-delay:0.15s">
+      <div class="panel-head">
+        <div class="panel-head-left">
+          <span class="panel-num">01</span>
+          <span class="panel-title">Deal Comparables Matrix</span>
+          <span class="panel-count">8 deals · $6B+ aggregate</span>
+        </div>
+      </div>
+      <div class="data-table comparables-table">
+        <div class="data-row header">
+          <span class="cell-date">Year</span>
+          <span class="cell-title" style="font-family:'GT America Mono',monospace; font-size:10px; letter-spacing:0.2em; color:var(--mercury-faint); text-transform:uppercase; font-weight:500">Deal</span>
+          <span class="cell-meta">Buyer / Category</span>
+          <span class="cell-meta">Value</span>
+          <span class="cell-meta">Relevance</span>
+        </div>
+        <div class="data-row"><span class="cell-date">2017</span><span class="cell-title">BAMTech</span><span class="cell-meta">Disney · Streaming</span><span class="cell-meta">$1.58B</span><span class="cell-pill acis">High</span></div>
+        <div class="data-row"><span class="cell-date">2021</span><span class="cell-title">NFL Digital Athlete</span><span class="cell-meta">AWS Partnership</span><span class="cell-meta">Strategic</span><span class="cell-pill acis">Direct</span></div>
+        <div class="data-row"><span class="cell-date">2021</span><span class="cell-title">Second Spectrum</span><span class="cell-meta">Genius · NBA Tracking</span><span class="cell-meta">$200M</span><span class="cell-pill acis">High</span></div>
+        <div class="data-row"><span class="cell-date">2011</span><span class="cell-title">Hawk-Eye</span><span class="cell-meta">Sony · Officiating</span><span class="cell-meta">Undisclosed</span><span class="cell-pill med">Adjacent</span></div>
+        <div class="data-row"><span class="cell-date">2021</span><span class="cell-title">Sportradar IPO</span><span class="cell-meta">NASDAQ Listing</span><span class="cell-meta">$8.08B</span><span class="cell-pill med">Context</span></div>
+        <div class="data-row"><span class="cell-date">2021</span><span class="cell-title">Genius Sports</span><span class="cell-meta">SPAC · DMYD</span><span class="cell-meta">$1.5B</span><span class="cell-pill med">Context</span></div>
+        <div class="data-row"><span class="cell-date">2019</span><span class="cell-title">Zebra Sports</span><span class="cell-meta">NFL RFID</span><span class="cell-meta">$42M/yr</span><span class="cell-pill med">Adjacent</span></div>
+        <div class="data-row acis-row"><span class="cell-date">2026</span><span class="cell-title" style="color:var(--gold)">ACIS · Baseline</span><span class="cell-meta" style="color:var(--gold-mid)">MLB · Pitcher Injury</span><span class="cell-meta" style="color:var(--gold-mid)">$15–50M/yr target</span><span class="cell-pill acis">Pitch</span></div>
+      </div>
+    </section>
+
+    <section class="panel fade" style="animation-delay:0.22s">
+      <div class="panel-head">
+        <div class="panel-head-left">
+          <span class="panel-num">02</span>
+          <span class="panel-title">Annual-Rate Positioning</span>
+          <span class="panel-count">5 deals · Scaled</span>
+        </div>
+      </div>
+      <div style="padding: 28px 20px;">
+        <div class="bar-row"><span class="bar-label">Sportradar<br/><span class="bar-meta">$720M/yr rev</span></span><div class="bar-track"><div class="bar-fill" style="width:100%; background:var(--mercury-dim)"></div></div><span class="bar-value">$720M</span></div>
+        <div class="bar-row"><span class="bar-label">Genius Sports<br/><span class="bar-meta">$410M/yr rev</span></span><div class="bar-track"><div class="bar-fill" style="width:57%; background:var(--mercury-dim)"></div></div><span class="bar-value">$410M</span></div>
+        <div class="bar-row"><span class="bar-label">Second Spectrum<br/><span class="bar-meta">$70M/yr rev</span></span><div class="bar-track"><div class="bar-fill" style="width:10%; background:var(--mercury-dim)"></div></div><span class="bar-value">$70M</span></div>
+        <div class="bar-row"><span class="bar-label">Zebra Sports<br/><span class="bar-meta">$42M/yr NFL</span></span><div class="bar-track"><div class="bar-fill" style="width:6%; background:var(--mercury-dim)"></div></div><span class="bar-value">$42M</span></div>
+        <div class="bar-row acis"><span class="bar-label" style="color:var(--gold)">ACIS · Target<br/><span class="bar-meta" style="color:var(--gold-mid)">$15–50M/yr</span></span><div class="bar-track"><div class="bar-fill" style="width:7%; background:var(--gold)"></div></div><span class="bar-value" style="color:var(--gold)">$15–50M</span></div>
+      </div>
+    </section>
+
+    <div class="insight-callout fade" style="animation-delay:0.3s">
+      <div class="insight-eyebrow">Key Insight</div>
+      <div class="insight-text">ACIS is not a bet on a new category. It's a bet on the <em>only uncaptured seat</em> in a category worth $6B in documented transactions — the pitcher injury prevention seat inside MLB's existing data stack.</div>
+    </div>
+
+    <div class="foot">
+      <span><em>Every Athlete</em> Deserves a Baseline.</span>
+      <span>Baseline Analytics · Investor Portal · V3 · Dark Sidebar</span>
+    </div>
+  </div>
+</main>
+
+<script>
+  // Sidebar About Us expand/collapse
+  const aboutGroup = document.getElementById('aboutGroup');
+  const aboutTrigger = document.getElementById('aboutTrigger');
+  if (aboutTrigger) aboutTrigger.addEventListener('click', (e) => {
+    e.preventDefault();
+    aboutGroup.classList.toggle('open');
+  });
+</script>
+
+</body>
+</html>

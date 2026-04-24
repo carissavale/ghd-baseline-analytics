@@ -1,0 +1,17 @@
+BASELINE ANALYTICS League-Wide Sports Tech
+Deal Comparables
+BASELINE ANALYTICS, INC. | Confidential | March 2026 baselineanalytics.net | Page 5
+Across these seven deals, the total documented transaction value exceeds $6 billion. MLB's own BAMTech experience, where a $77M investment returned
+$2.55B+ (33x), fundamentally shapes how the league approaches technology partnerships today. MLB will expect equity participation, centralized deployment,
+and long-term alignment in any league-wide deal. The pricing range for an ACIS-type deployment (AI-powered analytics layer across all 30 teams) falls
+between $15-50M/year, positioned between the data distribution mega-deals ($100M+/yr) and per-team analytics subscriptions ($3-15M aggregated). Against
+MLB's $641M annual cost of pitcher injuries, this represents just 2-8% of the problem's economic value.
+DEAL COMPARISON MATRIX
+Deal Value Duration Structure ACIS Relevance
+BAMTech / MLBAM $3.83B total 2000-2022 MLB-incubated, Disney acquired Foundational
+NFL Digital Athlete + AWS $60M+ program Ongoing League-wide AI platform Highest (95%)
+Second Spectrum + NBA ~$42M/yr 6 years Tiered license + upsell Very High (90%)
+Sportradar + MLB $37M eq + annual 8 years Cash + equity exclusive Structural (55%)
+Genius Sports + NFL ~$120M/yr 4+3 years Exclusive data rights Pricing ref (45%)
+Hawk-Eye + MLB Statcast Est. $20-80M/yr Multi-year HW + SW infrastructure Complementary (70%)
+Zebra Technologies + NFL Est. low tens M/yr 12+ seasons HW tracking / 3-yr renew Entrenchment (35%)

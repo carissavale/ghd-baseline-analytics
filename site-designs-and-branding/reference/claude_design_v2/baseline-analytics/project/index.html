@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Baseline Analytics — Stakeholder Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#000;
+    --onyx:#121211;
+    --onyx-2:#1a1916;
+    --gold:#FFC655;
+    --gold-d:#E0AC44;
+    --gold-m:#AE8E51;
+    --gold-dark:#6b5528;
+    --merc:#E5E5E5;
+    --t1:#ffffff;
+    --t2:rgba(255,255,255,0.58);
+    --t3:rgba(255,255,255,0.32);
+    --t4:rgba(255,255,255,0.14);
+    --bdr:rgba(255,198,85,0.10);
+    --bdr-h:rgba(255,198,85,0.30);
+    --line:rgba(255,255,255,0.06);
+    --line-2:rgba(255,255,255,0.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--t1);font-family:'Manrope',sans-serif;font-feature-settings:"ss01","ss02","cv11";-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  body{overflow-x:hidden}
+  a{color:inherit}
+  button{font-family:inherit;color:inherit}
+  .mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-feature-settings:"tnum","zero"}
+  .serif{font-family:'Fraunces',serif;font-optical-sizing:auto}
+  .tnum{font-variant-numeric:tabular-nums}
+  .kicker{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold-m)}
+  ::-webkit-scrollbar{width:8px;height:8px}
+  ::-webkit-scrollbar-track{background:transparent}
+  ::-webkit-scrollbar-thumb{background:rgba(255,198,85,0.18);border-radius:4px}
+  ::-webkit-scrollbar-thumb:hover{background:rgba(255,198,85,0.32)}
+
+  @keyframes shimmer{0%,100%{opacity:.35}50%{opacity:1}}
+  @keyframes sway{
+    0%{transform:translateY(-4%) scaleY(1.02)}
+    50%{transform:translateY(2%) scaleY(.98)}
+    100%{transform:translateY(-4%) scaleY(1.02)}
+  }
+  @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes cursorBlink{0%,49%{opacity:1}50%,100%{opacity:0}}
+  @keyframes lineGrow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+  @keyframes barGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  @keyframes pulseDot{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.4);opacity:.6}}
+
+  /* Selection */
+  ::selection{background:var(--gold);color:#000}
+</style>
+
+<script type="application/json" id="portal-data">
+{
+  "cycle":"Mar 24 — Apr 23, 2026",
+  "stakeholder":"Mark Shirman",
+  "stakeholderRole":"Prospective Investor · BizAnalytica"
+}
+</script>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="src/data.jsx"></script>
+<script type="text/babel" src="src/atoms.jsx"></script>
+<script type="text/babel" src="src/hero.jsx"></script>
+<script type="text/babel" src="src/dealintel.jsx"></script>
+<script type="text/babel" src="src/velocity.jsx"></script>
+<script type="text/babel" src="src/buzz.jsx"></script>
+<script type="text/babel" src="src/meetings.jsx"></script>
+<script type="text/babel" src="src/vault.jsx"></script>
+<script type="text/babel" src="src/ask.jsx"></script>
+<script type="text/babel" src="src/app.jsx"></script>
+</body>
+</html>

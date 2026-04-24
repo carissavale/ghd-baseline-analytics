@@ -1,0 +1,59 @@
+BASELINE ANALYTICS League-Wide Sports Tech
+Deal Comparables
+BASELINE ANALYTICS, INC. | Confidential | March 2026 baselineanalytics.net | Page 3
+NBA equity stake in Sportradar 3%
+Data Licensing Deals
+DATA LICENSING / EQUITY HYBRID
+Sportradar + MLB $37.3M equity + annual fees
+8-year exclusive deal (2025-2032) | Real-time game data distribution | Cash + equity hybrid structure
+WHAT IT IS
+Sportradar AG is a global sports data and technology company headquartered in Switzerland, publicly traded on NASDAQ (SRAD). It provides real-time game data,
+odds feeds, and integrity services to sportsbooks, media companies, and sports leagues worldwide. For MLB, Sportradar serves as the exclusive distributor of official
+real-time game data to the sports betting ecosystem and media partners. This means every licensed sportsbook that offers MLB betting must source its live game
+data through Sportradar.
+ROLLOUT
+The expanded exclusive partnership was announced in February 2025, extending through 2032 (8-year term). Under the deal, MLB received 1,855,724 Class A
+ordinary shares of Sportradar, worth approximately $37.3M at signing. Sportradar pays undisclosed annual license fees for exclusive rights to distribute MLB's
+real-time game data. This follows the model established across other major leagues where the data distributor pays the league for exclusive access. The deal
+replaced and expanded a prior Sportradar-MLB relationship, indicating satisfaction with the partnership structure.
+RESULT
+The equity component is the most significant structural signal. MLB now holds a direct equity stake in its data distribution partner, aligning long-term incentives. If
+Sportradar's stock appreciates, MLB benefits beyond the annual cash payments. The 8-year exclusive term provides both parties with planning stability and justifies
+higher capital investment from Sportradar in MLB-specific capabilities.
+WHY THIS MATTERS FOR ACIS
+MLB will almost certainly expect an equity stake in Baseline as part of any league-wide deal. The Sportradar deal establishes the cash-plus-equity hybrid as MLB's
+preferred deal structure. The 8-year duration is a benchmark for contract length. Plan for this in your cap table and term sheet.
+KEY FINANCIALS
+Equity granted to MLB 1,855,724 Class A shares (~$37.3M)
+Annual license fees Undisclosed
+Contract duration 8 years (2025-2032)
+Exclusivity Yes (sole distributor of real-time data)
+Sportradar NBA deal (comparison) $1B+ / 8 years + 3% equity to NBA
+Sportradar market cap (ref) ~$10B (NASDAQ: SRAD)
+DATA LICENSING / EXCLUSIVITY PREMIUM
+Genius Sports + NFL ~$120M/yr
+4+3 years (2021-2029) | Exclusive real-time data distribution to sportsbooks | Replaced prior Sportradar deal
+WHAT IT IS
+Genius Sports Limited (NYSE: GENI) is a sports data and technology company that became the NFL's exclusive distributor of real-time data to sportsbooks in 2021,
+replacing Sportradar. Genius also acquired Second Spectrum (the NBA's tracking and analytics provider) for $200M in 2021, giving it analytics capabilities across
+NBA, EPL, MLS, and WNBA. The NFL deal is a pure data monetization play focused on the legal sports betting market.
+ROLLOUT
+The NFL ran a competitive bidding process between Sportradar and Genius Sports for the exclusive data distribution rights. Under the prior non-exclusive
+arrangement with Sportradar, the NFL received approximately $20M/year. By granting exclusivity and running a competitive process, the NFL drove the price to
+approximately $120M/year, a 5-6x increase. The initial contract was 4 years. In 2023, the NFL and Genius Sports extended the deal by 3 additional years through
+2029, demonstrating satisfaction with the partnership.
+RESULT
+This deal established the highest-value data distribution agreement in professional sports. It definitively proved that exclusivity is the single most powerful pricing
+lever in league-wide technology partnerships. The 5-6x price increase from non-exclusive to exclusive demonstrates the premium that scarcity commands.
+WHY THIS MATTERS FOR ACIS
+The exclusivity premium is the critical insight. If ACIS can secure exclusive positioning as MLB's official AI-powered pitcher injury prevention system, pricing should
+reflect a 2-5x premium over what a non-exclusive arrangement would command. The ~$120M/yr figure is not directly comparable (it is a betting data play), but the
+structural lesson about exclusivity pricing absolutely applies.
+KEY FINANCIALS
+Annual rights fees (estimated) ~$120M/yr
+Prior non-exclusive deal (Sportradar) ~$20M/yr
+Price increase from exclusivity 5-6x
+Contract term 4 years + 3-year extension (2021-2029)
+Genius Sports acquisition of Second Spectrum $200M (2021)
+Genius Sports market cap (ref) ~$2.5B (NYSE: GENI)
+Tracking Infrastructure Deals

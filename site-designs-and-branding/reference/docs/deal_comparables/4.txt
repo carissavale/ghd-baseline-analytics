@@ -1,0 +1,60 @@
+BASELINE ANALYTICS League-Wide Sports Tech
+Deal Comparables
+BASELINE ANALYTICS, INC. | Confidential | March 2026 baselineanalytics.net | Page 4
+TRACKING INFRASTRUCTURE
+Hawk-Eye (Sony) + MLB Statcast Est. $20-80M/yr
+Multi-year (2020-present) | Camera-based ball and player tracking | All 30 MLB + 60+ MiLB stadiums
+WHAT IT IS
+Hawk-Eye Innovations, owned by Sony Group Corporation, provides the tracking technology that powers MLB's Statcast system. Hawk-Eye replaced TrackMan as
+MLB's official tracking provider starting in 2020. The system uses 12 high-resolution cameras per stadium to track ball flight (pitch velocity, spin rate, movement),
+player positioning, sprint speed, and defensive metrics in real-time. In October 2024, Sony acquired KinaTrax, Inc., a markerless biomechanical motion capture
+company that was already deployed in 100+ professional stadiums. This acquisition consolidated ball tracking and biomechanical analysis under one corporate
+entity.
+ROLLOUT
+MLB centrally procured and deployed Hawk-Eye across all 30 MLB stadiums, 60+ minor league venues, and 25+ spring training facilities. The deployment was
+managed by MLB's Commissioner's Office (led by CTO Jason Gaedtke), ensuring equal technology access for all teams. The transition from TrackMan to Hawk-Eye
+was phased across venues. Hawk-Eye's EPL precedent provides a per-venue benchmark: approximately $250K+ per stadium installation, though MLB's system is
+substantially more complex (12 cameras vs. goal-line only). The Sony/KinaTrax acquisition in 2024 added markerless biomechanical tracking to the existing camera
+infrastructure.
+RESULT
+Hawk-Eye/Statcast powers the entire MLB analytics ecosystem used by every team, broadcast partner, and fan-facing product. It generates the underlying pitch
+tracking, exit velocity, sprint speed, and defensive positioning data that has transformed how teams evaluate players and make in-game decisions. The data is the
+raw material that systems like ACIS would consume and process.
+WHY THIS MATTERS FOR ACIS
+ACIS sits on top of Hawk-Eye/Statcast data rather than competing with it. This is complementary infrastructure. ACIS is the intelligence layer that makes Statcast
+biomechanical data actionable for injury prevention, which neither Hawk-Eye nor KinaTrax currently does at scale. The Sony/KinaTrax consolidation is a competitive
+landscape factor to monitor, but it reinforces that there is no existing league-wide injury prevention analytics layer.
+KEY FINANCIALS
+Annual licensing (estimated range) $20-80M/yr
+Per-venue installation cost (EPL benchmark) ~$250K+/stadium
+Total venues deployed 30 MLB + 60+ MiLB + 25+ spring training
+Cameras per MLB stadium 12 high-resolution
+Sony acquisition of KinaTrax (Oct 2024) Undisclosed
+Hawk-Eye EPL total investment $5M+ across 20 clubs + Wembley
+TRACKING INFRASTRUCTURE
+Zebra Technologies + NFL Est. low tens of millions/yr
+12+ consecutive seasons (2014-present) | RFID/UWB player tracking | All 32 NFL teams | Rolling 3-year renewals
+WHAT IT IS
+Zebra Technologies Corporation (NASDAQ: ZBRA) provides RFID and ultra-wideband (UWB) tracking chips embedded in every NFL player's shoulder pads. The
+system tracks real-time location, speed, acceleration, distance traveled, and acceleration for all players on every play. This data feeds into the NFL's Next Gen Stats
+platform (powered by AWS) and is a foundational input to the Digital Athlete injury prediction system. Zebra upgraded from RFID to higher-precision UWB technology
+during the partnership.
+ROLLOUT
+Zebra's tracking system has been deployed league-wide across all 32 NFL teams since 2014. The partnership has been renewed consistently in 3-year increments,
+now running for 12+ consecutive seasons. The technology upgrade from RFID to UWB demonstrates how hardware partnerships evolve to deliver higher-fidelity
+data over time. The per-venue deployment includes hardware installation, ongoing maintenance, and data processing/transmission.
+RESULT
+Zebra created the foundational player tracking data layer that powers every NFL analytics product, from broadcast graphics to the Digital Athlete injury prediction
+platform. Once embedded in league operations and integrated into team workflows, the technology became deeply entrenched and virtually impossible to replace.
+The 12+ year unbroken relationship demonstrates the stickiness of league-wide tracking infrastructure.
+WHY THIS MATTERS FOR ACIS
+Less directly relevant since ACIS is a software/analytics layer, not hardware. But the 12+ year sustained partnership demonstrates a critical principle: once tracking
+infrastructure is embedded in league operations, it becomes indispensable. Get in early, become the standard, and the relationship compounds over time.
+KEY FINANCIALS
+Annual contract value (estimated) Low tens of millions/yr
+Contract structure Rolling 3-year renewals
+Partnership duration 12+ consecutive seasons (2014-present)
+Teams covered 32 of 32 (100%)
+Technology evolution RFID to UWB upgrade during contract
+Zebra Technologies market cap (ref) ~$17B (NASDAQ: ZBRA)
+Summary: Total Financial Landscape

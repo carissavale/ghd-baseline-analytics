@@ -1,0 +1,1021 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Baseline Analytics · Annual Timetable</title>
+<style>
+ @font-face {
+ font-family: 'GT America';
+ src: url('../../brand_source/fonts_2/GT-America-Standard-Light-Trial.otf') format('opentype');
+ font-weight: 300; font-style: normal;
+ }
+ @font-face {
+ font-family: 'GT America';
+ src: url('../../brand_source/fonts_2/GT-America-Standard-Regular-Trial.otf') format('opentype');
+ font-weight: 400; font-style: normal;
+ }
+ @font-face {
+ font-family: 'GT America';
+ src: url('../../brand_source/fonts_2/GT-America-Standard-Medium-Trial.otf') format('opentype');
+ font-weight: 500; font-style: normal;
+ }
+ @font-face {
+ font-family: 'GT America';
+ src: url('../../brand_source/fonts_2/GT-America-Standard-Bold-Trial.otf') format('opentype');
+ font-weight: 700; font-style: normal;
+ }
+ @font-face {
+ font-family: 'GT America Mono';
+ src: url('../../brand_source/fonts_1/GT-America-Mono-Regular-Trial.otf') format('opentype');
+ font-weight: 400;
+ }
+ @font-face {
+ font-family: 'GT America Mono';
+ src: url('../../brand_source/fonts_1/GT-America-Mono-Medium-Trial.otf') format('opentype');
+ font-weight: 500;
+ }
+
+ :root {
+ --black: #000000;
+ --onyx: #121211;
+ --onyx-2: #1a1916;
+ --gold: #FFC655;
+ --gold-mid: #AE8E51;
+ --gold-deep: #63553C;
+ --mercury: #E5E5E5;
+ --mercury-dim: rgba(229,229,229,0.62);
+ --mercury-faint: rgba(229,229,229,0.32);
+ --hairline: rgba(229,229,229,0.08);
+ --hairline-2: rgba(229,229,229,0.14);
+ }
+
+ * { box-sizing: border-box; margin: 0; padding: 0; }
+ html, body {
+ background: var(--black);
+ color: var(--mercury);
+ font-family: 'GT America', -apple-system, sans-serif;
+ font-weight: 300;
+ -webkit-font-smoothing: antialiased;
+ }
+ .mono { font-family: 'GT America Mono', ui-monospace, monospace; font-feature-settings: "tnum"; }
+ ::selection { background: var(--gold); color: var(--black); }
+
+ .page { max-width: 1480px; margin: 0 auto; padding: 72px 60px 120px; }
+
+ /* Editorial masthead */
+ .masthead {
+ display: flex; justify-content: space-between; align-items: flex-start;
+ padding-bottom: 20px; border-bottom: 1px solid var(--hairline-2);
+ margin-bottom: 56px;
+ }
+ .masthead-left .dateline {
+ font-family: 'GT America Mono', monospace; font-size: 10px;
+ letter-spacing: 0.26em; color: var(--gold-mid); text-transform: uppercase; margin-bottom: 8px;
+ }
+ .masthead-left .pub {
+ font-size: 13px; color: var(--mercury-dim); letter-spacing: 0.02em;
+ }
+ .masthead-right {
+ text-align: right; font-family: 'GT America Mono', monospace;
+ font-size: 10px; letter-spacing: 0.2em; color: var(--mercury-faint); text-transform: uppercase;
+ }
+ .masthead-right .ed { color: var(--mercury-dim); }
+
+ /* Hero headline · editorial */
+ .hero-wrap {
+ position: relative; overflow: hidden; margin-bottom: 28px;
+ padding-bottom: 8px;
+ }
+ .hero-headline {
+ font-size: 72px; font-weight: 300; line-height: 1.02;
+ letter-spacing: -0.035em; color: var(--mercury); max-width: 1100px;
+ position: relative; z-index: 2;
+ }
+ .hero-headline .line {
+ display: block; overflow: hidden;
+ }
+ .hero-headline .line > span {
+ display: inline-block;
+ animation: heroSlide 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+ }
+ .hero-headline .line:nth-child(1) > span { animation-delay: 0.15s; }
+ .hero-headline .line:nth-child(2) > span { animation-delay: 0.45s; }
+ .hero-headline .line:nth-child(3) > span { animation-delay: 0.75s; }
+ .hero-headline .em { color: var(--gold); font-weight: 400; }
+
+ @keyframes heroSlide {
+ from { opacity: 0; transform: translateY(100%) rotate(2deg); }
+ to { opacity: 1; transform: translateY(0) rotate(0); }
+ }
+
+ /* Trajectory arc · self-drawing pitch trace */
+ .trajectory {
+ position: absolute;
+ top: 0; left: 0; width: 100%; height: 100%;
+ z-index: 0; pointer-events: none;
+ }
+ .trajectory .arc {
+ stroke-dasharray: 1600;
+ stroke-dashoffset: 1600;
+ animation: drawArc 1.8s cubic-bezier(0.65, 0, 0.35, 1) 0.3s forwards;
+ }
+ @keyframes drawArc {
+ to { stroke-dashoffset: 0; }
+ }
+ .trajectory .endpoint {
+ opacity: 0;
+ animation: endpointLand 0.4s ease-out 1.9s forwards;
+ }
+ @keyframes endpointLand {
+ 0% { opacity: 0; transform: scale(0); transform-origin: center; }
+ 60% { opacity: 1; transform: scale(1.5); }
+ 100% { opacity: 1; transform: scale(1); }
+ }
+ .trajectory .endpoint-ring {
+ transform-origin: 1200px 80px;
+ animation: endpointPulse 1.6s ease-in-out 2.3s infinite;
+ }
+ @keyframes endpointPulse {
+ 0%, 100% { opacity: 0.35; transform: scale(1); }
+ 50% { opacity: 0.1; transform: scale(1.8); }
+ }
+
+ .standfirst {
+ max-width: 760px; font-size: 17px; line-height: 1.55; color: var(--mercury-dim);
+ font-weight: 300; margin-bottom: 56px; letter-spacing: -0.005em;
+ }
+ .standfirst em { color: var(--mercury); font-style: normal; }
+
+ /* Stat strip */
+ .stat-line {
+ display: grid; grid-template-columns: repeat(4, 1fr);
+ border-top: 1px solid var(--hairline-2); border-bottom: 1px solid var(--hairline-2);
+ margin-bottom: 64px;
+ }
+ .stat { padding: 28px 32px; border-right: 1px solid var(--hairline); }
+ .stat:first-child { padding-left: 0; }
+ .stat:last-child { border-right: none; padding-right: 0; }
+ .stat .num {
+ font-size: 56px; font-weight: 300; letter-spacing: -0.03em; line-height: 1;
+ color: var(--mercury); font-variant-numeric: tabular-nums;
+ }
+ .stat .num.accent { color: var(--gold); }
+ .stat .num.small { font-size: 32px; padding-top: 6px; }
+ .stat .label {
+ font-family: 'GT America Mono', monospace; font-size: 10px;
+ letter-spacing: 0.2em; color: var(--mercury-faint); text-transform: uppercase; margin-top: 12px;
+ }
+
+ /* Chart frame */
+ .chart-wrap {
+ margin-bottom: 64px;
+ }
+ .chart-toolbar {
+ display: flex; justify-content: space-between; align-items: baseline;
+ padding-bottom: 16px; border-bottom: 1px solid var(--hairline-2); margin-bottom: 0;
+ }
+ .chart-toolbar .section-num {
+ font-family: 'GT America Mono', monospace; font-size: 10px;
+ letter-spacing: 0.22em; color: var(--gold-mid); text-transform: uppercase;
+ }
+ .chart-toolbar .chart-title {
+ font-size: 22px; font-weight: 400; color: var(--mercury);
+ letter-spacing: -0.01em; flex: 1; padding-left: 24px;
+ }
+ .chart-toolbar .legend {
+ display: flex; gap: 20px;
+ font-family: 'GT America Mono', monospace; font-size: 9.5px;
+ letter-spacing: 0.18em; color: var(--mercury-dim); text-transform: uppercase;
+ }
+ .legend-item { display: flex; align-items: center; gap: 8px; }
+ .legend-bar { width: 14px; height: 3px; }
+
+ svg.timetable { display: block; width: 100%; height: auto; margin-top: 0; background: transparent; }
+
+ /* View toggle */
+ .view-toggle {
+ display: inline-flex; border: 1px solid var(--hairline-2); background: var(--onyx);
+ margin: 16px 0 0; position: relative;
+ }
+ .view-toggle button {
+ background: transparent; border: none; color: var(--mercury-dim);
+ padding: 10px 22px; font-family: 'GT America Mono', monospace; font-size: 10px;
+ letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer;
+ transition: all 0.2s ease; font-weight: 500;
+ }
+ .view-toggle button:hover { color: var(--mercury); }
+ .view-toggle button.active {
+ background: var(--gold); color: var(--black);
+ }
+
+ /* Roster view */
+ .roster-wrap { display: none; padding: 32px 0 0; }
+ .roster-wrap.active { display: block; }
+ .view-timeline { display: block; }
+ .view-timeline.hidden { display: none; }
+
+ .roster-section { margin-bottom: 40px; }
+ .roster-section-head {
+ display: flex; align-items: baseline; gap: 16px;
+ padding-bottom: 12px; margin-bottom: 20px;
+ border-bottom: 1px solid var(--hairline);
+ }
+ .roster-section-num {
+ font-family: 'GT America Mono', monospace; font-size: 10px;
+ letter-spacing: 0.24em; color: var(--gold-mid); text-transform: uppercase;
+ }
+ .roster-section-title {
+ font-size: 14px; font-weight: 500; color: var(--mercury); letter-spacing: -0.005em;
+ }
+ .roster-section-meta {
+ margin-left: auto; font-family: 'GT America Mono', monospace; font-size: 10px;
+ letter-spacing: 0.18em; color: var(--mercury-faint); text-transform: uppercase;
+ }
+
+ .roster-grid {
+ display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+ }
+
+ .tomb {
+ position: relative; background: rgba(18,18,17,0.9);
+ border: 1px solid rgba(229,229,229,0.32); padding: 22px 20px 20px;
+ min-height: 180px; display: flex; flex-direction: column;
+ }
+ .tomb.mlb { border-color: var(--gold); background: rgba(255,198,85,0.06); }
+ .tomb.aggregate { border-style: dashed; border-color: rgba(229,229,229,0.22); background: rgba(18,18,17,0.5); }
+ .tomb::before {
+ content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+ background: rgba(229,229,229,0.45);
+ }
+ .tomb.mlb::before, .tomb.investor::before { background: var(--gold); }
+ .tomb.advisory::before { background: var(--mercury); }
+ .tomb.legal::before { background: var(--gold-deep); }
+ .tomb.strategic::before { background: var(--gold-mid); }
+ .tomb-eyebrow {
+ font-family: 'GT America Mono', monospace; font-size: 9px;
+ letter-spacing: 0.22em; color: var(--gold-mid); text-transform: uppercase; margin-bottom: 12px;
+ }
+ .tomb.mlb .tomb-eyebrow { color: var(--gold); }
+ .tomb-name {
+ font-size: 16px; font-weight: 500; color: var(--mercury);
+ letter-spacing: -0.01em; line-height: 1.2; margin-bottom: 4px;
+ }
+ .tomb.mlb .tomb-name { color: var(--gold); }
+ .tomb-role {
+ font-family: 'GT America Mono', monospace; font-size: 9px;
+ letter-spacing: 0.14em; color: var(--mercury-faint); text-transform: uppercase;
+ line-height: 1.4; margin-bottom: 16px;
+ }
+ .tomb-count {
+ display: flex; align-items: baseline; gap: 8px; margin-top: auto; margin-bottom: 10px;
+ }
+ .tomb-count .num {
+ font-family: 'GT America Mono', monospace; font-size: 32px; font-weight: 500;
+ color: var(--mercury); letter-spacing: -0.02em; line-height: 1;
+ }
+ .tomb.mlb .tomb-count .num { color: var(--gold); }
+ .tomb.aggregate .tomb-count .num { color: var(--mercury-dim); }
+ .tomb-count .label {
+ font-family: 'GT America Mono', monospace; font-size: 9px;
+ letter-spacing: 0.2em; color: var(--mercury-faint); text-transform: uppercase;
+ }
+ .tomb-range {
+ font-family: 'GT America Mono', monospace; font-size: 9px;
+ letter-spacing: 0.14em; color: var(--mercury-faint); text-transform: uppercase;
+ padding-top: 10px; border-top: 1px solid var(--hairline);
+ }
+ .tomb.mlb .tomb-range { color: rgba(255,198,85,0.55); border-top-color: rgba(255,198,85,0.2); }
+
+ /* Meeting tick hover + tooltip */
+ .meeting-tick { cursor: pointer; transition: all 0.15s ease; }
+ .meeting-tick:hover { opacity: 1; }
+ svg .meeting-tick:hover { filter: brightness(1.4); }
+
+ #tooltip {
+ position: fixed; pointer-events: none; z-index: 1000;
+ background: rgba(18,18,17,0.96);
+ border: 1px solid rgba(229,229,229,0.22);
+ padding: 14px 16px; max-width: 320px;
+ opacity: 0; transform: translateY(-4px);
+ transition: opacity 0.15s ease, transform 0.15s ease;
+ backdrop-filter: blur(12px);
+ }
+ #tooltip.visible { opacity: 1; transform: translateY(0); }
+ #tooltip .tt-title {
+ font-family: 'GT America', sans-serif;
+ font-size: 13px; font-weight: 500;
+ color: var(--mercury); letter-spacing: -0.005em;
+ line-height: 1.35; margin-bottom: 8px;
+ }
+ #tooltip .tt-date {
+ font-family: 'GT America Mono', monospace; font-size: 10px;
+ letter-spacing: 0.14em; color: var(--mercury-faint);
+ text-transform: uppercase; margin-bottom: 10px;
+ }
+ #tooltip .tt-cat {
+ display: inline-block; padding: 3px 10px;
+ font-family: 'GT America Mono', monospace; font-size: 9px;
+ letter-spacing: 0.16em; text-transform: uppercase;
+ border: 1px solid;
+ }
+ #tooltip .tt-cat.advisory { color: var(--mercury); border-color: rgba(229,229,229,0.5); }
+ #tooltip .tt-cat.investor { color: var(--gold); border-color: var(--gold); }
+ #tooltip .tt-cat.strategic { color: var(--gold-mid); border-color: var(--gold-mid); }
+ #tooltip .tt-cat.board { color: var(--gold); border-color: var(--gold); background: rgba(255,198,85,0.08); }
+ #tooltip .tt-cat.legal { color: var(--gold-deep); border-color: var(--gold-mid); background: rgba(110,90,60,0.18); }
+
+ /* Caption */
+ .caption {
+ margin-top: 48px; display: grid; grid-template-columns: 1fr 1fr 1fr;
+ gap: 56px; padding-top: 28px; border-top: 1px solid var(--hairline-2);
+ }
+ .caption-col .anchor {
+ font-family: 'GT America Mono', monospace; font-size: 10px;
+ letter-spacing: 0.22em; color: var(--gold); text-transform: uppercase; margin-bottom: 12px;
+ display: flex; align-items: center; gap: 10px;
+ }
+ .caption-col .anchor::before {
+ content: ''; width: 18px; height: 1px; background: var(--gold);
+ }
+ .caption-col .headline {
+ font-size: 20px; font-weight: 400; color: var(--mercury);
+ line-height: 1.3; letter-spacing: -0.01em; margin-bottom: 10px;
+ }
+ .caption-col .body {
+ font-size: 13px; line-height: 1.65; color: var(--mercury-dim); font-weight: 300;
+ }
+
+ /* Bottom */
+ /* Compact Ask the Portal CTA */
+ .ask-compact {
+ margin: 0 0 56px; padding: 28px 36px;
+ border: 1px solid var(--gold-mid); background: rgba(18,18,17,0.7);
+ position: relative; display: flex; flex-direction: column; gap: 20px;
+ }
+ .ask-compact::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gold); }
+ .ask-compact-eyebrow { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.24em; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; }
+ .ask-compact-title { font-size: 28px; font-weight: 300; color: var(--mercury); letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 8px; }
+ .ask-compact-title em { color: var(--gold); font-style: normal; font-weight: 400; }
+ .ask-compact-sub { font-size: 14px; color: var(--mercury-dim); font-weight: 300; max-width: 620px; line-height: 1.5; }
+ .ask-compact-form { display: flex; gap: 10px; }
+ .ask-compact-input { flex: 1; background: rgba(0,0,0,0.5); border: 1px solid var(--hairline-2); color: var(--mercury); padding: 14px 18px; font-family: 'GT America', sans-serif; font-size: 15px; font-weight: 300; letter-spacing: -0.005em; outline: none; transition: border-color 0.2s; }
+ .ask-compact-input::placeholder { color: var(--mercury-faint); }
+ .ask-compact-input:focus { border-color: var(--gold); }
+ .ask-compact-send { background: var(--gold); color: var(--black); border: none; padding: 0 28px; font-family: 'GT America Mono', monospace; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 500; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
+ .ask-compact-send:hover { background: #ffd37a; }
+
+ .bottom {
+ margin-top: 80px; padding-top: 24px; border-top: 1px solid var(--hairline-2);
+ display: flex; justify-content: space-between; align-items: center;
+ }
+ .tagline {
+ font-size: 13px; font-weight: 300; color: var(--mercury-dim); letter-spacing: 0.02em;
+ }
+ .tagline em { color: var(--gold); font-style: normal; font-weight: 400; }
+ .bottom-mono {
+ font-family: 'GT America Mono', monospace; font-size: 10px;
+ letter-spacing: 0.2em; color: var(--mercury-faint); text-transform: uppercase;
+ }
+
+ @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+ @keyframes slideIn {
+ from { opacity: 0; transform: translateY(6px); }
+ to { opacity: 1; transform: translateY(0); }
+ }
+ .fade { animation: slideIn 0.8s ease-out both; }
+ .svg-fade { animation: fadeIn 1.2s ease-out both; }
+
+ /* Top nav */
+ .topnav {
+ position: sticky; top: 0; z-index: 100;
+ display: flex; align-items: center; justify-content: space-between;
+ padding: 16px 60px; border-bottom: 1px solid var(--hairline-2);
+ background: rgba(0,0,0,0.85); backdrop-filter: blur(20px);
+ }
+ .topnav-brand { display: flex; align-items: center; gap: 12px; }
+ .topnav-brand .mark { width: 28px; height: 36px; display: flex; gap: 2px; align-items: flex-start; }
+ .topnav-brand .mark span { width: 3px; background: var(--gold); display: block; }
+ .topnav-brand .mark span:nth-child(1) { height: 22px; background: var(--gold-mid); }
+ .topnav-brand .mark span:nth-child(2) { height: 32px; }
+ .topnav-brand .mark span:nth-child(3) { height: 36px; }
+ .topnav-brand .mark span:nth-child(4) { height: 28px; }
+ .topnav-brand .mark span:nth-child(5) { height: 20px; background: var(--gold-mid); }
+ .topnav-brand .name { font-size: 13px; font-weight: 500; letter-spacing: 0.04em; color: var(--mercury); }
+ .topnav-brand .sub { font-family: 'GT America Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: var(--gold-mid); text-transform: uppercase; margin-top: 2px; }
+ .topnav-links { display: flex; gap: 4px; align-items: center; }
+ .topnav-links a, .topnav-links .trigger { padding: 8px 16px; border-radius: 4px; text-decoration: none; font-size: 13px; color: var(--mercury-dim); transition: all 0.2s; cursor: pointer; }
+ .topnav-links a:hover, .topnav-links .trigger:hover { color: var(--mercury); }
+ .topnav-links a.active, .topnav-links .dropdown.active .trigger { color: var(--gold); background: rgba(255,198,85,0.08); }
+ .dropdown { position: relative; }
+ .dropdown .trigger { display: inline-flex; align-items: center; gap: 6px; background: transparent; border: none; font-family: inherit; font-size: 13px; letter-spacing: 0.01em; font-weight: 400; }
+ .dropdown .trigger::after { content: ''; width: 6px; height: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); margin-top: -3px; transition: transform 0.2s; }
+ .dropdown:hover .trigger::after { transform: rotate(225deg); margin-top: 2px; }
+ .dropdown-menu { position: absolute; top: 100%; left: 0; min-width: 180px; padding: 8px 0; background: var(--onyx); border: 1px solid var(--hairline-2); opacity: 0; pointer-events: none; transform: translateY(-4px); transition: opacity 0.18s, transform 0.18s; margin-top: 0; z-index: 200; }
+ .dropdown:hover .dropdown-menu { opacity: 1; pointer-events: auto; transform: translateY(0); }
+ .dropdown-menu a { display: block; padding: 10px 18px; font-size: 13px; color: var(--mercury-dim); text-decoration: none; transition: all 0.15s; border-radius: 0; }
+ .dropdown-menu a:hover { background: rgba(255,198,85,0.08); color: var(--gold); }
+ .dropdown-menu a.active { color: var(--gold); }
+ .topnav-user { display: flex; align-items: center; gap: 8px; font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.16em; color: var(--mercury-dim); text-transform: uppercase; }
+ .topnav-user .avatar { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--gold-mid); display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--gold); font-weight: 500; }
+</style>
+</head>
+<body>
+
+<!-- Top navigation -->
+<nav class="topnav fade">
+ <a class="topnav-brand" href="../mission/index.html" style="text-decoration:none; color:inherit;">
+ <div class="mark"><span></span><span></span><span></span><span></span><span></span></div>
+ <div>
+ <div class="name">Baseline Analytics</div>
+ <div class="sub">Investor Portal</div>
+ </div>
+ </a>
+ <div class="topnav-links">
+ <a href="../overview/index.html">Overview</a>
+ <a href="../deal_intel/index.html">Deal Intel</a>
+ <a href="../milestones/index.html">Milestones</a>
+ <a href="../meetings/index.html">Meetings</a>
+ <a href="../vault/index.html">Vault</a>
+ <a href="../buzz/index.html">Buzz</a>
+ <div class="dropdown">
+ <button class="trigger">About Us</button>
+ <div class="dropdown-menu">
+ <a href="../team/index.html">Meet the Team</a>
+ <a href="../advisory/index.html">Advisory Board</a>
+ </div>
+ </div>
+ <a href="../ask_portal/index.html">Ask</a>
+ </div>
+ <div class="topnav-user">
+ <div class="avatar">C</div>
+ <span>Chase</span>
+ </div>
+</nav>
+
+<div class="page">
+
+ <!-- Editorial masthead -->
+ <div class="masthead fade">
+ <div class="masthead-left">
+ <div class="dateline">Investor Portal · 23 April 2026</div>
+ <div class="pub">Baseline Analytics · Stakeholder Brief 03</div>
+ </div>
+ <div class="masthead-right">
+ <div class="ed">Annual Timetable</div>
+ <div>Oct 2025 to Apr 2026</div>
+ </div>
+ </div>
+
+ <!-- Hero headline -->
+ <div class="hero-wrap">
+ <h1 class="hero-headline">
+ <span class="line"><span>Seven months.</span></span>
+ <span class="line"><span>Nineteen relationships.</span></span>
+ <span class="line"><span class="em">Four milestones.</span></span>
+ </h1>
+ </div>
+
+ <p class="standfirst fade" style="animation-delay:0.16s">
+ The rhythm of how Baseline has been built is a better disclosure than any pitch deck. Below, every active relationship in the company's first seven months. <em>When it began. How often it's been tended. Where it intersects the milestones that matter.</em>
+ </p>
+
+ <!-- Ask the Portal CTA -->
+ <div class="ask-compact fade" style="animation-delay:0.2s">
+ <div>
+ <div class="ask-compact-eyebrow">Ask the Portal · Executive Briefing</div>
+ <div class="ask-compact-title">Ask a question. <em>The portal answers.</em></div>
+ <div class="ask-compact-sub">Plain-English questions across meetings, milestones, materials, and roster.</div>
+ </div>
+ <form class="ask-compact-form" onsubmit="event.preventDefault(); var q=this.q.value.trim(); if(q) window.location.href='../ask_portal/index.html?q='+encodeURIComponent(q);">
+ <input type="text" name="q" class="ask-compact-input" placeholder="What do you need to know?" autocomplete="off" />
+ <button type="submit" class="ask-compact-send">Ask →</button>
+ </form>
+ </div>
+
+ <!-- Stats -->
+ <div class="stat-line fade" style="animation-delay:0.24s">
+ <div class="stat"><div class="num accent">19</div><div class="label">Active Relationships</div></div>
+ <div class="stat"><div class="num">38</div><div class="label">Total Conversations</div></div>
+ <div class="stat"><div class="num">7</div><div class="label">This Month</div></div>
+ <div class="stat"><div class="num small">Oct 2025</div><div class="label">Corporate Formation</div></div>
+ </div>
+
+ <!-- Chart -->
+ <div class="chart-wrap fade" style="animation-delay:0.32s">
+ <div class="chart-toolbar">
+ <span class="section-num">03</span>
+ <span class="chart-title">The Annual Timetable</span>
+ <div class="legend">
+ <span class="legend-item"><span class="legend-bar" style="background:var(--gold)"></span>MLB / Investor</span>
+ <span class="legend-item"><span class="legend-bar" style="background:var(--mercury)"></span>Advisory</span>
+ <span class="legend-item"><span class="legend-bar" style="background:var(--gold-mid)"></span>Strategic</span>
+ <span class="legend-item"><span class="legend-bar" style="background:var(--gold-deep)"></span>Legal</span>
+ </div>
+ </div>
+
+ <!-- VIEW TOGGLE -->
+ <div class="view-toggle">
+ <button class="active" data-view="timeline">Timeline</button>
+ <button data-view="roster">Roster</button>
+ </div>
+
+ <div class="view-timeline" id="view-timeline">
+
+ <!--
+ Time scale:
+ x=280 → Oct 15 2025 (day 0)
+ x=1400 → Apr 23 2026 (day 190)
+ px/day = 5.8947
+ Month 1st positions:
+ Oct 15 → 280 Jan 1 → 280 + 78*5.895 = 739.8
+ Nov 1 → 280 + 17*5.895 = 380.2
+ Dec 1 → 280 + 47*5.895 = 557.1
+ Jan 1 → 739.8
+ Feb 1 → 280 + 109*5.895 = 922.6
+ Mar 1 → 280 + 137*5.895 = 1087.6
+ Apr 1 → 280 + 168*5.895 = 1270.3
+ Milestones:
+ Corporate Formation → x=280 (day 0)
+ IAB Established → Jan 20 = day 97 → x=280 + 97*5.895 = 851.8 → 852
+ Spring Training Validation → Feb 28 = day 136 → x=280 + 136*5.895 = 1081.7 → 1082
+ MLB LOI → Apr 23 = day 190 → x=1400
+ -->
+
+ <svg class="timetable svg-fade" viewBox="0 0 1440 820" preserveAspectRatio="xMidYMid meet" style="animation-delay:0.5s">
+
+ <!-- Background chart panel -->
+ <rect x="0" y="0" width="1440" height="820" fill="transparent"/>
+
+ <!-- Column header / time axis -->
+ <!-- Year label at top -->
+ <text x="739" y="26" text-anchor="middle" fill="rgba(229,229,229,0.45)" font-family="GT America Mono, monospace" font-size="10" letter-spacing="0.28em">2025 · 2026</text>
+
+ <!-- Month labels -->
+ <g font-family="GT America Mono, monospace" font-size="10" letter-spacing="0.2em" fill="rgba(229,229,229,0.55)">
+ <text x="280" y="66" text-anchor="start">OCT</text>
+ <text x="380" y="66" text-anchor="start">NOV</text>
+ <text x="557" y="66" text-anchor="start">DEC</text>
+ <text x="740" y="66" text-anchor="start">JAN</text>
+ <text x="923" y="66" text-anchor="start">FEB</text>
+ <text x="1088" y="66" text-anchor="start">MAR</text>
+ <text x="1270" y="66" text-anchor="start">APR</text>
+ </g>
+
+ <!-- Horizontal hairline above chart body -->
+ <line x1="40" y1="80" x2="1400" y2="80" stroke="rgba(229,229,229,0.22)" stroke-width="1"/>
+
+ <!-- Month tick marks (subtle) -->
+ <g stroke="rgba(229,229,229,0.08)" stroke-width="1">
+ <line x1="280" y1="80" x2="280" y2="760"/>
+ <line x1="380" y1="80" x2="380" y2="760"/>
+ <line x1="557" y1="80" x2="557" y2="760"/>
+ <line x1="740" y1="80" x2="740" y2="760"/>
+ <line x1="923" y1="80" x2="923" y2="760"/>
+ <line x1="1088" y1="80" x2="1088" y2="760"/>
+ <line x1="1270" y1="80" x2="1270" y2="760"/>
+ <line x1="1400" y1="80" x2="1400" y2="760"/>
+ </g>
+
+ <!-- Milestone vertical rules (thin gold hairlines, full height) -->
+ <g>
+ <!-- Corporate Formation → x=280 -->
+ <line x1="280" y1="88" x2="280" y2="760" stroke="#FFC655" stroke-width="1" opacity="0.4" stroke-dasharray="2,3"/>
+ <text x="286" y="98" fill="#FFC655" font-family="GT America Mono, monospace" font-size="9.5" letter-spacing="0.18em" text-anchor="start">CORPORATE FORMATION · ✓</text>
+
+ <!-- IAB Established → x=852 -->
+ <line x1="852" y1="88" x2="852" y2="760" stroke="#FFC655" stroke-width="1" opacity="0.4" stroke-dasharray="2,3"/>
+ <text x="858" y="98" fill="#FFC655" font-family="GT America Mono, monospace" font-size="9.5" letter-spacing="0.18em" text-anchor="start">IAB ESTABLISHED · ✓</text>
+
+ <!-- Spring Training Validation → x=1082 -->
+ <line x1="1082" y1="88" x2="1082" y2="760" stroke="#FFC655" stroke-width="1" opacity="0.4" stroke-dasharray="2,3"/>
+ <text x="1088" y="98" fill="#FFC655" font-family="GT America Mono, monospace" font-size="9.5" letter-spacing="0.18em" text-anchor="start">SPRING TRAINING · ✓</text>
+
+ <!-- MLB LOI → x=1400 -->
+ <line x1="1400" y1="88" x2="1400" y2="760" stroke="#FFC655" stroke-width="1.5" opacity="0.8"/>
+ <text x="1394" y="98" fill="#FFC655" font-family="GT America Mono, monospace" font-size="9.5" letter-spacing="0.18em" text-anchor="end">MLB LOI · ○</text>
+ </g>
+
+ <!-- ═══════════════════════════════════════════════════════════════════ -->
+ <!-- CATEGORY 1: MAJOR LEAGUE BASEBALL -->
+ <!-- ═══════════════════════════════════════════════════════════════════ -->
+ <text x="40" y="138" fill="rgba(229,229,229,0.6)" font-family="GT America Mono, monospace" font-size="10" letter-spacing="0.24em">I · MAJOR LEAGUE BASEBALL</text>
+ <line x1="40" y1="146" x2="270" y2="146" stroke="#FFC655" stroke-width="1" opacity="0.6"/>
+
+ <!-- Rob Engel (MLB) · y=165 · Meetings: Jan 22, Feb 15, Mar 8, Apr 2, Apr 23 -->
+ <text x="40" y="170" fill="#E5E5E5" font-family="GT America" font-size="13" font-weight="500">Rob Engel</text>
+ <text x="40" y="184" fill="rgba(229,229,229,0.45)" font-family="GT America Mono, monospace" font-size="9" letter-spacing="0.12em">SVP SOFTWARE ENG · MLB</text>
+ <!-- Bar: first meeting Jan 22 (x=863) → Apr 23 (x=1400) -->
+ <rect x="863" y="172" width="537" height="6" fill="#FFC655" opacity="0.55"/>
+ <!-- Meeting ticks -->
+ <rect class="meeting-tick" data-mt="1" data-title="Rob Engel Introduction · MLB" data-date="Jan 22, 2026" data-cat="Advisory Board" x="861" y="166" width="4" height="18" fill="#FFC655"/>
+ <rect class="meeting-tick" data-mt="1" data-title="MLB Technical Architecture Review" data-date="Feb 15, 2026" data-cat="Strategic Planning" x="1003" y="166" width="4" height="18" fill="#FFC655"/>
+ <rect class="meeting-tick" data-mt="1" data-title="MLB Pilot Scoping Session" data-date="Mar 8, 2026" data-cat="Strategic Planning" x="1127" y="166" width="4" height="18" fill="#FFC655"/>
+ <rect class="meeting-tick" data-mt="1" data-title="MLB LOI Process Review" data-date="Apr 2, 2026" data-cat="Strategic Planning" x="1274" y="166" width="4" height="18" fill="#FFC655"/>
+ <rect class="meeting-tick" data-mt="1" data-title="MLB Letter of Intent Discussion" data-date="Apr 23, 2026" data-cat="Board Meeting" x="1397" y="164" width="5" height="22" fill="#FFC655"/>
+ <!-- Meeting count (right-aligned) -->
+ <text x="1410" y="179" fill="rgba(229,229,229,0.55)" font-family="GT America Mono, monospace" font-size="10" letter-spacing="0.08em">5</text>
+
+ <!-- ═══════════════════════════════════════════════════════════════════ -->
+ <!-- CATEGORY 2: INVESTOR PIPELINE -->
+ <!-- ═══════════════════════════════════════════════════════════════════ -->
+ <text x="40" y="222" fill="rgba(229,229,229,0.6)" font-family="GT America Mono, monospace" font-size="10" letter-spacing="0.24em">II · INVESTOR PIPELINE</text>
+ <line x1="40" y1="230" x2="270" y2="230" stroke="#FFC655" stroke-width="1" opacity="0.5"/>
+
+ <!-- Mark Shirman · y=255 · Nov 10, Dec 5, Jan 18, Feb 28, Apr 15 -->
+ <text x="40" y="254" fill="#E5E5E5" font-family="GT America" font-size="13" font-weight="500">Mark Shirman</text>
+ <text x="40" y="268" fill="rgba(229,229,229,0.45)" font-family="GT America Mono, monospace" font-size="9" letter-spacing="0.12em">PROSPECTIVE · FMR CEO RIVERMEADOW</text>
+ <rect x="433" y="256" width="919" height="6" fill="#FFC655" opacity="0.4"/>
+ <rect class="meeting-tick" data-mt="1" data-title="Mark Shirman Introduction (via Jeff Newman)" data-date="Nov 10, 2025" data-cat="Investor Update" x="431" y="250" width="4" height="18" fill="#FFC655"/>
+ <rect class="meeting-tick" data-mt="1" data-title="Mark Shirman Follow-Up" data-date="Dec 5, 2025" data-cat="Investor Update" x="579" y="250" width="4" height="18" fill="#FFC655"/>
+ <rect class="meeting-tick" data-mt="1" data-title="Mark Shirman Deep Dive" data-date="Jan 18, 2026" data-cat="Investor Update" x="838" y="250" width="4" height="18" fill="#FFC655"/>
+ <rect class="meeting-tick" data-mt="1" data-title="Mark Shirman Term Discussion" data-date="Feb 28, 2026" data-cat="Investor Update" x="1080" y="250" width="4" height="18" fill="#FFC655"/>
+ <rect class="meeting-tick" data-mt="1" data-title="Mark Shirman Investor Discovery Call" data-date="Apr 9, 2026" data-cat="Investor Update" x="1351" y="250" width="4" height="18" fill="#FFC655"/>
+ <text x="1410" y="263" fill="rgba(229,229,229,0.55)" font-family="GT America Mono, monospace" font-size="10">5</text>
+
+ <!-- Scott Price · y=290 · Dec 20, Feb 10, Apr 8 -->
+ <text x="40" y="294" fill="#E5E5E5" font-family="GT America" font-size="13" font-weight="500">Scott Price</text>
+ <text x="40" y="308" fill="rgba(229,229,229,0.45)" font-family="GT America Mono, monospace" font-size="9" letter-spacing="0.12em">PROSPECTIVE · BEACON ORAL</text>
+ <rect x="669" y="296" width="642" height="6" fill="#FFC655" opacity="0.4"/>
+ <rect class="meeting-tick" data-mt="1" data-title="Scott Price Introduction (via Tom Castillo)" data-date="Dec 20, 2025" data-cat="Investor Update" x="667" y="290" width="4" height="18" fill="#FFC655"/>
+ <rect class="meeting-tick" data-mt="1" data-title="Scott Price Follow-Up" data-date="Feb 10, 2026" data-cat="Investor Update" x="974" y="290" width="4" height="18" fill="#FFC655"/>
+ <rect class="meeting-tick" data-mt="1" data-title="Scott Price Investor Discovery Call" data-date="Apr 7, 2026" data-cat="Investor Update" x="1310" y="290" width="4" height="18" fill="#FFC655"/>
+ <text x="1410" y="303" fill="rgba(229,229,229,0.55)" font-family="GT America Mono, monospace" font-size="10">3</text>
+
+ <!-- BizAnalytica · y=330 · Nov 25, Jan 30, Mar 20, Apr 18 -->
+ <text x="40" y="334" fill="#E5E5E5" font-family="GT America" font-size="13" font-weight="500">BizAnalytica</text>
+ <text x="40" y="348" fill="rgba(229,229,229,0.45)" font-family="GT America Mono, monospace" font-size="9" letter-spacing="0.12em">STRATEGIC INVESTOR</text>
+ <rect x="521" y="336" width="848" height="6" fill="#FFC655" opacity="0.4"/>
+ <rect class="meeting-tick" data-mt="1" data-title="BizAnalytica Introduction" data-date="Nov 25, 2025" data-cat="Investor Update" x="519" y="330" width="4" height="18" fill="#FFC655"/>
+ <rect class="meeting-tick" data-mt="1" data-title="BizAnalytica Deep Dive" data-date="Jan 30, 2026" data-cat="Investor Update" x="909" y="330" width="4" height="18" fill="#FFC655"/>
+ <rect class="meeting-tick" data-mt="1" data-title="BizAnalytica Strategic Review" data-date="Mar 20, 2026" data-cat="Investor Update" x="1197" y="330" width="4" height="18" fill="#FFC655"/>
+ <rect class="meeting-tick" data-mt="1" data-title="BizAnalytica Follow-Up" data-date="Apr 18, 2026" data-cat="Investor Update" x="1368" y="330" width="4" height="18" fill="#FFC655"/>
+ <text x="1410" y="343" fill="rgba(229,229,229,0.55)" font-family="GT America Mono, monospace" font-size="10">4</text>
+
+ <!-- 2 more (aggregate) · y=370 -->
+ <text x="40" y="374" fill="rgba(229,229,229,0.78)" font-family="GT America" font-size="13" font-style="italic" font-weight="300">+ 2 more investor conversations</text>
+ <text x="40" y="388" fill="rgba(229,229,229,0.35)" font-family="GT America Mono, monospace" font-size="9" letter-spacing="0.12em">EARLY DISCOVERY</text>
+ <rect x="740" y="376" width="600" height="4" fill="#FFC655" opacity="0.22"/>
+ <rect class="meeting-tick" data-mt="1" data-title="Early Discovery · Investor Conversation" data-date="Jan 2026" data-cat="Investor Update" x="759" y="370" width="4" height="16" fill="#FFC655" opacity="0.6"/>
+ <rect class="meeting-tick" data-mt="1" data-title="Tom Castillo Follow-Up" data-date="Mar 28, 2026" data-cat="Investor Update" x="1199" y="370" width="4" height="16" fill="#FFC655" opacity="0.6"/>
+ <text x="1410" y="383" fill="rgba(229,229,229,0.4)" font-family="GT America Mono, monospace" font-size="10">2</text>
+
+ <!-- ═══════════════════════════════════════════════════════════════════ -->
+ <!-- CATEGORY 3: INDUSTRY ADVISORY BOARD -->
+ <!-- ═══════════════════════════════════════════════════════════════════ -->
+ <text x="40" y="428" fill="rgba(229,229,229,0.6)" font-family="GT America Mono, monospace" font-size="10" letter-spacing="0.24em">III · INDUSTRY ADVISORY BOARD</text>
+ <line x1="40" y1="436" x2="270" y2="436" stroke="#E5E5E5" stroke-width="1" opacity="0.4"/>
+
+ <!-- TrackMan · y=460 · Jan 5, Feb 22, Apr 10 -->
+ <text x="40" y="464" fill="#E5E5E5" font-family="GT America" font-size="13" font-weight="500">TrackMan</text>
+ <text x="40" y="478" fill="rgba(229,229,229,0.45)" font-family="GT America Mono, monospace" font-size="9" letter-spacing="0.12em">ACTIVE MEMBER · TECH PARTNER</text>
+ <rect x="763" y="466" width="559" height="6" fill="#E5E5E5" opacity="0.45"/>
+ <rect class="meeting-tick" data-mt="1" data-title="TrackMan Initial Discussion" data-date="Jan 5, 2026" data-cat="Advisory Board" x="761" y="460" width="4" height="18" fill="#E5E5E5"/>
+ <rect class="meeting-tick" data-mt="1" data-title="TrackMan Integration Review" data-date="Feb 22, 2026" data-cat="Advisory Board" x="1045" y="460" width="4" height="18" fill="#E5E5E5"/>
+ <rect class="meeting-tick" data-mt="1" data-title="TrackMan Momentum Call · Adam Katz" data-date="Apr 2, 2026" data-cat="Advisory Board" x="1321" y="460" width="4" height="18" fill="#E5E5E5"/>
+ <text x="1410" y="473" fill="rgba(229,229,229,0.55)" font-family="GT America Mono, monospace" font-size="10">3</text>
+
+ <!-- Rob Engel (IAB) · y=500 · Jan 22, Mar 15, Apr 20 -->
+ <text x="40" y="504" fill="#E5E5E5" font-family="GT America" font-size="13" font-weight="500">Rob Engel (IAB)</text>
+ <text x="40" y="518" fill="rgba(229,229,229,0.45)" font-family="GT America Mono, monospace" font-size="9" letter-spacing="0.12em">FOUNDING MEMBER</text>
+ <rect x="863" y="506" width="518" height="6" fill="#E5E5E5" opacity="0.45"/>
+ <rect class="meeting-tick" data-mt="1" data-title="Industry Advisory Board · Rob Engel Appointment" data-date="Jan 7, 2026" data-cat="Advisory Board" x="861" y="500" width="4" height="18" fill="#E5E5E5"/>
+ <rect class="meeting-tick" data-mt="1" data-title="IAB Quarterly Session · Rob Engel" data-date="Mar 15, 2026" data-cat="Advisory Board" x="1168" y="500" width="4" height="18" fill="#E5E5E5"/>
+ <rect class="meeting-tick" data-mt="1" data-title="IAB Strategic Review · Rob Engel" data-date="Apr 20, 2026" data-cat="Advisory Board" x="1380" y="500" width="4" height="18" fill="#E5E5E5"/>
+ <text x="1410" y="513" fill="rgba(229,229,229,0.55)" font-family="GT America Mono, monospace" font-size="10">3</text>
+
+ <!-- IAB Collective · y=540 · Jan 20, Mar 15, Apr 23 -->
+ <text x="40" y="544" fill="#E5E5E5" font-family="GT America" font-size="13" font-weight="500">IAB · Collective</text>
+ <text x="40" y="558" fill="rgba(229,229,229,0.45)" font-family="GT America Mono, monospace" font-size="9" letter-spacing="0.12em">ALL-HANDS ADVISORY SESSIONS</text>
+ <rect x="852" y="546" width="548" height="6" fill="#E5E5E5" opacity="0.5"/>
+ <rect class="meeting-tick" data-mt="1" data-title="IAB Q1 All-Hands Session" data-date="Jan 20, 2026" data-cat="Advisory Board" x="850" y="540" width="5" height="18" fill="#E5E5E5"/>
+ <rect class="meeting-tick" data-mt="1" data-title="IAB Mid-Quarter Session" data-date="Mar 15, 2026" data-cat="Advisory Board" x="1168" y="540" width="4" height="18" fill="#E5E5E5"/>
+ <rect class="meeting-tick" data-mt="1" data-title="IAB Q2 Planning Session" data-date="Apr 23, 2026" data-cat="Advisory Board" x="1397" y="538" width="5" height="22" fill="#E5E5E5"/>
+ <text x="1410" y="553" fill="rgba(229,229,229,0.55)" font-family="GT America Mono, monospace" font-size="10">3</text>
+
+ <!-- 3 Pending IAB Offers (dashed) · y=580 -->
+ <text x="40" y="584" fill="rgba(229,229,229,0.65)" font-family="GT America" font-size="13" font-style="italic" font-weight="300">+ 3 pending IAB offers</text>
+ <text x="40" y="598" fill="rgba(229,229,229,0.35)" font-family="GT America Mono, monospace" font-size="9" letter-spacing="0.12em">OUTBOUND · AWAITING DECISION</text>
+ <rect x="1082" y="586" width="318" height="4" fill="none" stroke="#E5E5E5" stroke-width="1" stroke-dasharray="4,3" opacity="0.55"/>
+ <circle class="meeting-tick" data-mt="1" data-title="Edwin Prather IAB Discovery Call" data-date="Apr 2, 2026" data-cat="Advisory Board" cx="1150" cy="590" r="4" fill="none" stroke="#E5E5E5" stroke-width="1.5" opacity="0.75"/>
+ <circle class="meeting-tick" data-mt="1" data-title="Stephen Piscotty IAB Discovery Call" data-date="Apr 2, 2026" data-cat="Advisory Board" cx="1260" cy="590" r="4" fill="none" stroke="#E5E5E5" stroke-width="1.5" opacity="0.75"/>
+ <circle class="meeting-tick" data-mt="1" data-title="Joey Lucchesi · IAB Upcoming Offer" data-date="Apr 15, 2026" data-cat="Advisory Board" cx="1360" cy="590" r="4" fill="none" stroke="#E5E5E5" stroke-width="1.5" opacity="0.75"/>
+ <text x="1410" y="593" fill="rgba(229,229,229,0.4)" font-family="GT America Mono, monospace" font-size="10">3</text>
+
+ <!-- ═══════════════════════════════════════════════════════════════════ -->
+ <!-- CATEGORY 4: LEGAL COUNSEL -->
+ <!-- ═══════════════════════════════════════════════════════════════════ -->
+ <text x="40" y="640" fill="rgba(229,229,229,0.6)" font-family="GT America Mono, monospace" font-size="10" letter-spacing="0.24em">IV · LEGAL COUNSEL</text>
+ <line x1="40" y1="648" x2="270" y2="648" stroke="#AE8E51" stroke-width="1" opacity="0.5"/>
+
+ <!-- Kris Withrow · y=670 · Oct 25, Jan 12, Apr 5 -->
+ <text x="40" y="674" fill="#E5E5E5" font-family="GT America" font-size="13" font-weight="500">Kris Withrow</text>
+ <text x="40" y="688" fill="rgba(229,229,229,0.45)" font-family="GT America Mono, monospace" font-size="9" letter-spacing="0.12em">PARTNER · FENWICK &amp; WEST</text>
+ <rect x="339" y="676" width="954" height="6" fill="#AE8E51" opacity="0.45"/>
+ <rect class="meeting-tick" data-mt="1" data-title="Kris Withrow · Initial Legal Consultation" data-date="Oct 25, 2025" data-cat="Strategic Planning" x="337" y="670" width="4" height="18" fill="#AE8E51"/>
+ <rect class="meeting-tick" data-mt="1" data-title="Fenwick &amp; West · Legal Strategy Review" data-date="Jan 12, 2026" data-cat="Strategic Planning" x="803" y="670" width="4" height="18" fill="#AE8E51"/>
+ <rect class="meeting-tick" data-mt="1" data-title="Kris Withrow · Fenwick &amp; West" data-date="Apr 2, 2026" data-cat="Strategic Planning" x="1292" y="670" width="4" height="18" fill="#AE8E51"/>
+ <text x="1410" y="683" fill="rgba(229,229,229,0.55)" font-family="GT America Mono, monospace" font-size="10">3</text>
+
+ <!-- Edwin Prather · y=710 · Feb 1 -->
+ <text x="40" y="714" fill="#E5E5E5" font-family="GT America" font-size="13" font-weight="500">Edwin Prather</text>
+ <text x="40" y="728" fill="rgba(229,229,229,0.45)" font-family="GT America Mono, monospace" font-size="9" letter-spacing="0.12em">GC · ALEXANDER'S STEAKHOUSE</text>
+ <rect x="922" y="716" width="14" height="6" fill="#AE8E51" opacity="0.45"/>
+ <rect class="meeting-tick" data-mt="1" data-title="Edwin Prather · IAB Discovery Call" data-date="Feb 1, 2026" data-cat="Advisory Board" x="920" y="710" width="4" height="18" fill="#AE8E51"/>
+ <text x="1410" y="723" fill="rgba(229,229,229,0.55)" font-family="GT America Mono, monospace" font-size="10">1</text>
+
+ <!-- ═══════════════════════════════════════════════════════════════════ -->
+ <!-- CATEGORY 5: STRATEGIC LEADERSHIP -->
+ <!-- ═══════════════════════════════════════════════════════════════════ -->
+ <text x="40" y="768" fill="rgba(229,229,229,0.6)" font-family="GT America Mono, monospace" font-size="10" letter-spacing="0.24em">V · STRATEGIC LEADERSHIP</text>
+ <line x1="40" y1="776" x2="270" y2="776" stroke="#AE8E51" stroke-width="1" opacity="0.5"/>
+
+ <!-- Jeff Newman · y=795 · Mar 5, Apr 1, Apr 22 -->
+ <text x="40" y="799" fill="#E5E5E5" font-family="GT America" font-size="13" font-weight="500">Jeff Newman</text>
+ <rect x="1110" y="801" width="284" height="6" fill="#AE8E51" opacity="0.45"/>
+ <rect class="meeting-tick" data-mt="1" data-title="Jeff Newman Onboarding · Incoming Chairman" data-date="Mar 5, 2026" data-cat="Strategic Planning" x="1108" y="795" width="4" height="18" fill="#AE8E51"/>
+ <rect class="meeting-tick" data-mt="1" data-title="Jeff Newman Director Call" data-date="Apr 1, 2026" data-cat="Strategic Planning" x="1268" y="795" width="4" height="18" fill="#AE8E51"/>
+ <rect class="meeting-tick" data-mt="1" data-title="Jeff Newman · Board Strategy Session" data-date="Apr 22, 2026" data-cat="Board Meeting" x="1393" y="795" width="4" height="18" fill="#AE8E51"/>
+ <text x="1410" y="807" fill="rgba(229,229,229,0.55)" font-family="GT America Mono, monospace" font-size="10">3</text>
+
+ <!-- Bottom horizontal rule -->
+ <line x1="40" y1="818" x2="1400" y2="818" stroke="rgba(229,229,229,0.22)" stroke-width="1"/>
+
+ </svg>
+
+ <!-- Footer annotations (below chart) -->
+ <div style="display:flex; justify-content:space-between; padding: 16px 0 0; font-family:'GT America Mono', monospace; font-size:10px; letter-spacing:0.18em; color:rgba(229,229,229,0.45); text-transform:uppercase;">
+ <span>Each bar marks the active arc of a relationship. Each tick marks a conversation.</span>
+ <span>Source · Baseline Portal · n = 19</span>
+ </div>
+ </div><!-- /view-timeline -->
+
+ <!-- ═══════════════════════════════════════════════════════════════════ -->
+ <!-- ROSTER VIEW · Tombstones per stakeholder -->
+ <!-- ═══════════════════════════════════════════════════════════════════ -->
+ <div class="roster-wrap" id="view-roster">
+
+ <!-- MLB -->
+ <div class="roster-section">
+ <div class="roster-section-head">
+ <span class="roster-section-num">I</span>
+ <span class="roster-section-title">Major League Baseball</span>
+ <span class="roster-section-meta">1 Relationship · 5 Meetings</span>
+ </div>
+ <div class="roster-grid">
+ <div class="tomb mlb">
+ <div class="tomb-eyebrow">MLB · Priority</div>
+ <div class="tomb-name">Rob Engel</div>
+ <div class="tomb-role">SVP Software Eng · MLB</div>
+ <div class="tomb-count">
+ <span class="num">5</span>
+ <span class="label">Conversations</span>
+ </div>
+ <div class="tomb-range">Jan 22 to Apr 23 · 91 days</div>
+ </div>
+ </div>
+ </div>
+
+ <!-- INVESTOR -->
+ <div class="roster-section">
+ <div class="roster-section-head">
+ <span class="roster-section-num">II</span>
+ <span class="roster-section-title">Investor Pipeline</span>
+ <span class="roster-section-meta">5 Relationships · 17 Meetings</span>
+ </div>
+ <div class="roster-grid">
+ <div class="tomb investor">
+ <div class="tomb-eyebrow">INVESTOR · ACTIVE</div>
+ <div class="tomb-name">Mark Shirman</div>
+ <div class="tomb-role">Fmr CEO · RiverMeadow</div>
+ <div class="tomb-count">
+ <span class="num">5</span>
+ <span class="label">Conversations</span>
+ </div>
+ <div class="tomb-range">Nov 10 to Apr 15 · 156 days</div>
+ </div>
+ <div class="tomb investor">
+ <div class="tomb-eyebrow">INVESTOR · ACTIVE</div>
+ <div class="tomb-name">Scott Price</div>
+ <div class="tomb-role">President · Beacon Oral</div>
+ <div class="tomb-count">
+ <span class="num">3</span>
+ <span class="label">Conversations</span>
+ </div>
+ <div class="tomb-range">Dec 20 to Apr 8 · 109 days</div>
+ </div>
+ <div class="tomb investor">
+ <div class="tomb-eyebrow">INVESTOR · ACTIVE</div>
+ <div class="tomb-name">BizAnalytica</div>
+ <div class="tomb-role">Strategic Investor</div>
+ <div class="tomb-count">
+ <span class="num">4</span>
+ <span class="label">Conversations</span>
+ </div>
+ <div class="tomb-range">Nov 25 to Apr 18 · 144 days</div>
+ </div>
+ <div class="tomb investor aggregate">
+ <div class="tomb-eyebrow">INVESTOR · DISCOVERY</div>
+ <div class="tomb-name">2 more conversations</div>
+ <div class="tomb-role">Early stage · Unnamed</div>
+ <div class="tomb-count">
+ <span class="num">2</span>
+ <span class="label">Conversations</span>
+ </div>
+ <div class="tomb-range">Jan to Apr · In motion</div>
+ </div>
+ </div>
+ </div>
+
+ <!-- ADVISORY -->
+ <div class="roster-section">
+ <div class="roster-section-head">
+ <span class="roster-section-num">III</span>
+ <span class="roster-section-title">Industry Advisory Board</span>
+ <span class="roster-section-meta">11 Active · 3 Pending · 1 Upcoming</span>
+ </div>
+ <div class="roster-grid">
+ <div class="tomb advisory">
+ <div class="tomb-eyebrow">ADVISORY · ACTIVE</div>
+ <div class="tomb-name">TrackMan</div>
+ <div class="tomb-role">Technology Partner</div>
+ <div class="tomb-count">
+ <span class="num">3</span>
+ <span class="label">Conversations</span>
+ </div>
+ <div class="tomb-range">Jan 5 to Apr 10 · 95 days</div>
+ </div>
+ <div class="tomb advisory">
+ <div class="tomb-eyebrow">ADVISORY · ACTIVE</div>
+ <div class="tomb-name">Rob Engel (IAB)</div>
+ <div class="tomb-role">Founding Member</div>
+ <div class="tomb-count">
+ <span class="num">3</span>
+ <span class="label">Conversations</span>
+ </div>
+ <div class="tomb-range">Jan 22 to Apr 20 · 88 days</div>
+ </div>
+ <div class="tomb advisory">
+ <div class="tomb-eyebrow">ADVISORY · COLLECTIVE</div>
+ <div class="tomb-name">IAB · All-Hands</div>
+ <div class="tomb-role">Full Board Sessions</div>
+ <div class="tomb-count">
+ <span class="num">3</span>
+ <span class="label">Sessions</span>
+ </div>
+ <div class="tomb-range">Jan 20 to Apr 23 · 93 days</div>
+ </div>
+ <div class="tomb advisory aggregate">
+ <div class="tomb-eyebrow">ADVISORY · PENDING</div>
+ <div class="tomb-name">3 pending IAB offers</div>
+ <div class="tomb-role">Outbound · Awaiting</div>
+ <div class="tomb-count">
+ <span class="num">3</span>
+ <span class="label">Offers</span>
+ </div>
+ <div class="tomb-range">Feb to Apr · Outreach</div>
+ </div>
+ </div>
+ </div>
+
+ <!-- LEGAL -->
+ <div class="roster-section">
+ <div class="roster-section-head">
+ <span class="roster-section-num">IV</span>
+ <span class="roster-section-title">Legal Counsel</span>
+ <span class="roster-section-meta">2 Relationships · 4 Meetings</span>
+ </div>
+ <div class="roster-grid">
+ <div class="tomb legal">
+ <div class="tomb-eyebrow">LEGAL · ACTIVE</div>
+ <div class="tomb-name">Kris Withrow</div>
+ <div class="tomb-role">Partner · Fenwick &amp; West</div>
+ <div class="tomb-count">
+ <span class="num">3</span>
+ <span class="label">Conversations</span>
+ </div>
+ <div class="tomb-range">Oct 25 to Apr 5 · 163 days</div>
+ </div>
+ <div class="tomb legal">
+ <div class="tomb-eyebrow">LEGAL · NEW</div>
+ <div class="tomb-name">Edwin Prather</div>
+ <div class="tomb-role">GC · Alexander's Steakhouse</div>
+ <div class="tomb-count">
+ <span class="num">1</span>
+ <span class="label">Conversation</span>
+ </div>
+ <div class="tomb-range">Apr 2 · Discovery</div>
+ </div>
+ </div>
+ </div>
+
+ <!-- STRATEGIC -->
+ <div class="roster-section">
+ <div class="roster-section-head">
+ <span class="roster-section-num">V</span>
+ <span class="roster-section-title">Strategic Leadership</span>
+ <span class="roster-section-meta">2 Incoming Executives · 5 Meetings</span>
+ </div>
+ <div class="roster-grid">
+ <div class="tomb strategic">
+ <div class="tomb-eyebrow">STRATEGIC · LEADERSHIP</div>
+ <div class="tomb-name">Jeff Newman</div>
+ <div class="tomb-role">Incoming Chairman</div>
+ <div class="tomb-count">
+ <span class="num">3</span>
+ <span class="label">Conversations</span>
+ </div>
+ <div class="tomb-range">Mar 5 to Apr 22 · 48 days</div>
+ </div>
+ <div class="tomb strategic">
+ <div class="tomb-eyebrow">STRATEGIC · LEADERSHIP</div>
+ <div class="tomb-name">Ramesh Bobba</div>
+ <div class="tomb-role">Incoming CTO</div>
+ <div class="tomb-count">
+ <span class="num">2</span>
+ <span class="label">Conversations</span>
+ </div>
+ <div class="tomb-range">Feb 18 to Apr 20 · 61 days</div>
+ </div>
+ </div>
+ </div>
+
+ </div><!-- /view-roster -->
+ </div><!-- /chart-wrap -->
+
+ <!-- Editorial marginalia -->
+ <div class="caption fade" style="animation-delay:0.48s">
+ <div class="caption-col">
+ <div class="anchor">JAN 20 · IAB ESTABLISHED</div>
+ <div class="headline">The first convergence.</div>
+ <div class="body">Rob Engel's MLB strand opens the same week the Industry Advisory Board formalizes. TrackMan enters as a technology partner. The week Baseline stops being a conversation and starts being a roster.</div>
+ </div>
+ <div class="caption-col">
+ <div class="anchor">FEB 28 · SPRING TRAINING VALIDATION</div>
+ <div class="headline">The product meets the field.</div>
+ <div class="body">Pilots run. TrackMan deepens. The investor strands tighten around the same window · Mark Shirman returns, BizAnalytica's cadence thickens. Validation and capital begin to move in parallel.</div>
+ </div>
+ <div class="caption-col">
+ <div class="anchor">APR 23 · MLB LETTER OF INTENT</div>
+ <div class="headline">Seven strands in one week.</div>
+ <div class="body">The MLB column, two investor threads, the IAB collective, both incoming executives, and legal counsel all touch April. The next six weeks decide whether Q2 closes as the quarter Baseline moved from validated to capitalized.</div>
+ </div>
+ </div>
+
+ <!-- Bottom -->
+ <div class="bottom">
+ <div class="tagline"><em>Every Athlete</em> Deserves a Baseline.</div>
+ <div class="bottom-mono">Baseline Analytics · Investor Portal · 03 · Annual Timetable</div>
+ </div>
+
+</div>
+<!-- Tooltip -->
+<div id="tooltip"></div>
+
+<script>
+ /* Tooltip for meeting ticks */
+ const tooltip = document.getElementById('tooltip');
+ document.addEventListener('mouseover', (e) => {
+ const tick = e.target.closest('[data-mt]');
+ if (!tick) return;
+ const title = tick.dataset.title;
+ const date = tick.dataset.date;
+ const cat = tick.dataset.cat || 'advisory';
+ const catClass = cat.toLowerCase().replace(/ /g, '');
+ tooltip.innerHTML = `<div class="tt-title">${title}</div><div class="tt-date">${date}</div><div class="tt-cat ${catClass}">${cat}</div>`;
+ tooltip.classList.add('visible');
+ });
+ document.addEventListener('mousemove', (e) => {
+ if (!tooltip.classList.contains('visible')) return;
+ let x = e.clientX + 14;
+ let y = e.clientY + 14;
+ if (x + 320 > window.innerWidth) x = e.clientX - 336;
+ if (y + 100 > window.innerHeight) y = e.clientY - 110;
+ tooltip.style.left = x + 'px';
+ tooltip.style.top = y + 'px';
+ });
+ document.addEventListener('mouseout', (e) => {
+ const tick = e.target.closest('[data-mt]');
+ if (tick) tooltip.classList.remove('visible');
+ });
+
+ /* View toggle */
+ document.querySelectorAll('.view-toggle button').forEach(btn => {
+ btn.addEventListener('click', () => {
+ const view = btn.dataset.view;
+ document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('active'));
+ btn.classList.add('active');
+ const timeline = document.getElementById('view-timeline');
+ const roster = document.getElementById('view-roster');
+ if (view === 'timeline') {
+ timeline.classList.remove('hidden');
+ roster.classList.remove('active');
+ } else {
+ timeline.classList.add('hidden');
+ roster.classList.add('active');
+ }
+ });
+ });
+</script>
+</body>
+</html>

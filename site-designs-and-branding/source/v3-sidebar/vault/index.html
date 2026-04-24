@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Baseline Analytics — Vault (V3)</title>
+<style>
+  @font-face { font-family: 'GT America'; src: url('../../brand_source/fonts_2/GT-America-Standard-Light-Trial.otf') format('opentype'); font-weight: 300; }
+  @font-face { font-family: 'GT America'; src: url('../../brand_source/fonts_2/GT-America-Standard-Regular-Trial.otf') format('opentype'); font-weight: 400; }
+  @font-face { font-family: 'GT America'; src: url('../../brand_source/fonts_2/GT-America-Standard-Medium-Trial.otf') format('opentype'); font-weight: 500; }
+  @font-face { font-family: 'GT America'; src: url('../../brand_source/fonts_2/GT-America-Standard-Bold-Trial.otf') format('opentype'); font-weight: 700; }
+  @font-face { font-family: 'GT America Mono'; src: url('../../brand_source/fonts_1/GT-America-Mono-Regular-Trial.otf') format('opentype'); font-weight: 400; }
+  @font-face { font-family: 'GT America Mono'; src: url('../../brand_source/fonts_1/GT-America-Mono-Medium-Trial.otf') format('opentype'); font-weight: 500; }
+
+  :root {
+    --black: #000; --onyx: #121211; --onyx-2: #1a1916; --onyx-3: #0a0a09;
+    --gold: #FFC655; --gold-mid: #AE8E51; --gold-deep: #63553C;
+    --mercury: #E5E5E5; --mercury-dim: rgba(229,229,229,0.62);
+    --mercury-faint: rgba(229,229,229,0.32);
+    --hairline: rgba(229,229,229,0.08); --hairline-2: rgba(229,229,229,0.14);
+    --sidebar-w: 220px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--black); color: var(--mercury); font-family: 'GT America', -apple-system, sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+  ::selection { background: var(--gold); color: var(--black); }
+
+  /* ========== SIDEBAR ========== */
+  .sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--onyx-3); border-right: 1px solid var(--hairline-2); display: flex; flex-direction: column; z-index: 50; padding: 24px 0; }
+  .sb-brand { padding: 4px 22px 28px; border-bottom: 1px solid var(--hairline); margin-bottom: 22px; display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+  .sb-mark { width: 24px; height: 32px; display: flex; gap: 2px; align-items: flex-start; }
+  .sb-mark span { width: 3px; background: var(--gold); display: block; }
+  .sb-mark span:nth-child(1) { height: 19px; background: var(--gold-mid); }
+  .sb-mark span:nth-child(2) { height: 28px; }
+  .sb-mark span:nth-child(3) { height: 32px; }
+  .sb-mark span:nth-child(4) { height: 24px; }
+  .sb-mark span:nth-child(5) { height: 17px; background: var(--gold-mid); }
+  .sb-brand .name { font-size: 12px; font-weight: 500; color: var(--mercury); letter-spacing: 0.02em; line-height: 1.2; }
+  .sb-brand .sub { font-family: 'GT America Mono', monospace; font-size: 8.5px; letter-spacing: 0.22em; color: var(--gold-mid); text-transform: uppercase; margin-top: 3px; }
+  .sb-section-label { font-family: 'GT America Mono', monospace; font-size: 9px; letter-spacing: 0.24em; color: var(--mercury-faint); text-transform: uppercase; padding: 0 22px; margin-bottom: 10px; }
+  .sb-nav { display: flex; flex-direction: column; gap: 1px; flex: 1; }
+  .sb-link { display: flex; align-items: center; gap: 12px; padding: 10px 22px; text-decoration: none; font-size: 13px; color: var(--mercury-dim); transition: all 0.15s; cursor: pointer; border: none; background: transparent; font-family: inherit; text-align: left; width: 100%; position: relative; }
+  .sb-link:hover { color: var(--mercury); background: rgba(255,255,255,0.02); }
+  .sb-link.active { color: var(--gold); background: rgba(255,198,85,0.06); }
+  .sb-link.active::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--gold); }
+  .sb-link .dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(229,229,229,0.2); flex-shrink: 0; }
+  .sb-link.active .dot { background: var(--gold); }
+  .sb-link:hover .dot { background: rgba(229,229,229,0.5); }
+  .sb-group { margin: 0; }
+  .sb-group-trigger .caret { margin-left: auto; width: 5px; height: 5px; border-right: 1.2px solid currentColor; border-bottom: 1.2px solid currentColor; transform: rotate(45deg); transition: transform 0.2s; margin-bottom: 2px; }
+  .sb-group.open .sb-group-trigger .caret { transform: rotate(225deg); margin-top: 2px; margin-bottom: 0; }
+  .sb-subnav { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.22s ease; }
+  .sb-group.open .sb-subnav { grid-template-rows: 1fr; }
+  .sb-subnav-inner { overflow: hidden; }
+  .sb-sublink { display: block; padding: 8px 22px 8px 42px; font-size: 12.5px; color: var(--mercury-dim); text-decoration: none; transition: all 0.15s; }
+  .sb-sublink:hover { color: var(--gold); background: rgba(255,198,85,0.04); }
+  .sb-sublink.active { color: var(--gold); }
+  .sb-divider { height: 1px; background: var(--hairline); margin: 18px 22px; }
+  .sb-user { padding: 16px 22px; border-top: 1px solid var(--hairline); display: flex; align-items: center; gap: 10px; }
+  .sb-user .avatar { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--gold-mid); display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--gold); font-weight: 500; font-family: 'GT America Mono', monospace; }
+  .sb-user .meta { display: flex; flex-direction: column; line-height: 1.2; }
+  .sb-user .name { font-size: 12px; color: var(--mercury); font-weight: 500; }
+  .sb-user .role { font-family: 'GT America Mono', monospace; font-size: 9px; letter-spacing: 0.16em; color: var(--mercury-faint); text-transform: uppercase; margin-top: 3px; }
+
+  /* ========== MAIN ========== */
+  .main { margin-left: var(--sidebar-w); min-height: 100vh; }
+  .main-head { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; padding: 16px 48px; background: rgba(0,0,0,0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--hairline); }
+  .main-head-left { display: flex; align-items: baseline; gap: 16px; font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; }
+  .main-head-left .crumb { color: var(--mercury-faint); }
+  .main-head-left .sep { color: var(--mercury-faint); }
+  .main-head-left .cur { color: var(--gold); }
+  .main-head-right { display: flex; align-items: center; gap: 24px; font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: var(--mercury-faint); text-transform: uppercase; }
+  .main-head-right .live { display: inline-flex; align-items: center; gap: 8px; color: var(--gold); }
+  .main-head-right .live::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .content { padding: 40px 48px 80px; }
+
+  /* ========== HERO ========== */
+  .hero { margin-bottom: 40px; }
+  .hero-kicker { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.28em; color: var(--gold); text-transform: uppercase; margin-bottom: 18px; }
+  .hero-head { font-size: 56px; font-weight: 400; line-height: 1.08; letter-spacing: -0.03em; color: var(--mercury); max-width: 900px; margin-bottom: 18px; }
+  .hero-head .em { color: var(--gold); font-weight: 400; font-style: italic; }
+  .hero-sub { max-width: 720px; font-size: 15px; line-height: 1.58; color: var(--mercury-dim); font-weight: 300; letter-spacing: -0.005em; }
+  .hero-sub em { color: var(--mercury); font-style: normal; }
+
+  /* ========== STATS ========== */
+  .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--hairline-2); border-bottom: 1px solid var(--hairline-2); margin-bottom: 40px; }
+  .stat { padding: 22px 28px; border-right: 1px solid var(--hairline); }
+  .stat:first-child { padding-left: 0; }
+  .stat:last-child { border-right: none; padding-right: 0; }
+  .stat .num { font-size: 46px; font-weight: 300; letter-spacing: -0.025em; line-height: 1; color: var(--mercury); font-variant-numeric: tabular-nums; }
+  .stat .num.accent { color: var(--gold); }
+  .stat .num.compact { font-size: 26px; padding-top: 10px; letter-spacing: -0.01em; }
+  .stat .label { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--mercury-faint); text-transform: uppercase; margin-top: 10px; }
+
+  /* ========== PANEL / SECTION ========== */
+  .panel { background: rgba(18,18,17,0.5); border: 1px solid var(--hairline-2); display: flex; flex-direction: column; margin-bottom: 28px; }
+  .panel-head { display: flex; align-items: baseline; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid var(--hairline); }
+  .panel-head-left { display: flex; align-items: baseline; gap: 12px; }
+  .panel-num { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.22em; color: var(--gold-mid); text-transform: uppercase; }
+  .panel-title { font-size: 15px; font-weight: 500; color: var(--mercury); letter-spacing: -0.005em; }
+  .panel-count { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.16em; color: var(--mercury-faint); text-transform: uppercase; }
+  .panel-all { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.22em; color: var(--gold); text-transform: uppercase; text-decoration: none; }
+  .panel-all:hover { color: #ffd37a; }
+
+  /* ========== TABLE ROWS (enterprise-tool pattern) ========== */
+  .data-table { display: flex; flex-direction: column; }
+  .data-row { display: grid; align-items: center; gap: 14px; padding: 14px 20px; border-bottom: 1px solid var(--hairline); text-decoration: none; color: inherit; transition: background 0.15s; cursor: pointer; }
+  .data-row:last-child { border-bottom: none; }
+  .data-row:hover { background: rgba(255,255,255,0.02); }
+  .cell-date { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: var(--mercury-faint); text-transform: uppercase; }
+  .cell-pill { display: inline-flex; justify-content: center; padding: 3px 8px; font-family: 'GT America Mono', monospace; font-size: 8.5px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; border: 1px solid; text-align: center; }
+  .cell-title { font-size: 13px; font-weight: 500; color: var(--mercury); letter-spacing: -0.005em; line-height: 1.3; }
+  .data-row:hover .cell-title { color: var(--gold); }
+  .cell-meta { font-family: 'GT America Mono', monospace; font-size: 9.5px; letter-spacing: 0.16em; color: var(--mercury-faint); text-transform: uppercase; }
+  .cell-actions { font-family: 'GT America Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; }
+
+  /* ========== ASK PERSIST (Overview only per spec) ========== */
+  .ask-persist { display: flex; align-items: center; gap: 14px; padding: 14px 18px; margin-bottom: 36px; background: var(--onyx); border: 1px solid var(--gold-mid); position: relative; }
+  .ask-persist::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gold); }
+  .ask-persist-label { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.24em; color: var(--gold); text-transform: uppercase; white-space: nowrap; }
+  .ask-persist-form { display: flex; gap: 8px; flex: 1; }
+  .ask-persist-input { flex: 1; background: rgba(0,0,0,0.5); border: 1px solid var(--hairline-2); color: var(--mercury); padding: 10px 14px; font-family: 'GT America', sans-serif; font-size: 14px; font-weight: 300; letter-spacing: -0.005em; outline: none; transition: border-color 0.2s; }
+  .ask-persist-input::placeholder { color: var(--mercury-faint); }
+  .ask-persist-input:focus { border-color: var(--gold); }
+  .ask-persist-send { background: var(--gold); color: #121211; border: none; padding: 0 20px; font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 500; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
+  .ask-persist-send:hover { background: #ffd37a; }
+  .ask-persist-chips { display: flex; gap: 6px; }
+  .ask-persist-chip { padding: 6px 10px; background: transparent; border: 1px solid var(--hairline-2); font-family: 'GT America Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mercury-dim); cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+  .ask-persist-chip:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ========== FOOT ========== */
+  .foot { padding-top: 24px; border-top: 1px solid var(--hairline-2); display: flex; justify-content: space-between; align-items: center; font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: var(--mercury-faint); text-transform: uppercase; }
+  .foot em { color: var(--gold); font-style: normal; font-weight: 400; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .fade { animation: fadeUp 0.8s ease-out both; }
+
+
+  .filter-bar { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+  .filter-chip { padding: 8px 14px; background: transparent; border: 1px solid var(--hairline-2); color: var(--mercury-dim); font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 500; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+  .filter-chip:hover { border-color: var(--gold-mid); color: var(--mercury); }
+  .filter-chip.active { border-color: var(--gold); color: var(--gold); background: rgba(255,198,85,0.06); }
+  .chip-count { padding: 1px 6px; background: rgba(229,229,229,0.08); color: var(--mercury-dim); font-size: 9px; min-width: 18px; text-align: center; }
+  .filter-chip.active .chip-count { background: rgba(255,198,85,0.2); color: var(--gold); }
+
+  .vault-table .data-row { grid-template-columns: 60px 1fr 1fr 1fr 80px; }
+  .cell-badge { display: inline-flex; justify-content: center; padding: 4px 0; font-family: 'GT America Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600; border: 1px solid; }
+  .cell-badge.pdf { color: var(--gold); border-color: var(--gold); background: rgba(255,198,85,0.08); }
+  .cell-badge.doc { color: var(--mercury); border-color: rgba(229,229,229,0.4); }
+  .cell-badge.pptx { color: var(--gold-mid); border-color: var(--gold-mid); }
+  .draft-tag { display: inline-block; margin-left: 8px; padding: 2px 6px; font-family: 'GT America Mono', monospace; font-size: 8px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-mid); border: 1px solid var(--gold-mid); background: rgba(174,142,81,0.08); }
+
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <a class="sb-brand" href="../overview/index.html">
+    <div class="sb-mark"><span></span><span></span><span></span><span></span><span></span></div>
+    <div>
+      <div class="name">Baseline Analytics</div>
+      <div class="sub">Investor Portal</div>
+    </div>
+  </a>
+  <div class="sb-section-label">Portal</div>
+  <nav class="sb-nav">
+    <a href="../overview/index.html" class="sb-link"><span class="dot"></span>Overview</a>
+    <a href="../deal_intel/index.html" class="sb-link"><span class="dot"></span>Deal Intel</a>
+    <a href="../milestones/index.html" class="sb-link"><span class="dot"></span>Milestones</a>
+    <a href="../meetings/index.html" class="sb-link"><span class="dot"></span>Meetings</a>
+    <a href="../vault/index.html" class="sb-link active"><span class="dot"></span>Vault</a>
+    <a href="../buzz/index.html" class="sb-link"><span class="dot"></span>Buzz</a>
+    <div class="sb-group " id="aboutGroup">
+      <button class="sb-link sb-group-trigger" id="aboutTrigger">
+        <span class="dot"></span>About Us<span class="caret"></span>
+      </button>
+      <div class="sb-subnav">
+        <div class="sb-subnav-inner">
+          <a href="../team/index.html" class="sb-sublink">Meet the Team</a>
+          <a href="../advisory/index.html" class="sb-sublink">Advisory Board</a>
+        </div>
+      </div>
+    </div>
+    <div class="sb-divider"></div>
+    <a href="../ask_portal/index.html" class="sb-link"><span class="dot"></span>Ask the Portal</a>
+  </nav>
+  <div class="sb-user">
+    <div class="avatar">C</div>
+    <div class="meta">
+      <span class="name">Chase</span>
+      <span class="role">Founder · CEO</span>
+    </div>
+  </div>
+</aside>
+
+<main class="main">
+  <div class="main-head">
+    <div class="main-head-left">
+      <span class="crumb">Baseline Analytics</span>
+      <span class="sep">/</span>
+      <span class="cur">Vault</span>
+    </div>
+    <div class="main-head-right">
+      <span>Cycle 04 · 24 Mar to 23 Apr 2026</span>
+      <span class="live">Live</span>
+    </div>
+  </div>
+  <div class="content">
+
+    <div class="hero fade">
+      <div class="hero-kicker">Investor Portal · Vault</div>
+      <h1 class="hero-head">The <span class="em">source of record.</span></h1>
+      <p class="hero-sub">Every material the stakeholder portal references — case studies, governance, positioning, and brand — stored, versioned, and link-accessible for cycle-level review.</p>
+    </div>
+
+    <div class="stat-row fade" style="animation-delay:0.1s">
+      <div class="stat"><div class="num accent">6</div><div class="label">Documents</div></div>
+      <div class="stat"><div class="num">4</div><div class="label">Released</div></div>
+      <div class="stat"><div class="num">2</div><div class="label">Drafts</div></div>
+      <div class="stat"><div class="num compact">Cycle 04</div><div class="label">Active Period</div></div>
+    </div>
+
+    <div class="filter-bar fade" style="animation-delay:0.14s">
+      <button class="filter-chip active" data-cat="all">All <span class="chip-count">6</span></button>
+      <button class="filter-chip" data-cat="intel">Intel <span class="chip-count">2</span></button>
+      <button class="filter-chip" data-cat="governance">Governance <span class="chip-count">1</span></button>
+      <button class="filter-chip" data-cat="brand">Brand <span class="chip-count">1</span></button>
+      <button class="filter-chip" data-cat="case">Case Study <span class="chip-count">1</span></button>
+      <button class="filter-chip" data-cat="deck">Deck <span class="chip-count">1</span></button>
+    </div>
+
+    <section class="panel fade" style="animation-delay:0.18s">
+      <div class="panel-head">
+        <div class="panel-head-left">
+          <span class="panel-num">01</span>
+          <span class="panel-title">Cycle 04 Materials</span>
+          <span class="panel-count">6 documents</span>
+        </div>
+      </div>
+      <div class="data-table vault-table">
+        <a href="../../artifacts/vault/docs/Sports_Tech_Deal_Comparables.pdf" target="_blank" class="data-row" data-cat="intel"><span class="cell-badge pdf">PDF</span><span class="cell-title">Sports Tech Deal Comparables</span><span class="cell-meta">Market Intel · Deal Comparables</span><span class="cell-meta">Sheldon McClelland · Apr 8</span><span class="cell-actions">View →</span></a>
+        <a href="../../artifacts/vault/docs/IAB_Overview.pdf" target="_blank" class="data-row" data-cat="governance"><span class="cell-badge pdf">PDF</span><span class="cell-title">IAB Program Framework</span><span class="cell-meta">Governance · Advisory Board</span><span class="cell-meta">Jeff Newman · Apr 4</span><span class="cell-actions">View →</span></a>
+        <a href="#" class="data-row" data-cat="brand"><span class="cell-badge pdf">PDF</span><span class="cell-title">Brand Guidelines v1.0</span><span class="cell-meta">Brand · PERKK Branding Studio</span><span class="cell-meta">External · Jan 2026</span><span class="cell-actions">View →</span></a>
+        <a href="#" class="data-row draft" data-cat="case"><span class="cell-badge doc">DOC</span><span class="cell-title">Hayden Birdsong Case Study <span class="draft-tag">Draft</span></span><span class="cell-meta">Case Study · ACIS</span><span class="cell-meta">Chase Spivey · Apr 14</span><span class="cell-actions">View →</span></a>
+        <a href="../../artifacts/vault/docs/Investor_Deck.pdf" target="_blank" class="data-row" data-cat="deck"><span class="cell-badge pptx">PPTX</span><span class="cell-title">Investor Deck</span><span class="cell-meta">Deck · Capital Strategy</span><span class="cell-meta">Chase Spivey · Apr 10</span><span class="cell-actions">View →</span></a>
+        <a href="#" class="data-row draft" data-cat="intel"><span class="cell-badge doc">DOC</span><span class="cell-title">Power Statement <span class="draft-tag">Draft</span></span><span class="cell-meta">Leadership · Positioning</span><span class="cell-meta">Sheldon McClelland · Apr 11</span><span class="cell-actions">View →</span></a>
+      </div>
+    </section>
+
+    <div class="foot">
+      <span><em>Every Athlete</em> Deserves a Baseline.</span>
+      <span>Baseline Analytics · Investor Portal · V3 · Dark Sidebar</span>
+    </div>
+  </div>
+</main>
+
+<script>
+  // Sidebar About Us expand/collapse
+  const aboutGroup = document.getElementById('aboutGroup');
+  const aboutTrigger = document.getElementById('aboutTrigger');
+  if (aboutTrigger) aboutTrigger.addEventListener('click', (e) => {
+    e.preventDefault();
+    aboutGroup.classList.toggle('open');
+  });
+</script>
+<script>
+  document.querySelectorAll('.filter-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const cat = chip.dataset.cat;
+      document.querySelectorAll('.vault-table .data-row').forEach(row => {
+        row.style.display = (cat === 'all' || row.dataset.cat === cat) ? '' : 'none';
+      });
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+BASELINE ANALYTICS League-Wide Sports Tech
+Deal Comparables
+BASELINE ANALYTICS, INC. | Confidential | March 2026 baselineanalytics.net | Page 2
+CLOSEST ACIS COMPARABLE
+NFL "Digital Athlete" + AWS $60M+ program
+Ongoing since 2019 | League-wide AI injury prediction platform | All 32 NFL teams
+WHAT IT IS
+The Digital Athlete is an AI-powered injury prediction platform built jointly by the NFL and Amazon Web Services (AWS). It creates a virtual simulation of every NFL
+player by combining multiple data sources: RFID tracking data from chips in players' shoulder pads (provided by Zebra Technologies), footage from 38 5K optical
+tracking cameras per field capturing 60 frames per second, weather and environmental data, equipment specifications, play type classifications, and aggregated
+anonymized injury data across the league. AWS applies machine learning and computer vision to this data to run millions of game simulations, identifying which
+players are at highest risk of injury based on their workload, movement patterns, and position-specific risk factors.
+ROLLOUT
+The concept originated during an NFL visit to GE's innovation lab, where Jennifer Langton (SVP Player Health and Innovation) saw digital twin technology used to
+predict turbine engine failures. The NFL evaluated Microsoft, Google, and AWS before selecting AWS as the technology partner. AWS had been the NFL's cloud
+computing partner since 2017 through the Next Gen Stats platform. The Digital Athlete was developed through the NFL's $60M+ Engineering Roadmap, managed by
+Football Research, Inc. (FRI). It was piloted with select teams in 2023, then deployed to all 32 NFL clubs for the 2024 season via a centralized team portal. The
+portal provides each team with daily training volume data, individualized injury risk scores, and league-wide trends and benchmarks. Coaches and training staff use it
+to manage practice intensity, in-season workloads, position-group fatigue, and individualized recovery protocols.
+RESULT
+In 2024, the NFL recorded a 17% reduction in concussions compared to 2023, the lowest concussion rate since the league began tracking. The platform also
+informed the design of the new Dynamic Kickoff rule (reducing kickoff returns by 7%, projected to cut concussions from those plays by 15%) and drove
+improvements in helmet design and manufacturing based on impact force data. The system identified position-specific injury patterns, such as quarterbacks being
+more susceptible to rear head injuries when bracing the ball during a rush. Teams report using the platform for individualized training camp scheduling, weekly
+practice intensity management, and soft-tissue injury prevention.
+WHY THIS MATTERS FOR ACIS
+This is the single closest structural comparable to ACIS. Both are league-wide AI-powered injury prevention platforms deployed to all teams via a centralized portal
+with team-specific and league-wide benchmarking. The key difference: AWS likely subsidizes Digital Athlete costs in exchange for brand/marketing value as a
+$100B+ company. ACIS should price at full standalone value since Baseline does not have that dynamic. The 17% concussion reduction is the strongest available
+proof point that league-wide AI injury prevention produces measurable, documentable outcomes.
+KEY FINANCIALS
+NFL Engineering Roadmap budget $60M+ (funded by NFL, managed by FRI)
+AWS as NFL cloud partner (since 2017) Undisclosed annual terms
+Estimated annual platform cost Likely subsidized by AWS for marketing ROI
+Concussion reduction achieved 17% (2023-2024)
+Teams with portal access 32 of 32 (100%)
+CLOSEST ACIS COMPARABLE
+Second Spectrum + NBA ~$42M/yr est.
+6-year deal (2016-2022) | AI tracking and analytics platform | All 30 NBA teams | Acquired by Genius Sports for $200M
+WHAT IT IS
+Second Spectrum was an AI analytics company founded in 2013 by three USC computer science professors. It developed the 'Eagle' machine learning platform for
+real-time player and ball tracking, using camera-based optical tracking systems installed in all 30 NBA arenas. The system captured every player movement and ball
+trajectory, then applied machine learning to generate advanced analytics: shot probability, defensive positioning effectiveness, play classification, and predictive
+modeling. Second Spectrum served as the NBA's official optical tracking provider, replacing the previous SportVU system. It also expanded to the English Premier
+League (EPL) and Major League Soccer (MLS) before being acquired by Genius Sports for $200M in 2021.
+ROLLOUT
+The NBA announced a combined $250M, 6-year partnership with both Sportradar (data distribution) and Second Spectrum (tracking + analytics) in 2016. Second
+Spectrum's share was estimated at roughly $20-25M/year for the base league contract. Camera hardware was installed in all 30 NBA arenas. The critical innovation
+was a tiered pricing architecture: a base tier of raw tracking data and standard analytics was included in the league contract for all 30 teams. A premium tier offering
+advanced machine learning capabilities, custom modeling, and deeper predictive analytics was sold as a per-team add-on. 26 of 30 NBA teams (87%) paid extra for
+the premium tier, demonstrating strong demand for AI-powered analytics beyond baseline monitoring. When the NBA restructured its tracking ecosystem in 2023, the
+technology stack was unbundled: Sony's Hawk-Eye took over raw optical tracking, Sportradar continued data distribution (at a dramatically higher $1B+ price), and
+Genius Sports (which had acquired Second Spectrum) retained the team-facing analytics layer.
+RESULT
+Second Spectrum became the foundational analytics infrastructure for the entire NBA. Its data powered team analytics departments, broadcast augmented reality
+graphics, and league-wide research initiatives. The 87% premium upgrade rate validated that teams will pay substantially more for advanced AI capabilities beyond
+basic monitoring. When the NBA restructured in 2023, the analytics layer retained standalone commercial value separate from raw tracking hardware, proving that
+the intelligence layer (what ACIS represents) has independent pricing power.
+WHY THIS MATTERS FOR ACIS
+The tiered pricing architecture is the ideal template for ACIS: base monitoring for all 30 MLB teams under the league contract, premium predictive analytics as a
+per-team upsell. The 87% upgrade rate (26/30 teams) proves teams will pay more for advanced AI beyond baseline. The $200M acquisition by Genius Sports
+validates standalone value for AI analytics companies in sports.
+KEY FINANCIALS
+Combined NBA deal (Sportradar + Second Spectrum) $250M / 6 years (~$42M/yr)
+Second Spectrum estimated annual share $20-25M/yr (league contract)
+Premium tier adoption 26 of 30 teams (87%)
+Genius Sports acquisition of Second Spectrum $200M (2021)
+NBA Sportradar renewal (data distribution) $1B+ / 8 years

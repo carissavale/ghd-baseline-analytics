@@ -1,0 +1,54 @@
+PERKK Branding Studio Brand Guidelines - Baseline Analytics
+Onyx
+Black & Sunglow are used to 
+establish confidence and 
+professionalism, echoing the 
+brand’s "older and wiser" 
+personality.
+
+
+The brand is black dominant and 
+should be used primarily on black 
+backgrounds when in use. 
+HEX: 
+RGB: 
+CMYK:
+HEX: 
+RGB: 
+CMYK:
+#000000 
+ 0, 0, 0 
+ 0, 0, 0, 100
+#121211 
+ 18, 18, 17  Primary Colors 0, 0, 5, 92
+Brand Colors Black 2.0 Sunglow Shades
+HEX: 
+RGB: 
+CMYK:
+HEX: 
+RGB: 
+CMYK:
+HEX: 
+RGB: 
+CMYK:
+HEX: 
+RGB: 
+CMYK:
+HEX: 
+RGB: 
+CMYK:
+#FFC655 
+100, 78, 33 
+ 0, 22, 67, 0
+#E0AC44 
+88, 67, 27 
+ 0, 23, 70, 12
+#E8B248 
+91, 70, 28 
+ 0, 23, 69, 9
+#EFB94C 
+94, 73, 30 
+ 0, 23, 68, 6
+#F7BF51 
+97, 75, 32 
+ 0, 23, 67, 3

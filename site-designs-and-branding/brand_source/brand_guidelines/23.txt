@@ -1,0 +1,33 @@
+PERKK Branding Studio Brand Guidelines - Baseline Analytics Page - 22
+Secondary Colors
+Brand Colors
+2.0
+HEX: 
+RGB: 
+CMYK:
+HEX: 
+RGB: 
+CMYK:
+HEX: 
+RGB: 
+CMYK:
+#AE8E51 
+ 68, 56, 32 
+ 0, 18, 53, 32
+#E5E5E5 
+ 90, 90, 90 
+ 0, 0, 0, 10
+#FFFFFF 
+ 100, 100, 100 
+ 0, 0, 0, 0
+Limed Oak
+White Mercury
+White & Limed Oak are neutral 
+tones support transparency and 
+trust, ensuring the data remains 
+the "hero of the story".
+
+
+Mercury is used for adding 
+contrast to certain scenarios 
+when needed.

@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Baseline Analytics — Advisory Board</title>
+<style>
+  @font-face { font-family: 'GT America'; src: url('../../brand_source/fonts_2/GT-America-Standard-Light-Trial.otf') format('opentype'); font-weight: 300; }
+  @font-face { font-family: 'GT America'; src: url('../../brand_source/fonts_2/GT-America-Standard-Regular-Trial.otf') format('opentype'); font-weight: 400; }
+  @font-face { font-family: 'GT America'; src: url('../../brand_source/fonts_2/GT-America-Standard-Medium-Trial.otf') format('opentype'); font-weight: 500; }
+  @font-face { font-family: 'GT America Mono'; src: url('../../brand_source/fonts_1/GT-America-Mono-Regular-Trial.otf') format('opentype'); font-weight: 400; }
+  @font-face { font-family: 'GT America Mono'; src: url('../../brand_source/fonts_1/GT-America-Mono-Medium-Trial.otf') format('opentype'); font-weight: 500; }
+
+  :root {
+    --black: #000; --onyx: #121211; --onyx-2: #1a1916;
+    --gold: #FFC655; --gold-mid: #AE8E51; --gold-deep: #63553C;
+    --mercury: #E5E5E5; --mercury-dim: rgba(229,229,229,0.62);
+    --mercury-faint: rgba(229,229,229,0.32);
+    --hairline: rgba(229,229,229,0.08); --hairline-2: rgba(229,229,229,0.14);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--black); color: var(--mercury); font-family: 'GT America', -apple-system, sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; }
+  ::selection { background: var(--gold); color: var(--black); }
+
+  /* Top nav */
+  .topnav { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 16px 60px; border-bottom: 1px solid var(--hairline-2); background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); }
+  .topnav-brand { display: flex; align-items: center; gap: 12px; }
+  .topnav-brand .mark { width: 28px; height: 36px; display: flex; gap: 2px; align-items: flex-start; }
+  .topnav-brand .mark span { width: 3px; background: var(--gold); display: block; }
+  .topnav-brand .mark span:nth-child(1) { height: 22px; background: var(--gold-mid); }
+  .topnav-brand .mark span:nth-child(2) { height: 32px; }
+  .topnav-brand .mark span:nth-child(3) { height: 36px; }
+  .topnav-brand .mark span:nth-child(4) { height: 28px; }
+  .topnav-brand .mark span:nth-child(5) { height: 20px; background: var(--gold-mid); }
+  .topnav-brand .name { font-size: 13px; font-weight: 500; color: var(--mercury); }
+  .topnav-brand .sub { font-family: 'GT America Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: var(--gold-mid); text-transform: uppercase; margin-top: 2px; }
+  .topnav-links { display: flex; gap: 4px; align-items: center; }
+  .topnav-links a, .topnav-links .trigger { padding: 8px 16px; border-radius: 4px; text-decoration: none; font-size: 13px; color: var(--mercury-dim); transition: all 0.2s; cursor: pointer; }
+  .topnav-links a:hover, .topnav-links .trigger:hover { color: var(--mercury); }
+  .topnav-links a.active, .topnav-links .dropdown.active .trigger { color: var(--gold); background: rgba(255,198,85,0.08); }
+  .dropdown { position: relative; }
+  .dropdown .trigger { display: inline-flex; align-items: center; gap: 6px; background: transparent; border: none; font-family: inherit; font-size: 13px; }
+  .dropdown .trigger::after { content: ''; width: 6px; height: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); margin-top: -3px; transition: transform 0.2s; }
+  .dropdown:hover .trigger::after { transform: rotate(225deg); margin-top: 2px; }
+  .dropdown-menu { position: absolute; top: 100%; left: 0; min-width: 180px; padding: 8px 0; background: var(--onyx); border: 1px solid var(--hairline-2); opacity: 0; pointer-events: none; transform: translateY(-4px); transition: opacity 0.18s, transform 0.18s; margin-top: 0; z-index: 200; }
+  .dropdown:hover .dropdown-menu { opacity: 1; pointer-events: auto; transform: translateY(0); }
+  .dropdown-menu a { display: block; padding: 10px 18px; font-size: 13px; color: var(--mercury-dim); text-decoration: none; transition: all 0.15s; border-radius: 0; }
+  .dropdown-menu a:hover { background: rgba(255,198,85,0.08); color: var(--gold); }
+  .dropdown-menu a.active { color: var(--gold); }
+
+  .topnav-user { display: flex; align-items: center; gap: 8px; font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.16em; color: var(--mercury-dim); text-transform: uppercase; }
+  .topnav-user .avatar { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--gold-mid); display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--gold); font-weight: 500; }
+
+  .page { max-width: 1480px; margin: 0 auto; padding: 72px 60px 120px; }
+
+  .masthead { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 20px; border-bottom: 1px solid var(--hairline-2); margin-bottom: 56px; }
+  .masthead-left .dateline { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.26em; color: var(--gold-mid); text-transform: uppercase; margin-bottom: 8px; }
+  .masthead-left .pub { font-size: 13px; color: var(--mercury-dim); }
+  .masthead-right { text-align: right; font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--mercury-faint); text-transform: uppercase; }
+  .masthead-right .ed { color: var(--mercury-dim); }
+
+  /* Hero */
+  .hero-kicker { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.28em; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; }
+  .hero-headline { font-size: 72px; font-weight: 300; line-height: 1.02; letter-spacing: -0.035em; color: var(--mercury); max-width: 1100px; margin-bottom: 28px; display: flex; align-items: baseline; gap: 18px; border-left: 3px solid var(--gold); padding-left: 24px; }
+  .hero-headline .em { color: var(--gold); font-weight: 400; }
+  .standfirst { max-width: 820px; font-size: 17px; line-height: 1.55; color: var(--mercury-dim); font-weight: 300; margin-bottom: 56px; letter-spacing: -0.005em; padding-left: 27px; }
+  .standfirst em { color: var(--mercury); font-style: normal; }
+
+  /* Stats */
+  .stat-line { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--hairline-2); border-bottom: 1px solid var(--hairline-2); margin-bottom: 64px; }
+  .stat { padding: 28px 32px; border-right: 1px solid var(--hairline); }
+  .stat:first-child { padding-left: 0; }
+  .stat:last-child { border-right: none; padding-right: 0; }
+  .stat .num { font-size: 56px; font-weight: 300; letter-spacing: -0.03em; line-height: 1; color: var(--mercury); font-variant-numeric: tabular-nums; }
+  .stat .num.accent { color: var(--gold); }
+  .stat .num.compact { font-size: 32px; padding-top: 8px; letter-spacing: -0.015em; }
+  .stat .label { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--mercury-faint); text-transform: uppercase; margin-top: 12px; }
+
+  /* Section heading */
+  .section-heading { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 16px; border-bottom: 1px solid var(--hairline-2); margin-bottom: 28px; }
+  .section-heading .num { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.22em; color: var(--gold-mid); text-transform: uppercase; }
+  .section-heading .title { font-size: 22px; font-weight: 400; color: var(--mercury); letter-spacing: -0.01em; flex: 1; padding-left: 24px; }
+  .section-heading .meta { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: var(--mercury-dim); text-transform: uppercase; }
+
+  /* Member cards */
+  .members-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 56px; }
+  .members-grid.pending { grid-template-columns: repeat(4, 1fr); margin-bottom: 56px; }
+  .member-card {
+    background: rgba(18,18,17,0.6); border: 1px solid var(--hairline-2);
+    padding: 24px 22px 22px; text-align: left; transition: all 0.2s;
+    min-height: 170px; display: flex; flex-direction: column; position: relative;
+  }
+  .member-card:hover { border-color: var(--gold-mid); background: rgba(18,18,17,0.9); transform: translateY(-2px); }
+  .member-card.active-seat { border-left: 2px solid var(--gold); }
+  .member-card.pending-seat { border-left: 2px solid var(--gold-mid); border-style: dashed; border-top-style: solid; border-right-style: solid; border-bottom-style: solid; opacity: 0.95; }
+  .member-card.upcoming-seat { border: 1px dashed var(--gold-mid); background: rgba(255,198,85,0.03); }
+  .member-eyebrow {
+    font-family: 'GT America Mono', monospace; font-size: 9px;
+    letter-spacing: 0.22em; color: var(--gold-mid); text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .member-card.active-seat .member-eyebrow { color: var(--gold); }
+  .member-name {
+    font-size: 17px; font-weight: 500; color: var(--mercury);
+    letter-spacing: -0.01em; line-height: 1.2; margin-bottom: 8px;
+  }
+  .member-role {
+    font-family: 'GT America Mono', monospace; font-size: 10px;
+    letter-spacing: 0.14em; color: var(--gold); text-transform: uppercase;
+    line-height: 1.5; margin-bottom: 12px;
+  }
+  .member-card.pending-seat .member-role { color: var(--gold-mid); }
+  .member-card.upcoming-seat .member-role { color: var(--gold-mid); }
+  .member-bio {
+    font-size: 12.5px; line-height: 1.5; color: var(--mercury-dim);
+    font-weight: 300; margin-top: auto;
+  }
+
+  /* Composition block */
+  .composition {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+    margin-bottom: 56px;
+  }
+  .comp-card {
+    background: rgba(18,18,17,0.5); border: 1px solid var(--hairline-2);
+    padding: 22px 24px;
+  }
+  .comp-num {
+    font-size: 32px; font-weight: 300; color: var(--gold);
+    letter-spacing: -0.02em; line-height: 1; font-variant-numeric: tabular-nums;
+  }
+  .comp-label {
+    font-family: 'GT America Mono', monospace; font-size: 9.5px;
+    letter-spacing: 0.2em; color: var(--mercury); text-transform: uppercase;
+    margin: 10px 0 4px;
+  }
+  .comp-meta {
+    font-family: 'GT America Mono', monospace; font-size: 9px;
+    letter-spacing: 0.14em; color: var(--mercury-faint); text-transform: uppercase;
+    line-height: 1.5;
+  }
+
+  /* Cross-link */
+  .cross-link { text-align: center; margin: 16px 0 48px; }
+  .cross-link a {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 16px 32px; background: rgba(18,18,17,0.7);
+    border: 1px solid var(--gold-mid); color: var(--mercury);
+    font-family: 'GT America Mono', monospace; font-size: 11px;
+    letter-spacing: 0.22em; text-transform: uppercase; font-weight: 500;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .cross-link a:hover { border-color: var(--gold); color: var(--gold); background: rgba(255,198,85,0.06); }
+  .cross-link a span { color: var(--gold); }
+
+  /* Confidential footer */
+  .confidential {
+    margin-top: 64px; padding: 22px 28px;
+    background: rgba(18,18,17,0.6); border: 1px solid var(--hairline-2);
+    border-left: 3px solid var(--gold);
+    display: flex; justify-content: space-between; align-items: center; gap: 24px;
+    font-family: 'GT America Mono', monospace;
+  }
+  .confidential-left { display: flex; align-items: center; gap: 14px; }
+  .confidential-left .lock { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; }
+  .confidential-left .label { font-size: 11px; letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; font-weight: 500; }
+  .confidential-left .meta { font-size: 11px; letter-spacing: 0.12em; color: var(--mercury-dim); text-transform: none; }
+  .confidential-right { font-size: 10.5px; letter-spacing: 0.1em; color: var(--mercury-faint); max-width: 620px; text-align: right; line-height: 1.5; }
+
+  /* Section label with accent */
+  .block-label {
+    font-size: 24px; font-weight: 500; color: var(--mercury);
+    letter-spacing: -0.01em; margin-bottom: 18px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .block-label::before {
+    content: ''; width: 24px; height: 1px; background: var(--gold);
+  }
+  .block-label .chip {
+    font-family: 'GT America Mono', monospace; font-size: 10px;
+    letter-spacing: 0.22em; color: var(--gold);
+    padding: 3px 10px; border: 1px solid var(--gold); background: rgba(255,198,85,0.06);
+    text-transform: uppercase; font-weight: 500;
+  }
+  .block-label .chip.pending { color: var(--gold-mid); border-color: var(--gold-mid); background: rgba(174,142,81,0.1); }
+  .block-label .chip.upcoming { color: var(--mercury-dim); border-color: var(--hairline-2); background: transparent; }
+
+  /* Bottom */
+  .bottom { margin-top: 80px; padding-top: 24px; border-top: 1px solid var(--hairline-2); display: flex; justify-content: space-between; align-items: center; }
+  .tagline { font-size: 13px; color: var(--mercury-dim); }
+  .tagline em { color: var(--gold); font-style: normal; font-weight: 400; }
+  .bottom-mono { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--mercury-faint); text-transform: uppercase; }
+
+  @keyframes slideIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .fade { animation: slideIn 0.8s ease-out both; }
+</style>
+</head>
+<body>
+
+<nav class="topnav fade">
+  <a class="topnav-brand" href="../mission/index.html" style="text-decoration:none; color:inherit;">
+    <div class="mark"><span></span><span></span><span></span><span></span><span></span></div>
+    <div>
+      <div class="name">Baseline Analytics</div>
+      <div class="sub">Investor Portal</div>
+    </div>
+  </a>
+  <div class="topnav-links">
+    <a href="../overview/index.html">Overview</a>
+    <a href="../deal_intel/index.html">Deal Intel</a>
+    <a href="../milestones/index.html">Milestones</a>
+    <a href="../meetings/index.html">Meetings</a>
+    <a href="../vault/index.html">Vault</a>
+    <a href="../buzz/index.html">Buzz</a>
+    <div class="dropdown">
+      <button class="trigger">About Us</button>
+      <div class="dropdown-menu">
+        <a href="../team/index.html">Meet the Team</a>
+        <a href="../advisory/index.html" class="active">Advisory Board</a>
+      </div>
+    </div>
+    <a href="../ask_portal/index.html">Ask</a>
+  </div>
+  <div class="topnav-user">
+    <div class="avatar">C</div>
+    <span>Chase</span>
+  </div>
+</nav>
+
+<div class="page">
+
+  <div class="masthead fade">
+    <div class="masthead-left">
+      <div class="dateline">Investor Portal · 23 April 2026</div>
+      <div class="pub">Baseline Analytics · Stakeholder Brief 06</div>
+    </div>
+    <div class="masthead-right">
+      <div class="ed">Advisory Board</div>
+      <div>Governance · Cycle 04</div>
+    </div>
+  </div>
+
+  <div class="hero-kicker fade" style="animation-delay:0.1s">About Us · Governance</div>
+  <h1 class="hero-headline">Industry Advisory Board<span class="em">.</span></h1>
+  <p class="standfirst fade" style="animation-delay:0.2s">
+    Domain experts from <em>MLB, sports medicine, and technology</em> guiding Baseline's product, market, and governance strategy. Eleven active members, two pending, one upcoming.
+  </p>
+
+  <!-- Stats -->
+  <div class="stat-line fade" style="animation-delay:0.26s">
+    <div class="stat"><div class="num accent">11</div><div class="label">Active Members</div></div>
+    <div class="stat"><div class="num">2</div><div class="label">Pending</div></div>
+    <div class="stat"><div class="num">1</div><div class="label">Upcoming Offer</div></div>
+    <div class="stat"><div class="num compact">Quarterly</div><div class="label">Meeting Cadence</div></div>
+  </div>
+
+  <!-- Composition -->
+  <div class="fade" style="animation-delay:0.3s">
+    <div class="section-heading">
+      <span class="num">01</span>
+      <span class="title">Composition</span>
+      <span class="meta">Pitcher-Heavy · League Anchored</span>
+    </div>
+
+    <div class="composition">
+      <div class="comp-card">
+        <div class="comp-num">4</div>
+        <div class="comp-label">Pitchers</div>
+        <div class="comp-meta">Active + Pending · MLB</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-num">2</div>
+        <div class="comp-label">League Operators</div>
+        <div class="comp-meta">MLB SVP · Active Scout</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-num">3</div>
+        <div class="comp-label">Investor Advisors</div>
+        <div class="comp-meta">Capital + Strategy</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-num">4</div>
+        <div class="comp-label">Industry &amp; Strategic</div>
+        <div class="comp-meta">Market · Product · GTM</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Active Members -->
+  <div class="fade" style="animation-delay:0.36s">
+    <div class="section-heading">
+      <span class="num">02</span>
+      <span class="title">Active Members</span>
+      <span class="meta">11 Seats · Quarterly Cadence</span>
+    </div>
+
+    <div class="members-grid">
+      <div class="member-card active-seat">
+        <div class="member-eyebrow">MLB · Founding</div>
+        <div class="member-name">Rob Engel</div>
+        <div class="member-role">SVP Software<br/>Engineering, MLB</div>
+        <div class="member-bio">The league-office anchor. Opens the direct MLB technical track and carries the LOI conversation.</div>
+      </div>
+      <div class="member-card active-seat">
+        <div class="member-eyebrow">Industry · Advisor</div>
+        <div class="member-name">Joe Revels</div>
+        <div class="member-role">Industry Advisor</div>
+        <div class="member-bio">Sports-tech industry operator. Early investor-lane introductions and positioning counsel.</div>
+      </div>
+      <div class="member-card active-seat">
+        <div class="member-eyebrow">Industry · Advisor</div>
+        <div class="member-name">Cindy Leeper</div>
+        <div class="member-role">Industry Advisor</div>
+        <div class="member-bio">Operations and go-to-market advisor. Commercial cadence and stakeholder programming.</div>
+      </div>
+      <div class="member-card active-seat">
+        <div class="member-eyebrow">Investor · Advisor</div>
+        <div class="member-name">Tom Castillo</div>
+        <div class="member-role">Investor · Advisor</div>
+        <div class="member-bio">Source of the Scott Price introduction. Bridge between the investor pipeline and the board.</div>
+      </div>
+
+      <div class="member-card active-seat">
+        <div class="member-eyebrow">Investor · Advisor</div>
+        <div class="member-name">Ryan Pollace</div>
+        <div class="member-role">Investor · Advisor</div>
+        <div class="member-bio">Capital-markets advisor. Supports term-sheet framing and diligence prep.</div>
+      </div>
+      <div class="member-card active-seat">
+        <div class="member-eyebrow">MLB · Coach · Investor</div>
+        <div class="member-name">Robbie Erlin</div>
+        <div class="member-role">Former MLB Pitcher<br/>Dodgers Coach · Investor</div>
+        <div class="member-bio">Former MLB pitcher, Dodgers organization coach. Pitcher-side credibility and also an investor in the round.</div>
+      </div>
+      <div class="member-card active-seat">
+        <div class="member-eyebrow">Industry · Advisor</div>
+        <div class="member-name">Guy Gandenberger</div>
+        <div class="member-role">Industry Advisor</div>
+        <div class="member-bio">Sports and technology advisor. Product positioning against NFL / NBA comparables.</div>
+      </div>
+      <div class="member-card active-seat">
+        <div class="member-eyebrow">MLB · Active Scout</div>
+        <div class="member-name">Tom Kunis</div>
+        <div class="member-role">Current MLB Scout</div>
+        <div class="member-bio">Active MLB scout. Ground truth on talent evaluation and pitcher-workload signal relevance.</div>
+      </div>
+
+      <div class="member-card active-seat">
+        <div class="member-eyebrow">Strategic · Advisor</div>
+        <div class="member-name">Mark Webster</div>
+        <div class="member-role">Strategic Advisor</div>
+        <div class="member-bio">Senior strategic advisor. Narrative, partner strategy, and board-level counsel.</div>
+      </div>
+      <div class="member-card active-seat">
+        <div class="member-eyebrow">MLB · Pitcher</div>
+        <div class="member-name">Tyson Ross</div>
+        <div class="member-role">Former MLB Pitcher</div>
+        <div class="member-bio">Former MLB starter. Voice of the pitcher on product design and clinical framing.</div>
+      </div>
+      <div class="member-card active-seat">
+        <div class="member-eyebrow">MLB · Pitcher</div>
+        <div class="member-name">Adam Cimber</div>
+        <div class="member-role">Former MLB Pitcher</div>
+        <div class="member-bio">Former MLB reliever. Relief-arm workload perspective and pitcher-network introductions.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pending Advisory Members -->
+  <div class="fade" style="animation-delay:0.44s">
+    <div class="section-heading">
+      <span class="num">03</span>
+      <span class="title">Pending Advisory Members</span>
+      <span class="meta">2 Candidates · Offers Outbound</span>
+    </div>
+
+    <div class="members-grid pending">
+      <div class="member-card pending-seat">
+        <div class="member-eyebrow">Outbound · Pitcher</div>
+        <div class="member-name">Tony Gonsolin</div>
+        <div class="member-role">MLB Pitcher<br/>Free Agent</div>
+        <div class="member-bio">Active-era MLB pitcher. Offer extended; decision pending.</div>
+      </div>
+      <div class="member-card pending-seat">
+        <div class="member-eyebrow">Outbound · Hitter</div>
+        <div class="member-name">Stephen Piscotty</div>
+        <div class="member-role">Former MLB Hitter</div>
+        <div class="member-bio">Discovery call held Apr 2. Broadens the clubhouse-side perspective.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Upcoming -->
+  <div class="fade" style="animation-delay:0.5s">
+    <div class="section-heading">
+      <span class="num">04</span>
+      <span class="title">Upcoming Advisory Offers</span>
+      <span class="meta">1 Target · In Discovery</span>
+    </div>
+
+    <div class="members-grid pending">
+      <div class="member-card upcoming-seat">
+        <div class="member-eyebrow">Targeted · Apr 15</div>
+        <div class="member-name">Joey Lucchesi</div>
+        <div class="member-role">MLB Pitcher<br/>SF Giants</div>
+        <div class="member-bio">Current MLB pitcher. Offer sequenced for post-LOI window to align incentives with program launch.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cross-link fade" style="animation-delay:0.56s">
+    <a href="../team/index.html">View Executive Team <span>→</span></a>
+  </div>
+
+  <!-- Confidential footer -->
+  <div class="confidential fade" style="animation-delay:0.62s">
+    <div class="confidential-left">
+      <span class="lock">
+        <svg viewBox="0 0 16 16" fill="none" style="width:14px;height:14px"><path d="M4 7V5a4 4 0 018 0v2M3 7h10v7H3V7z" stroke="#FFC655" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="label">Confidential</span>
+      <span class="meta">Baseline Analytics, Inc. · Wyoming C-Corporation</span>
+    </div>
+    <div class="confidential-right">Advisory Board roster. Names, roles, and status intended solely for authorized stakeholders.</div>
+  </div>
+
+  <div class="bottom">
+    <div class="tagline"><em>Every Athlete</em> Deserves a Baseline.</div>
+    <div class="bottom-mono">Baseline Analytics · Investor Portal · 06 · Advisory Board</div>
+  </div>
+
+</div>
+</body>
+</html>
