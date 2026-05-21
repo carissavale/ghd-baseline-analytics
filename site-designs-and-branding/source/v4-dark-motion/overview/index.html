@@ -4,29 +4,27 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Baseline Analytics · Overview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
- @font-face { font-family: 'GT America'; src: url('../../brand_source/fonts_2/GT-America-Standard-Light-Trial.otf') format('opentype'); font-weight: 300; }
- @font-face { font-family: 'GT America'; src: url('../../brand_source/fonts_2/GT-America-Standard-Regular-Trial.otf') format('opentype'); font-weight: 400; }
- @font-face { font-family: 'GT America'; src: url('../../brand_source/fonts_2/GT-America-Standard-Medium-Trial.otf') format('opentype'); font-weight: 500; }
- @font-face { font-family: 'GT America'; src: url('../../brand_source/fonts_2/GT-America-Standard-Bold-Trial.otf') format('opentype'); font-weight: 700; }
- @font-face { font-family: 'GT America Mono'; src: url('../../brand_source/fonts_1/GT-America-Mono-Regular-Trial.otf') format('opentype'); font-weight: 400; }
- @font-face { font-family: 'GT America Mono'; src: url('../../brand_source/fonts_1/GT-America-Mono-Medium-Trial.otf') format('opentype'); font-weight: 500; }
 
  :root {
  --black: #000; --onyx: #121211; --onyx-2: #1a1916;
  --gold: #FFC655; --gold-mid: #AE8E51; --gold-deep: #63553C;
  --mercury: #E5E5E5; --mercury-dim: rgba(229,229,229,0.62);
  --mercury-faint: rgba(229,229,229,0.32);
+ --cat-investor: #FFC655; --cat-advisory: #6CBF8F;
+ --cat-strategy: #6CA8E5; --cat-board: #C49BE5;
  --hairline: rgba(229,229,229,0.08); --hairline-2: rgba(229,229,229,0.14);
  }
 
  * { box-sizing: border-box; margin: 0; padding: 0; }
  html, body {
  background: var(--black); color: var(--mercury);
- font-family: 'GT America', -apple-system, sans-serif; font-weight: 300;
+ font-family: 'Manrope', -apple-system, sans-serif; font-weight: 400;
  -webkit-font-smoothing: antialiased;
  }
- .mono { font-family: 'GT America Mono', ui-monospace, monospace; font-feature-settings: "tnum"; }
  ::selection { background: var(--gold); color: var(--black); }
 
  /* Top nav */
@@ -44,23 +42,23 @@
  .topnav-brand .mark span:nth-child(3) { height: 36px; }
  .topnav-brand .mark span:nth-child(4) { height: 28px; }
  .topnav-brand .mark span:nth-child(5) { height: 20px; background: var(--gold-mid); }
- .topnav-brand .name { font-size: 13px; font-weight: 500; letter-spacing: 0.04em; color: var(--mercury); }
- .topnav-brand .sub { font-family: 'GT America Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: var(--gold-mid); text-transform: uppercase; margin-top: 2px; }
+ .topnav-brand .name { font-size: 15px; font-weight: 500; letter-spacing: 0.04em; color: var(--mercury); }
+ .topnav-brand .sub { font-family: 'Manrope', -apple-system, sans-serif; font-size: 11px; letter-spacing: 0.2em; color: var(--gold-mid); text-transform: uppercase; margin-top: 2px; }
  .topnav-links { display: flex; gap: 4px; align-items: center; }
- .topnav-links a, .topnav-links .trigger { padding: 8px 16px; border-radius: 4px; text-decoration: none; font-size: 13px; color: var(--mercury-dim); transition: all 0.2s; cursor: pointer; }
+ .topnav-links a, .topnav-links .trigger { padding: 8px 16px; border-radius: 4px; text-decoration: none; font-size: 15px; color: var(--mercury-dim); transition: all 0.2s; cursor: pointer; }
  .topnav-links a:hover, .topnav-links .trigger:hover { color: var(--mercury); }
  .topnav-links a.active, .topnav-links .dropdown.active .trigger { color: var(--gold); background: rgba(255,198,85,0.08); }
  .dropdown { position: relative; }
- .dropdown .trigger { display: inline-flex; align-items: center; gap: 6px; background: transparent; border: none; font-family: inherit; font-size: 13px; letter-spacing: 0.01em; font-weight: 400; }
+ .dropdown .trigger { display: inline-flex; align-items: center; gap: 6px; background: transparent; border: none; font-family: inherit; font-size: 15px; letter-spacing: 0.01em; font-weight: 400; }
  .dropdown .trigger::after { content: ''; width: 6px; height: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); margin-top: -3px; transition: transform 0.2s; }
  .dropdown:hover .trigger::after { transform: rotate(225deg); margin-top: 2px; }
  .dropdown-menu { position: absolute; top: 100%; left: 0; min-width: 180px; padding: 8px 0; background: var(--onyx); border: 1px solid var(--hairline-2); opacity: 0; pointer-events: none; transform: translateY(-4px); transition: opacity 0.18s, transform 0.18s; margin-top: 0; z-index: 200; }
  .dropdown:hover .dropdown-menu { opacity: 1; pointer-events: auto; transform: translateY(0); }
- .dropdown-menu a { display: block; padding: 10px 18px; font-size: 13px; color: var(--mercury-dim); text-decoration: none; transition: all 0.15s; border-radius: 0; }
+ .dropdown-menu a { display: block; padding: 10px 18px; font-size: 15px; color: var(--mercury-dim); text-decoration: none; transition: all 0.15s; border-radius: 0; }
  .dropdown-menu a:hover { background: rgba(255,198,85,0.08); color: var(--gold); }
  .dropdown-menu a.active { color: var(--gold); }
- .topnav-user { display: flex; align-items: center; gap: 8px; font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.16em; color: var(--mercury-dim); text-transform: uppercase; }
- .topnav-user .avatar { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--gold-mid); display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--gold); font-weight: 500; }
+ .topnav-user { display: flex; align-items: center; gap: 8px; font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px; letter-spacing: 0.16em; color: var(--mercury-dim); text-transform: uppercase; }
+ .topnav-user .avatar { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--gold-mid); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--gold); font-weight: 500; }
 
  .page { max-width: 1480px; margin: 0 auto; padding: 72px 60px 120px; }
 
@@ -70,13 +68,13 @@
  padding-bottom: 20px; border-bottom: 1px solid var(--hairline-2); margin-bottom: 56px;
  }
  .masthead-left .dateline {
- font-family: 'GT America Mono', monospace; font-size: 10px;
+ font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px;
  letter-spacing: 0.26em; color: var(--gold-mid); text-transform: uppercase; margin-bottom: 8px;
  }
- .masthead-left .pub { font-size: 13px; color: var(--mercury-dim); letter-spacing: 0.02em; }
+ .masthead-left .pub { font-size: 15px; color: var(--mercury-dim); letter-spacing: 0.02em; }
  .masthead-right {
- text-align: right; font-family: 'GT America Mono', monospace;
- font-size: 10px; letter-spacing: 0.2em; color: var(--mercury-faint); text-transform: uppercase;
+ text-align: right; font-family: 'Manrope', -apple-system, sans-serif;
+ font-size: 12px; letter-spacing: 0.2em; color: var(--mercury-faint); text-transform: uppercase;
  }
  .masthead-right .ed { color: var(--mercury-dim); }
 
@@ -104,7 +102,7 @@
  }
  .hero-wrap .hero-headline, .hero-wrap .hero-kicker { position: relative; z-index: 2; }
  .hero-kicker {
- font-family: 'GT America Mono', monospace; font-size: 10px;
+ font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px;
  letter-spacing: 0.28em; color: var(--gold); text-transform: uppercase;
  margin-bottom: 20px; opacity: 0; animation: fadeIn 1.4s ease 0.6s both;
  }
@@ -128,7 +126,7 @@
 
  .standfirst {
  max-width: 760px; font-size: 16px; line-height: 1.5; color: var(--mercury-dim);
- font-weight: 300; margin: 28px 0 24px; letter-spacing: -0.005em;
+ font-weight: 400; margin: 28px 0 24px; letter-spacing: -0.005em;
  position: relative; z-index: 2;
  }
  .standfirst em { color: var(--mercury); font-style: normal; }
@@ -141,7 +139,7 @@
  .hero-cta {
  display: inline-flex; align-items: center; gap: 10px;
  padding: 14px 24px;
- font-family: 'GT America Mono', monospace; font-size: 11px;
+ font-family: 'Manrope', -apple-system, sans-serif; font-size: 13px;
  letter-spacing: 0.24em; text-transform: uppercase; font-weight: 500;
  text-decoration: none; cursor: pointer; transition: all 0.2s;
  border: 1px solid; background: transparent;
@@ -160,13 +158,13 @@
  .stat:first-child { padding-left: 0; }
  .stat:last-child { border-right: none; padding-right: 0; }
  .stat .num {
- font-size: 48px; font-weight: 300; letter-spacing: -0.025em; line-height: 1;
+ font-size: 48px; font-weight: 400; letter-spacing: -0.025em; line-height: 1;
  color: var(--mercury); font-variant-numeric: tabular-nums;
  }
  .stat .num.accent { color: var(--gold); }
  .stat .num.compact { font-size: 28px; padding-top: 10px; letter-spacing: -0.015em; }
  .stat .label {
- font-family: 'GT America Mono', monospace; font-size: 10px;
+ font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px;
  letter-spacing: 0.2em; color: var(--mercury-faint); text-transform: uppercase; margin-top: 12px;
  }
 
@@ -176,7 +174,7 @@
  padding-bottom: 16px; border-bottom: 1px solid var(--hairline-2); margin-bottom: 32px;
  }
  .section-heading .num {
- font-family: 'GT America Mono', monospace; font-size: 10px;
+ font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px;
  letter-spacing: 0.22em; color: var(--gold-mid); text-transform: uppercase;
  }
  .section-heading .title {
@@ -184,7 +182,7 @@
  letter-spacing: -0.01em; flex: 1; padding-left: 24px;
  }
  .section-heading .meta {
- font-family: 'GT America Mono', monospace; font-size: 10px;
+ font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px;
  letter-spacing: 0.18em; color: var(--mercury-dim); text-transform: uppercase;
  }
 
@@ -203,42 +201,51 @@
  border-color: var(--gold); border-left-color: var(--gold);
  background: rgba(30,28,24,0.95); transform: translateY(-2px);
  }
- .activity-card.investor { border-left-color: var(--gold); }
- .activity-card.advisory { border-left-color: var(--mercury); }
- .activity-card.strategic { border-left-color: var(--gold-mid); }
+ .activity-card.investor  { border-left-color: var(--cat-investor); }
+ .activity-card.advisory  { border-left-color: var(--cat-advisory); }
+ .activity-card.strategic { border-left-color: var(--cat-strategy); }
+ .activity-card.board     { border-left-color: var(--cat-board); }
  .activity-head {
  display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px;
  }
  .activity-date {
- font-family: 'GT America Mono', monospace; font-size: 10px;
+ font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px;
  letter-spacing: 0.18em; color: var(--mercury); text-transform: uppercase;
  }
  .activity-cat {
- font-family: 'GT America Mono', monospace; font-size: 9px;
+ font-family: 'Manrope', -apple-system, sans-serif; font-size: 11px;
  letter-spacing: 0.18em; text-transform: uppercase;
  padding: 3px 8px; border: 1px solid;
  }
- .activity-cat.investor { color: var(--gold); border-color: var(--gold); }
- .activity-cat.advisory { color: var(--mercury); border-color: rgba(229,229,229,0.45); }
- .activity-cat.strategic { color: var(--gold-mid); border-color: var(--gold-mid); }
+ .activity-cat.investor  { color: var(--cat-investor); border-color: var(--cat-investor); }
+ .activity-cat.advisory  { color: var(--cat-advisory); border-color: var(--cat-advisory); }
+ .activity-cat.strategic { color: var(--cat-strategy); border-color: var(--cat-strategy); }
+ .activity-cat.board     { color: var(--cat-board);    border-color: var(--cat-board); }
  .activity-title {
  font-size: 15px; font-weight: 500; color: var(--mercury);
  line-height: 1.3; letter-spacing: -0.005em; margin-bottom: 10px;
  }
  .activity-desc {
- font-size: 12px; line-height: 1.55; color: var(--mercury-dim); font-weight: 300;
+ font-size: 14px; line-height: 1.55; color: var(--mercury-dim); font-weight: 400;
  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
  flex: 1;
  }
  .activity-org {
  margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--hairline);
  display: flex; align-items: center; gap: 8px;
- font-family: 'GT America Mono', monospace; font-size: 9px;
+ font-family: 'Manrope', -apple-system, sans-serif; font-size: 11px;
  letter-spacing: 0.16em; color: var(--mercury-faint); text-transform: uppercase;
  }
  .activity-org .dot {
- width: 6px; height: 6px; border-radius: 50%; background: var(--gold-mid);
+ width: 22px; height: 22px; border-radius: 5px;
+ background: var(--mercury) center/contain no-repeat;
+ border: 1px solid var(--hairline-2);
+ display: inline-flex; align-items: center; justify-content: center;
+ font-family: 'Manrope', sans-serif; font-size: 12px;
+ color: var(--black); font-weight: 700; letter-spacing: 0.02em;
+ flex-shrink: 0;
  }
+ .activity-org .dot[style*="background-image"] { color: transparent; }
 
  /* Ask preview block */
  .ask-wrap {
@@ -250,7 +257,7 @@
  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gold);
  }
  .ask-eyebrow {
- font-family: 'GT America Mono', monospace; font-size: 10px;
+ font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px;
  letter-spacing: 0.24em; color: var(--gold); text-transform: uppercase;
  white-space: nowrap; flex-shrink: 0;
  }
@@ -258,15 +265,15 @@
  .ask-input {
  flex: 1; background: rgba(0,0,0,0.5); border: 1px solid var(--hairline-2);
  color: var(--mercury); padding: 10px 14px;
- font-family: 'GT America', sans-serif; font-size: 14px; font-weight: 300;
+ font-family: 'Manrope', sans-serif; font-size: 16px; font-weight: 400;
  letter-spacing: -0.005em; outline: none; transition: border-color 0.2s;
  }
  .ask-input::placeholder { color: var(--mercury-faint); }
  .ask-input:focus { border-color: var(--gold); }
  .ask-send {
  background: var(--gold); color: var(--black); border: none;
- padding: 0 20px; font-family: 'GT America Mono', monospace;
- font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+ padding: 0 20px; font-family: 'Manrope', -apple-system, sans-serif;
+ font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
  font-weight: 500; cursor: pointer; transition: background 0.2s; white-space: nowrap;
  }
  .ask-send:hover { background: #ffd37a; }
@@ -276,7 +283,7 @@
  .ask-prompt {
  background: transparent; border: 1px solid var(--hairline-2);
  padding: 7px 12px; cursor: pointer; transition: all 0.2s;
- font-family: 'GT America Mono', monospace; font-size: 10px;
+ font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px;
  letter-spacing: 0.12em; text-transform: uppercase;
  color: var(--mercury-dim); white-space: nowrap;
  }
@@ -295,7 +302,7 @@
  align-items: start;
  }
  .portal-about-eyebrow {
- font-family: 'GT America Mono', monospace; font-size: 10px;
+ font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px;
  letter-spacing: 0.28em; color: var(--gold); text-transform: uppercase;
  margin-bottom: 18px;
  }
@@ -305,21 +312,21 @@
  }
  .portal-about-headline em { color: var(--gold); font-style: italic; font-weight: 400; }
  .portal-about-copy {
- font-size: 16px; line-height: 1.55; color: var(--mercury-dim); font-weight: 300;
+ font-size: 16px; line-height: 1.55; color: var(--mercury-dim); font-weight: 400;
  }
  .portal-about-copy strong { color: var(--mercury); font-weight: 500; }
  .portal-about-quote {
  margin-top: 18px; padding-left: 16px;
  border-left: 2px solid var(--gold-mid);
- font-size: 14px; line-height: 1.55; color: var(--mercury); font-style: italic;
+ font-size: 16px; line-height: 1.55; color: var(--mercury); font-style: italic;
  }
  .portal-about-quote .attrib {
  display: block; margin-top: 8px; font-style: normal;
- font-family: 'GT America Mono', monospace; font-size: 10px;
+ font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px;
  letter-spacing: 0.16em; color: var(--mercury-faint); text-transform: uppercase;
  }
  .portal-objectives-label {
- font-family: 'GT America Mono', monospace; font-size: 10px;
+ font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px;
  letter-spacing: 0.24em; color: var(--gold-mid); text-transform: uppercase;
  margin-bottom: 20px;
  }
@@ -332,7 +339,7 @@
  position: relative; min-height: 160px;
  }
  .obj-num {
- font-family: 'GT America Mono', monospace; font-size: 10px;
+ font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px;
  letter-spacing: 0.22em; color: var(--gold); text-transform: uppercase;
  margin-bottom: 14px;
  }
@@ -342,7 +349,7 @@
  }
  .obj-desc {
  font-size: 12.5px; line-height: 1.5; color: var(--mercury-dim);
- font-weight: 300; flex: 1;
+ font-weight: 400; flex: 1;
  }
 
  /* Page tiles grid */
@@ -361,7 +368,7 @@
  transform: translateY(-2px);
  }
  .page-tile .num {
- font-family: 'GT America Mono', monospace; font-size: 10px;
+ font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px;
  letter-spacing: 0.24em; color: var(--gold-mid); margin-bottom: 20px;
  }
  .page-tile .name {
@@ -369,11 +376,11 @@
  letter-spacing: -0.015em; line-height: 1.22; margin-bottom: 10px;
  }
  .page-tile .desc {
- font-size: 14px; line-height: 1.55; color: var(--mercury-dim); font-weight: 300;
+ font-size: 16px; line-height: 1.55; color: var(--mercury-dim); font-weight: 400;
  flex: 1;
  }
  .page-tile .arrow {
- margin-top: 20px; font-family: 'GT America Mono', monospace; font-size: 10px;
+ margin-top: 20px; font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px;
  letter-spacing: 0.22em; color: var(--gold); text-transform: uppercase;
  display: flex; align-items: center; gap: 8px;
  }
@@ -386,7 +393,7 @@
  gap: 56px; padding-top: 28px; border-top: 1px solid var(--hairline-2);
  }
  .caption-col .anchor {
- font-family: 'GT America Mono', monospace; font-size: 10px;
+ font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px;
  letter-spacing: 0.22em; color: var(--gold); text-transform: uppercase; margin-bottom: 12px;
  display: flex; align-items: center; gap: 10px;
  }
@@ -396,17 +403,17 @@
  line-height: 1.3; letter-spacing: -0.01em; margin-bottom: 10px;
  }
  .caption-col .body {
- font-size: 13px; line-height: 1.65; color: var(--mercury-dim); font-weight: 300;
+ font-size: 15px; line-height: 1.65; color: var(--mercury-dim); font-weight: 400;
  }
 
  .bottom {
  margin-top: 80px; padding-top: 24px; border-top: 1px solid var(--hairline-2);
  display: flex; justify-content: space-between; align-items: center;
  }
- .tagline { font-size: 13px; font-weight: 300; color: var(--mercury-dim); letter-spacing: 0.02em; }
+ .tagline { font-size: 15px; font-weight: 400; color: var(--mercury-dim); letter-spacing: 0.02em; }
  .tagline em { color: var(--gold); font-style: normal; font-weight: 400; }
  .bottom-mono {
- font-family: 'GT America Mono', monospace; font-size: 10px;
+ font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px;
  letter-spacing: 0.2em; color: var(--mercury-faint); text-transform: uppercase;
  }
 
@@ -426,7 +433,7 @@
  .pitch-investor::before { background: var(--gold); }
  .pitch-teams::before { background: var(--gold-mid); }
  .pitch-eyebrow {
- font-family: 'GT America Mono', monospace; font-size: 10px;
+ font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px;
  letter-spacing: 0.24em; text-transform: uppercase; margin-bottom: 18px;
  }
  .pitch-investor .pitch-eyebrow { color: var(--gold); }
@@ -439,7 +446,7 @@
  .pitch-teams .pitch-headline em { color: var(--gold); }
  .pitch-body {
  font-size: 15px; line-height: 1.6; color: var(--mercury-dim);
- font-weight: 300; margin-bottom: 24px; flex: 1;
+ font-weight: 400; margin-bottom: 24px; flex: 1;
  }
  .pitch-body strong { color: var(--mercury); font-weight: 500; }
  .pitch-stats {
@@ -449,15 +456,15 @@
  .pitch-stats > div { padding-right: 14px; }
  .pitch-stats > div + div { padding-left: 14px; border-left: 1px solid var(--hairline); }
  .pitch-stats strong {
- display: block; font-family: 'GT America', sans-serif;
- font-size: 28px; font-weight: 300; color: var(--gold);
+ display: block; font-family: 'Manrope', sans-serif;
+ font-size: 28px; font-weight: 400; color: var(--gold);
  letter-spacing: -0.02em; line-height: 1; margin-bottom: 8px;
  font-variant-numeric: tabular-nums;
  }
  .pitch-teams .pitch-stats strong { color: var(--gold-mid); }
  .pitch-stats span {
- display: block; font-family: 'GT America Mono', monospace;
- font-size: 9px; letter-spacing: 0.18em;
+ display: block; font-family: 'Manrope', -apple-system, sans-serif;
+ font-size: 11px; letter-spacing: 0.18em;
  color: var(--mercury-faint); text-transform: uppercase; line-height: 1.35;
  }
 
@@ -509,8 +516,8 @@
  <a href="../ask_portal/index.html">Ask</a>
  </div>
  <div class="topnav-user">
- <div class="avatar">C</div>
- <span>Chase</span>
+ <div class="avatar" data-cms-field="user_initial">C</div>
+ <span data-cms-field="user_name">Chase</span>
  </div>
 </nav>
 
@@ -533,8 +540,9 @@
  <source src="../../brand_source/video/baseball_impact.mp4" type="video/mp4">
  </video>
  <div class="hero-video-overlay"></div>
- <div class="hero-kicker">Investor Portal · Cycle 04</div>
- <h1 class="hero-headline">
+ <div class="hero-kicker" data-cms-field="hero_kicker">Investor Portal · Q2 2026</div>
+ <!-- North Star message — single editable slot · Supabase: portal_settings.hero_headline -->
+ <h1 class="hero-headline" data-cms-field="hero_headline">
  <span class="line"><span>If every pitch matters,</span></span>
  <span class="line"><span class="em"><span class="noit">so does </span>every pitcher.</span></span>
  </h1>
@@ -698,32 +706,32 @@
  <div class="section-heading">
  <span class="num">02</span>
  <span class="title">Recent Buzz</span>
- <span class="meta"><a href="../buzz/index.html" style="color:var(--gold); text-decoration:none; font-family:'GT America Mono',monospace; font-size:10px; letter-spacing:0.22em; text-transform:uppercase">View All Buzz →</a></span>
+ <span class="meta"><a href="../buzz/index.html" style="color:var(--gold); text-decoration:none; font-family:'Manrope', -apple-system, sans-serif; font-size: 14px; letter-spacing:0.22em; text-transform:uppercase">View All Buzz →</a></span>
  </div>
  <div style="display:grid; grid-template-columns: 2fr 1fr 1fr; gap:14px">
  <a href="../buzz/index.html" style="text-decoration:none; position:relative; padding:28px 32px; background:rgba(18,18,17,0.7); border:1px solid var(--gold-mid); display:flex; flex-direction:column; min-height:240px; transition:all 0.2s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--gold-mid)'">
  <div style="position:absolute; top:0; left:0; right:0; height:3px; background:var(--gold)"></div>
  <div style="display:flex; gap:10px; align-items:center; margin-bottom:14px">
- <span style="display:inline-flex; align-items:center; gap:8px; padding:5px 12px; font-family:'GT America Mono',monospace; font-size:9.5px; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); border:1px solid var(--gold); background:rgba(255,198,85,0.08)"><span style="width:6px; height:6px; border-radius:50%; background:var(--gold)"></span>Case Study</span>
- <span style="font-family:'GT America Mono',monospace; font-size:10px; letter-spacing:0.22em; color:var(--gold); text-transform:uppercase">★ Featured</span>
+ <span style="display:inline-flex; align-items:center; gap:8px; padding:5px 12px; font-family:'Manrope', -apple-system, sans-serif; font-size: 11.5px; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); border:1px solid var(--gold); background:rgba(255,198,85,0.08)"><span style="width:6px; height:6px; border-radius:50%; background:var(--gold)"></span>Case Study</span>
+ <span style="font-family:'Manrope', -apple-system, sans-serif; font-size: 14px; letter-spacing:0.22em; color:var(--gold); text-transform:uppercase">★ Featured</span>
  </div>
  <div style="font-size:26px; font-weight:500; color:var(--mercury); letter-spacing:-0.015em; line-height:1.2; margin-bottom:10px">Hayden Birdsong Case Study.</div>
- <div style="font-size:14px; line-height:1.6; color:var(--mercury-dim); font-weight:300; flex:1">Deep-dive on SF Giants pitcher Hayden Birdsong's biomechanical markers through the ACIS lens. Cornerstone proof-of-concept for investor conversations.</div>
- <div style="display:flex; gap:10px; align-items:center; margin-top:16px; padding-top:14px; border-top:1px solid var(--hairline); font-family:'GT America Mono',monospace; font-size:10px; letter-spacing:0.14em; color:var(--mercury-faint); text-transform:uppercase">
+ <div style="font-size: 16px; line-height:1.6; color:var(--mercury-dim); font-weight: 400; flex:1">Deep-dive on SF Giants pitcher Hayden Birdsong's biomechanical markers through the ACIS lens. Cornerstone proof-of-concept for investor conversations.</div>
+ <div style="display:flex; gap:10px; align-items:center; margin-top:16px; padding-top:14px; border-top:1px solid var(--hairline); font-family:'Manrope', -apple-system, sans-serif; font-size: 14px; letter-spacing:0.14em; color:var(--mercury-faint); text-transform:uppercase">
  <span style="color:var(--mercury-dim)">Chase Spivey</span><span>·</span><span>Apr 14</span>
  </div>
  </a>
  <a href="../buzz/index.html" style="text-decoration:none; padding:24px 26px; background:rgba(18,18,17,0.6); border:1px solid var(--hairline-2); display:flex; flex-direction:column; transition:all 0.2s;" onmouseover="this.style.borderColor='var(--gold-mid)'" onmouseout="this.style.borderColor='var(--hairline-2)'">
- <span style="display:inline-flex; align-self:flex-start; align-items:center; gap:8px; padding:4px 10px; font-family:'GT America Mono',monospace; font-size:9px; letter-spacing:0.18em; text-transform:uppercase; color:#B19CD9; border:1px solid #B19CD9; background:rgba(177,156,217,0.1); margin-bottom:14px"><span style="width:5px; height:5px; border-radius:50%; background:#B19CD9"></span>Leadership</span>
+ <span style="display:inline-flex; align-self:flex-start; align-items:center; gap:8px; padding:4px 10px; font-family:'Manrope', -apple-system, sans-serif; font-size: 11px; letter-spacing:0.18em; text-transform:uppercase; color:#B19CD9; border:1px solid #B19CD9; background:rgba(177,156,217,0.1); margin-bottom:14px"><span style="width:5px; height:5px; border-radius:50%; background:#B19CD9"></span>Leadership</span>
  <div style="font-size:17px; font-weight:500; color:var(--mercury); letter-spacing:-0.01em; line-height:1.25; margin-bottom:10px">Sheldon's Power Statement.</div>
- <div style="font-size:12px; line-height:1.55; color:var(--mercury-dim); font-weight:300; flex:1">COO's definitive positioning statement on market authority and competitive moat.</div>
- <div style="margin-top:14px; padding-top:12px; border-top:1px solid var(--hairline); font-family:'GT America Mono',monospace; font-size:10px; letter-spacing:0.14em; color:var(--mercury-faint); text-transform:uppercase">Sheldon McClelland · Apr 11</div>
+ <div style="font-size: 14px; line-height:1.55; color:var(--mercury-dim); font-weight: 400; flex:1">COO's definitive positioning statement on market authority and competitive moat.</div>
+ <div style="margin-top:14px; padding-top:12px; border-top:1px solid var(--hairline); font-family:'Manrope', -apple-system, sans-serif; font-size: 14px; letter-spacing:0.14em; color:var(--mercury-faint); text-transform:uppercase">Sheldon McClelland · Apr 11</div>
  </a>
  <a href="../buzz/index.html" style="text-decoration:none; padding:24px 26px; background:rgba(18,18,17,0.6); border:1px solid var(--hairline-2); display:flex; flex-direction:column; transition:all 0.2s;" onmouseover="this.style.borderColor='var(--gold-mid)'" onmouseout="this.style.borderColor='var(--hairline-2)'">
- <span style="display:inline-flex; align-self:flex-start; align-items:center; gap:8px; padding:4px 10px; font-family:'GT America Mono',monospace; font-size:9px; letter-spacing:0.18em; text-transform:uppercase; color:#7FC89A; border:1px solid #7FC89A; background:rgba(127,200,154,0.1); margin-bottom:14px"><span style="width:5px; height:5px; border-radius:50%; background:#7FC89A"></span>Market Intel</span>
+ <span style="display:inline-flex; align-self:flex-start; align-items:center; gap:8px; padding:4px 10px; font-family:'Manrope', -apple-system, sans-serif; font-size: 11px; letter-spacing:0.18em; text-transform:uppercase; color:#7FC89A; border:1px solid #7FC89A; background:rgba(127,200,154,0.1); margin-bottom:14px"><span style="width:5px; height:5px; border-radius:50%; background:#7FC89A"></span>Market Intel</span>
  <div style="font-size:17px; font-weight:500; color:var(--mercury); letter-spacing:-0.01em; line-height:1.25; margin-bottom:10px">Marketplace Comparables Doc.</div>
- <div style="font-size:12px; line-height:1.55; color:var(--mercury-dim); font-weight:300; flex:1">$6B+ in documented sports-tech transactions. Positions ACIS against BAMTech, Digital Athlete, Second Spectrum.</div>
- <div style="margin-top:14px; padding-top:12px; border-top:1px solid var(--hairline); font-family:'GT America Mono',monospace; font-size:10px; letter-spacing:0.14em; color:var(--mercury-faint); text-transform:uppercase">Sheldon McClelland · Apr 8</div>
+ <div style="font-size: 14px; line-height:1.55; color:var(--mercury-dim); font-weight: 400; flex:1">$6B+ in documented sports-tech transactions. Positions ACIS against BAMTech, Digital Athlete, Second Spectrum.</div>
+ <div style="margin-top:14px; padding-top:12px; border-top:1px solid var(--hairline); font-family:'Manrope', -apple-system, sans-serif; font-size: 14px; letter-spacing:0.14em; color:var(--mercury-faint); text-transform:uppercase">Sheldon McClelland · Apr 8</div>
  </a>
  </div>
  </div>

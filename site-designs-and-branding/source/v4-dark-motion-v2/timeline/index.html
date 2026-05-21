@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Baseline Analytics · Timeline</title>
+<style>
+ @font-face { font-family: 'GT America'; src: url('../../brand_source/fonts_2/GT-America-Standard-Light-Trial.otf') format('opentype'); font-weight: 400; }
+ @font-face { font-family: 'GT America'; src: url('../../brand_source/fonts_2/GT-America-Standard-Regular-Trial.otf') format('opentype'); font-weight: 400; }
+ @font-face { font-family: 'GT America'; src: url('../../brand_source/fonts_2/GT-America-Standard-Medium-Trial.otf') format('opentype'); font-weight: 500; }
+ @font-face { font-family: 'GT America'; src: url('../../brand_source/fonts_2/GT-America-Standard-Bold-Trial.otf') format('opentype'); font-weight: 700; }
+ @font-face { font-family: 'GT America Mono'; src: url('../../brand_source/fonts_1/GT-America-Mono-Regular-Trial.otf') format('opentype'); font-weight: 400; }
+ @font-face { font-family: 'GT America Mono'; src: url('../../brand_source/fonts_1/GT-America-Mono-Medium-Trial.otf') format('opentype'); font-weight: 500; }
+
+ :root {
+ --black: #000; --onyx: #121211; --onyx-2: #1a1916;
+ --gold: #FFC655; --gold-mid: #AE8E51; --gold-deep: #63553C;
+ --mercury: #E5E5E5; --mercury-dim: rgba(229,229,229,0.62);
+ --mercury-faint: rgba(229,229,229,0.32);
+ --cat-investor: #FFC655; --cat-advisory: #6CBF8F;
+ --cat-strategy: #6CA8E5; --cat-board: #C49BE5;
+ --hairline: rgba(229,229,229,0.08); --hairline-2: rgba(229,229,229,0.14);
+ }
+
+ * { box-sizing: border-box; margin: 0; padding: 0; }
+ html, body {
+ background: var(--black); color: var(--mercury);
+ font-family: 'GT America', -apple-system, sans-serif; font-weight: 400;
+ -webkit-font-smoothing: antialiased;
+ }
+ .mono { font-family: 'GT America Mono', ui-monospace, monospace; }
+ ::selection { background: var(--gold); color: var(--black); }
+
+ .topnav {
+ position: sticky; top: 0; z-index: 100;
+ display: flex; align-items: center; justify-content: space-between;
+ padding: 16px 60px; border-bottom: 1px solid var(--hairline-2);
+ background: rgba(0,0,0,0.85); backdrop-filter: blur(20px);
+ }
+ .topnav-brand { display: flex; align-items: center; gap: 12px; }
+ .topnav-brand .mark { width: 28px; height: 36px; display: flex; gap: 2px; align-items: flex-start; }
+ .topnav-brand .mark span { width: 3px; background: var(--gold); display: block; }
+ .topnav-brand .mark span:nth-child(1) { height: 22px; background: var(--gold-mid); }
+ .topnav-brand .mark span:nth-child(2) { height: 32px; }
+ .topnav-brand .mark span:nth-child(3) { height: 36px; }
+ .topnav-brand .mark span:nth-child(4) { height: 28px; }
+ .topnav-brand .mark span:nth-child(5) { height: 20px; background: var(--gold-mid); }
+ .topnav-brand .name { font-size: 15px; font-weight: 500; color: var(--mercury); }
+ .topnav-brand .sub { font-family: 'GT America', -apple-system, sans-serif; font-size: 11px; letter-spacing: 0.2em; color: var(--gold-mid); text-transform: uppercase; margin-top: 2px; }
+ .topnav-links { display: flex; gap: 4px; align-items: center; }
+ .topnav-links a, .topnav-links .trigger { padding: 8px 16px; border-radius: 4px; text-decoration: none; font-size: 15px; color: var(--mercury-dim); transition: all 0.2s; cursor: pointer; }
+ .topnav-links a:hover, .topnav-links .trigger:hover { color: var(--mercury); }
+ .topnav-links a.active, .topnav-links .dropdown.active .trigger { color: var(--gold); background: rgba(255,198,85,0.08); }
+ .dropdown { position: relative; }
+ .dropdown .trigger { display: inline-flex; align-items: center; gap: 6px; background: transparent; border: none; font-family: inherit; font-size: 15px; letter-spacing: 0.01em; font-weight: 400; }
+ .dropdown .trigger::after { content: ''; width: 6px; height: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); margin-top: -3px; transition: transform 0.2s; }
+ .dropdown:hover .trigger::after { transform: rotate(225deg); margin-top: 2px; }
+ .dropdown-menu { position: absolute; top: 100%; left: 0; min-width: 180px; padding: 8px 0; background: var(--onyx); border: 1px solid var(--hairline-2); opacity: 0; pointer-events: none; transform: translateY(-4px); transition: opacity 0.18s, transform 0.18s; margin-top: 0; z-index: 200; }
+ .dropdown:hover .dropdown-menu { opacity: 1; pointer-events: auto; transform: translateY(0); }
+ .dropdown-menu a { display: block; padding: 10px 18px; font-size: 15px; color: var(--mercury-dim); text-decoration: none; transition: all 0.15s; border-radius: 0; }
+ .dropdown-menu a:hover { background: rgba(255,198,85,0.08); color: var(--gold); }
+ .dropdown-menu a.active { color: var(--gold); }
+ .topnav-user { display: flex; align-items: center; gap: 8px; font-family: 'GT America', -apple-system, sans-serif; font-size: 12px; letter-spacing: 0.16em; color: var(--mercury-dim); text-transform: uppercase; }
+ .topnav-user .avatar { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--gold-mid); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--gold); font-weight: 500; }
+
+ .page { max-width: 1480px; margin: 0 auto; padding: 72px 60px 120px; }
+
+ .masthead {
+ display: flex; justify-content: space-between; align-items: flex-start;
+ padding-bottom: 20px; border-bottom: 1px solid var(--hairline-2); margin-bottom: 56px;
+ }
+ .masthead-left .dateline { font-family: 'GT America', -apple-system, sans-serif; font-size: 12px; letter-spacing: 0.26em; color: var(--gold-mid); text-transform: uppercase; margin-bottom: 8px; }
+ .masthead-left .pub { font-size: 15px; color: var(--mercury-dim); }
+ .masthead-right { text-align: right; font-family: 'GT America', -apple-system, sans-serif; font-size: 12px; letter-spacing: 0.2em; color: var(--mercury-faint); text-transform: uppercase; }
+ .masthead-right .ed { color: var(--mercury-dim); }
+
+ /* Hero */
+ .hero-wrap { position: relative; overflow: hidden; margin-bottom: 28px; padding-bottom: 8px; }
+ .hero-headline {
+ font-size: 72px; font-weight: 400; line-height: 1.02;
+ letter-spacing: -0.035em; color: var(--mercury); max-width: 1100px;
+ position: relative; z-index: 2;
+ }
+ .hero-headline .line { display: block; overflow: hidden; }
+ .hero-headline .line > span { display: inline-block; animation: heroSlide 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+ .hero-headline .line:nth-child(1) > span { animation-delay: 0.15s; }
+ .hero-headline .line:nth-child(2) > span { animation-delay: 0.45s; }
+ .hero-headline .em { color: var(--gold); font-weight: 400; }
+ @keyframes heroSlide { from { opacity: 0; transform: translateY(100%) rotate(2deg); } to { opacity: 1; transform: translateY(0) rotate(0); } }
+
+ .standfirst {
+ max-width: 760px; font-size: 17px; line-height: 1.55; color: var(--mercury-dim);
+ font-weight: 400; margin-bottom: 56px;
+ }
+ .standfirst em { color: var(--mercury); font-style: normal; }
+
+ .stat-line {
+ display: grid; grid-template-columns: repeat(4, 1fr);
+ border-top: 1px solid var(--hairline-2); border-bottom: 1px solid var(--hairline-2);
+ margin-bottom: 64px;
+ }
+ .stat { padding: 28px 32px; border-right: 1px solid var(--hairline); }
+ .stat:first-child { padding-left: 0; }
+ .stat:last-child { border-right: none; padding-right: 0; }
+ .stat .num { font-size: 56px; font-weight: 400; letter-spacing: -0.03em; line-height: 1; color: var(--mercury); font-variant-numeric: tabular-nums; }
+ .stat .num.accent { color: var(--gold); }
+ .stat .num.compact { font-size: 32px; padding-top: 8px; letter-spacing: -0.015em; }
+ .stat .label { font-family: 'GT America', -apple-system, sans-serif; font-size: 12px; letter-spacing: 0.2em; color: var(--mercury-faint); text-transform: uppercase; margin-top: 12px; }
+
+ /* Month section */
+ .tl-month {
+ margin-bottom: 20px;
+ }
+ .tl-month:last-of-type { margin-bottom: 56px; }
+ .tl-m-band {
+ display: flex; align-items: center; justify-content: space-between;
+ padding: 16px 24px;
+ background: var(--onyx); border: 1px solid var(--hairline-2);
+ margin-bottom: 0;
+ cursor: pointer; user-select: none;
+ transition: background 0.2s, border-color 0.2s;
+ }
+ .tl-m-band:hover {
+ background: var(--onyx-2); border-color: var(--gold-mid);
+ }
+ .tl-month.collapsed .tl-m-band { border-color: var(--hairline-2); }
+ .tl-m {
+ font-family: 'GT America', -apple-system, sans-serif;
+ font-size: 16px; font-weight: 500; letter-spacing: 0.18em;
+ color: var(--gold); line-height: 1; text-transform: uppercase;
+ }
+ .tl-m-count {
+ display: inline-flex; align-items: center; gap: 18px;
+ font-family: 'GT America', -apple-system, sans-serif; font-size: 13px;
+ letter-spacing: 0.22em; color: var(--mercury-faint); text-transform: uppercase;
+ }
+ .tl-m-count::after {
+ content: ''; display: inline-block;
+ width: 8px; height: 8px;
+ border-right: 2px solid var(--gold-mid);
+ border-bottom: 2px solid var(--gold-mid);
+ transform: rotate(45deg);
+ transition: transform 0.3s, border-color 0.2s;
+ margin-bottom: 4px; flex-shrink: 0;
+ }
+ .tl-m-band:hover .tl-m-count::after { border-color: var(--gold); }
+ .tl-month.collapsed .tl-m-count::after {
+ transform: rotate(-45deg);
+ margin-bottom: -2px;
+ }
+
+ /* Collapsible body · grid-rows animation trick */
+ .tl-body {
+ display: grid; grid-template-rows: 1fr;
+ transition: grid-template-rows 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
+ opacity: 1;
+ }
+ .tl-body > .tl-body-inner { overflow: hidden; min-height: 0; }
+ .tl-month.collapsed .tl-body {
+ grid-template-rows: 0fr; opacity: 0;
+ }
+
+ /* Month controls · jump chips + expand/collapse */
+ .tl-controls {
+ display: flex; justify-content: space-between; align-items: center;
+ padding: 18px 22px; margin-bottom: 28px;
+ background: rgba(18,18,17,0.55); border: 1px solid var(--hairline-2);
+ gap: 20px; flex-wrap: wrap;
+ }
+ .tl-controls-left {
+ display: flex; align-items: center; gap: 14px; flex-wrap: wrap; flex: 1;
+ }
+ .tl-controls-label {
+ font-family: 'GT America', -apple-system, sans-serif; font-size: 12px;
+ letter-spacing: 0.22em; color: var(--gold-mid); text-transform: uppercase;
+ padding-right: 6px; border-right: 1px solid var(--hairline-2);
+ margin-right: 4px;
+ }
+ .tl-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+ .tl-chip {
+ display: inline-flex; align-items: center; gap: 8px;
+ padding: 6px 11px; background: transparent;
+ border: 1px solid var(--hairline-2); color: var(--mercury-dim);
+ font-family: 'GT America', -apple-system, sans-serif; font-size: 12px;
+ letter-spacing: 0.18em; text-transform: uppercase;
+ cursor: pointer; transition: all 0.18s;
+ }
+ .tl-chip:hover {
+ border-color: var(--gold); color: var(--gold); background: rgba(255,198,85,0.04);
+ }
+ .tl-chip span {
+ padding: 1px 6px; background: rgba(255,198,85,0.12);
+ color: var(--gold); font-weight: 500;
+ min-width: 20px; text-align: center;
+ }
+ .tl-chip:hover span { background: rgba(255,198,85,0.2); }
+ .tl-actions { display: flex; gap: 6px; }
+ .tl-btn {
+ padding: 7px 14px; background: transparent;
+ border: 1px solid var(--gold-mid); color: var(--gold-mid);
+ font-family: 'GT America', -apple-system, sans-serif; font-size: 12px;
+ letter-spacing: 0.22em; text-transform: uppercase;
+ cursor: pointer; transition: all 0.2s;
+ }
+ .tl-btn:hover {
+ border-color: var(--gold); color: var(--gold); background: rgba(255,198,85,0.06);
+ }
+ .tl-banner {
+ padding: 20px 36px 24px; border-left: 1px solid var(--hairline-2); border-right: 1px solid var(--hairline-2);
+ background: rgba(18,18,17,0.45);
+ font-size: 15px; line-height: 1.55; color: var(--mercury-dim);
+ font-style: italic; font-weight: 400; letter-spacing: -0.005em;
+ }
+
+ /* Key milestone flag */
+ .flag {
+ display: grid; grid-template-columns: 200px 1fr; gap: 16px;
+ padding: 18px 36px;
+ background: rgba(255,198,85,0.05); border-left: 3px solid var(--gold);
+ border-right: 1px solid var(--hairline-2);
+ }
+ .flag .k {
+ font-family: 'GT America', -apple-system, sans-serif; font-size: 12px;
+ letter-spacing: 0.22em; color: var(--gold); text-transform: uppercase; font-weight: 500;
+ }
+ .flag .t {
+ font-size: 16px; color: var(--mercury); font-weight: 400; letter-spacing: -0.005em;
+ }
+
+ .tl-items {
+ border: 1px solid var(--hairline-2); border-top: none;
+ }
+ .tl-item {
+ display: grid; grid-template-columns: 120px 1fr 160px;
+ gap: 24px; padding: 24px 36px;
+ border-bottom: 1px solid var(--hairline);
+ cursor: pointer; transition: all 0.2s;
+ align-items: start;
+ }
+ .tl-item:last-child { border-bottom: none; }
+ .tl-item:hover {
+ background: rgba(255,198,85,0.04);
+ }
+ .tl-item:hover .tl-title { color: var(--gold); }
+ .tl-date {
+ font-family: 'GT America', -apple-system, sans-serif; font-size: 14px;
+ letter-spacing: 0.18em; color: var(--mercury); text-transform: uppercase;
+ padding-top: 2px;
+ }
+ .tl-content .tl-title {
+ font-size: 17px; font-weight: 500; color: var(--mercury);
+ letter-spacing: -0.01em; line-height: 1.3; margin-bottom: 6px; transition: color 0.2s;
+ }
+ .tl-content .tl-who {
+ font-family: 'GT America', -apple-system, sans-serif; font-size: 12px;
+ letter-spacing: 0.16em; color: var(--gold-mid); text-transform: uppercase; margin-bottom: 10px;
+ }
+ .tl-content .tl-sum {
+ font-size: 15px; line-height: 1.55; color: var(--mercury-dim); font-weight: 400;
+ }
+ .pill {
+ display: inline-block; padding: 5px 12px;
+ font-family: 'GT America', -apple-system, sans-serif; font-size: 11.5px;
+ letter-spacing: 0.18em; text-transform: uppercase;
+ border: 1px solid; justify-self: end; align-self: start;
+ white-space: nowrap;
+ }
+ .pill.inv { color: var(--cat-investor); border-color: var(--cat-investor); background: rgba(255,198,85,0.08); }
+ .pill.iab { color: var(--cat-advisory); border-color: var(--cat-advisory); background: rgba(108,191,143,0.10); }
+ .pill.str { color: var(--cat-strategy); border-color: var(--cat-strategy); background: rgba(108,168,229,0.10); }
+ .pill.brd { color: var(--cat-board);    border-color: var(--cat-board);    background: rgba(196,155,229,0.10); }
+
+ /* Modal */
+ .modal-backdrop {
+ position: fixed; inset: 0; background: rgba(0,0,0,0.78);
+ backdrop-filter: blur(8px); z-index: 1000;
+ display: none; align-items: center; justify-content: center; padding: 40px;
+ }
+ .modal-backdrop.visible { display: flex; }
+ .modal-panel {
+ background: var(--onyx); border: 1px solid var(--gold-mid);
+ max-width: 720px; width: 100%; padding: 40px;
+ position: relative;
+ }
+ .modal-panel::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold); }
+ .modal-close {
+ position: absolute; top: 20px; right: 20px;
+ background: transparent; border: 1px solid var(--hairline-2); color: var(--mercury-dim);
+ width: 32px; height: 32px; cursor: pointer; font-size: 16px; transition: all 0.2s;
+ }
+ .modal-close:hover { border-color: var(--gold); color: var(--gold); }
+ .modal-kicker {
+ font-family: 'GT America', -apple-system, sans-serif; font-size: 12px;
+ letter-spacing: 0.22em; color: var(--gold); text-transform: uppercase; margin-bottom: 12px;
+ }
+ .modal-title {
+ font-size: 28px; font-weight: 400; color: var(--mercury);
+ letter-spacing: -0.015em; line-height: 1.25; margin-bottom: 24px;
+ }
+ .modal-meta {
+ display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+ padding: 20px 0; border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline);
+ margin-bottom: 24px;
+ }
+ .modal-meta .ml { font-family: 'GT America', -apple-system, sans-serif; font-size: 11px; letter-spacing: 0.22em; color: var(--mercury-faint); text-transform: uppercase; margin-bottom: 6px; }
+ .modal-meta .mv { font-size: 16px; color: var(--mercury); font-weight: 400; }
+ .modal-body { font-size: 15px; line-height: 1.65; color: var(--mercury-dim); font-weight: 400; }
+
+ /* Ask CTA */
+ .ask-compact {
+ margin: 0 0 56px; padding: 28px 36px;
+ border: 1px solid var(--gold-mid); background: rgba(18,18,17,0.7);
+ position: relative; display: flex; flex-direction: column; gap: 20px;
+ }
+ .ask-compact::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gold); }
+ .ask-compact-eyebrow { font-family: 'GT America', -apple-system, sans-serif; font-size: 12px; letter-spacing: 0.24em; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; }
+ .ask-compact-title { font-size: 28px; font-weight: 400; color: var(--mercury); letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 8px; }
+ .ask-compact-title em { color: var(--gold); font-style: normal; font-weight: 400; }
+ .ask-compact-sub { font-size: 16px; color: var(--mercury-dim); font-weight: 400; max-width: 620px; line-height: 1.5; }
+ .ask-compact-form { display: flex; gap: 10px; }
+ .ask-compact-input { flex: 1; background: rgba(0,0,0,0.5); border: 1px solid var(--hairline-2); color: var(--mercury); padding: 14px 18px; font-family: 'GT America', sans-serif; font-size: 15px; font-weight: 400; letter-spacing: -0.005em; outline: none; transition: border-color 0.2s; }
+ .ask-compact-input::placeholder { color: var(--mercury-faint); }
+ .ask-compact-input:focus { border-color: var(--gold); }
+ .ask-compact-send { background: var(--gold); color: var(--black); border: none; padding: 0 28px; font-family: 'GT America', -apple-system, sans-serif; font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 500; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
+ .ask-compact-send:hover { background: #ffd37a; }
+
+ .bottom {
+ margin-top: 80px; padding-top: 24px; border-top: 1px solid var(--hairline-2);
+ display: flex; justify-content: space-between; align-items: center;
+ }
+ .tagline { font-size: 15px; color: var(--mercury-dim); }
+ .tagline em { color: var(--gold); font-style: normal; font-weight: 400; }
+ .bottom-mono { font-family: 'GT America', -apple-system, sans-serif; font-size: 12px; letter-spacing: 0.2em; color: var(--mercury-faint); text-transform: uppercase; }
+
+ @keyframes slideIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+ .fade { animation: slideIn 0.8s ease-out both; }
+</style>
+</head>
+<body>
+
+<nav class="topnav fade">
+ <a class="topnav-brand" href="../mission/index.html" style="text-decoration:none; color:inherit;">
+ <div class="mark"><span></span><span></span><span></span><span></span><span></span></div>
+ <div>
+ <div class="name">Baseline Analytics</div>
+ <div class="sub">Investor Portal</div>
+ </div>
+ </a>
+ <div class="topnav-links">
+ <a href="../overview/index.html">Overview</a>
+ <a href="../deal_intel/index.html">Deal Intel</a>
+ <a href="../milestones/index.html">Milestones</a>
+ <a href="../meetings/index.html">Meetings</a>
+ <a href="../vault/index.html">Vault</a>
+ <a href="../buzz/index.html">Buzz</a>
+ <div class="dropdown">
+ <button class="trigger">About Us</button>
+ <div class="dropdown-menu">
+ <a href="../team/index.html">Meet the Team</a>
+ <a href="../advisory/index.html">Advisory Board</a>
+ </div>
+ </div>
+ <a href="../ask_portal/index.html">Ask</a>
+ </div>
+ <div class="topnav-user">
+ <div class="avatar">C</div>
+ <span>Chase</span>
+ </div>
+</nav>
+
+<div class="page">
+
+ <div class="masthead fade">
+ <div class="masthead-left">
+ <div class="dateline">Investor Portal · 23 April 2026</div>
+ <div class="pub">Baseline Analytics · Stakeholder Brief 06</div>
+ </div>
+ <div class="masthead-right">
+ <div class="ed">Timeline</div>
+ <div>Oct 2025 to Apr 2026</div>
+ </div>
+ </div>
+
+ <div class="hero-wrap">
+ <h1 class="hero-headline">
+ <span class="line"><span>Month by month.</span></span>
+ <span class="line"><span class="em">On the record.</span></span>
+ </h1>
+ </div>
+
+ <p class="standfirst fade" style="animation-delay:0.3s">
+ The complete chronological record of Baseline's first seven months. <em>Reverse-chronological, grouped by month, key milestones flagged.</em> Click any meeting to read the full entry.
+ </p>
+
+ <!-- Ask the Portal CTA -->
+ <div class="ask-compact fade" style="animation-delay:0.33s">
+ <div>
+ <div class="ask-compact-eyebrow">Ask the Portal · Executive Briefing</div>
+ <div class="ask-compact-title">Ask a question. <em>The portal answers.</em></div>
+ <div class="ask-compact-sub">Plain-English questions across meetings, milestones, materials, and roster.</div>
+ </div>
+ <form class="ask-compact-form" onsubmit="event.preventDefault(); var q=this.q.value.trim(); if(q) window.location.href='../ask_portal/index.html?q='+encodeURIComponent(q);">
+ <input type="text" name="q" class="ask-compact-input" placeholder="What do you need to know?" autocomplete="off" />
+ <button type="submit" class="ask-compact-send">Ask →</button>
+ </form>
+ </div>
+
+ <div class="stat-line fade" style="animation-delay:0.36s">
+ <div class="stat"><div class="num accent">38</div><div class="label">Total Meetings</div></div>
+ <div class="stat"><div class="num">7</div><div class="label">Months on Record</div></div>
+ <div class="stat"><div class="num">3</div><div class="label">Key Milestones</div></div>
+ <div class="stat"><div class="num compact">Oct 2025</div><div class="label">First Meeting</div></div>
+ </div>
+
+ <!-- Month quick-jump controls -->
+ <div class="tl-controls fade" style="animation-delay:0.4s">
+ <div class="tl-controls-left">
+ <span class="tl-controls-label">Jump to</span>
+ <div class="tl-chips">
+ <button class="tl-chip" data-idx="0">Apr '26 <span>11</span></button>
+ <button class="tl-chip" data-idx="1">Mar '26 <span>6</span></button>
+ <button class="tl-chip" data-idx="2">Feb '26 <span>6</span></button>
+ <button class="tl-chip" data-idx="3">Jan '26 <span>4</span></button>
+ <button class="tl-chip" data-idx="4">Dec '25 <span>4</span></button>
+ <button class="tl-chip" data-idx="5">Nov '25 <span>4</span></button>
+ <button class="tl-chip" data-idx="6">Oct '25 <span>3</span></button>
+ </div>
+ </div>
+ <div class="tl-actions">
+ <button class="tl-btn" id="expandAll">Expand All</button>
+ <button class="tl-btn" id="collapseAll">Collapse All</button>
+ </div>
+ </div>
+
+ <!-- ═══════════════════════════════════════════════════════════════ -->
+ <!-- APRIL 2026 -->
+ <!-- ═══════════════════════════════════════════════════════════════ -->
+ <div class="tl-month fade" style="animation-delay:0.44s">
+ <div class="tl-m-band">
+ <div class="tl-m">APR '26</div>
+ <span class="tl-m-count">11 Meetings</span>
+ </div>
+ <div class="tl-banner">"LOI in sight. Investor pipeline concentrates; IAB expansion live."</div>
+ <div class="flag">
+ <div class="k">★ Key Milestone</div>
+ <div class="t">MLB Letter of Intent. In Progress · Apr 15 Target.</div>
+ </div>
+ <div class="tl-items">
+ <div class="tl-item" data-title="Mid-April Board Sync" data-who="Jeff Newman · Chase Spivey · Sheldon McClelland" data-cat="Board Meeting" data-date="Apr 23, 2026" data-sum="Progress check on LOI; IAB expansion plan.">
+ <div class="tl-date">APR 23</div>
+ <div class="tl-content"><div class="tl-title">Mid-April Board Sync</div><div class="tl-who">Jeff Newman</div><div class="tl-sum">Progress check on LOI; IAB expansion plan.</div></div>
+ <span class="pill brd">Board Meeting</span>
+ </div>
+ <div class="tl-item" data-title="LOI Draft Review · Fenwick" data-who="Kris Withrow · Chase Spivey" data-cat="Strategic Planning" data-date="Apr 21, 2026" data-sum="LOI language review; blackline turned.">
+ <div class="tl-date">APR 21</div>
+ <div class="tl-content"><div class="tl-title">LOI Draft Review · Fenwick</div><div class="tl-who">Kris Withrow</div><div class="tl-sum">LOI language review; blackline turned.</div></div>
+ <span class="pill str">Strategic Planning</span>
+ </div>
+ <div class="tl-item" data-title="Engel · Pre-LOI Review" data-who="Rob Engel · Chase Spivey" data-cat="Advisory Board" data-date="Apr 17, 2026" data-sum="Technical readiness review ahead of LOI signing.">
+ <div class="tl-date">APR 17</div>
+ <div class="tl-content"><div class="tl-title">Engel · Pre-LOI Review</div><div class="tl-who">Rob Engel</div><div class="tl-sum">Technical readiness review ahead of LOI signing.</div></div>
+ <span class="pill iab">Advisory Board</span>
+ </div>
+ <div class="tl-item" data-title="Birdsong Case Study Filed" data-who="Chase Spivey" data-cat="Strategic Planning" data-date="Apr 14, 2026" data-sum="Biomechanical markers through ACIS lens · investor cornerstone.">
+ <div class="tl-date">APR 14</div>
+ <div class="tl-content"><div class="tl-title">Birdsong Case Study Filed</div><div class="tl-who">Chase Spivey</div><div class="tl-sum">Biomechanical markers through ACIS lens. Investor cornerstone.</div></div>
+ <span class="pill str">Strategic Planning</span>
+ </div>
+ <div class="tl-item" data-title="Sheldon Power Statement" data-who="Sheldon McClelland" data-cat="Strategic Planning" data-date="Apr 11, 2026" data-sum="COO positioning statement finalized.">
+ <div class="tl-date">APR 11</div>
+ <div class="tl-content"><div class="tl-title">Sheldon Power Statement</div><div class="tl-who">Sheldon McClelland</div><div class="tl-sum">COO positioning statement finalized.</div></div>
+ <span class="pill str">Strategic Planning</span>
+ </div>
+ <div class="tl-item" data-title="Mark Shirman · Discovery" data-who="Mark Shirman · Chase Spivey" data-cat="Investor Update" data-date="Apr 09, 2026" data-sum="Former CEO RiverMeadow Software. Strong interest expressed.">
+ <div class="tl-date">APR 09</div>
+ <div class="tl-content"><div class="tl-title">Mark Shirman · Discovery</div><div class="tl-who">Mark Shirman</div><div class="tl-sum">Former CEO RiverMeadow Software. Strong interest expressed.</div></div>
+ <span class="pill inv">Investor Update</span>
+ </div>
+ <div class="tl-item" data-title="Scott Price · Discovery" data-who="Scott Price · Chase Spivey" data-cat="Investor Update" data-date="Apr 07, 2026" data-sum="President, Beacon Oral Specialists. Personal investment interest.">
+ <div class="tl-date">APR 07</div>
+ <div class="tl-content"><div class="tl-title">Scott Price · Discovery</div><div class="tl-who">Scott Price</div><div class="tl-sum">President, Beacon Oral Specialists. Personal investment interest.</div></div>
+ <span class="pill inv">Investor Update</span>
+ </div>
+ <div class="tl-item" data-title="Stephen Piscotty · IAB Discovery" data-who="Stephen Piscotty · Jeff Newman" data-cat="Advisory Board" data-date="Apr 02, 2026" data-sum="Former MLB experience; player development connections.">
+ <div class="tl-date">APR 02</div>
+ <div class="tl-content"><div class="tl-title">Stephen Piscotty · IAB Discovery</div><div class="tl-who">Stephen Piscotty</div><div class="tl-sum">Former MLB experience; player development connections.</div></div>
+ <span class="pill iab">Advisory Board</span>
+ </div>
+ <div class="tl-item" data-title="Edwin Prather · IAB Discovery" data-who="Edwin Prather · Jeff Newman" data-cat="Advisory Board" data-date="Apr 02, 2026" data-sum="Bay Area attorney; GC at Alexander's Steakhouse.">
+ <div class="tl-date">APR 02</div>
+ <div class="tl-content"><div class="tl-title">Edwin Prather · IAB Discovery</div><div class="tl-who">Edwin Prather</div><div class="tl-sum">Bay Area attorney; GC at Alexander's Steakhouse.</div></div>
+ <span class="pill iab">Advisory Board</span>
+ </div>
+ <div class="tl-item" data-title="TrackMan Momentum Call" data-who="Adam Katz · Chase Spivey" data-cat="Strategic Planning" data-date="Apr 02, 2026" data-sum="Data partnership alignment confirmed for platform.">
+ <div class="tl-date">APR 02</div>
+ <div class="tl-content"><div class="tl-title">TrackMan Momentum Call</div><div class="tl-who">Adam Katz</div><div class="tl-sum">Data partnership alignment confirmed for platform.</div></div>
+ <span class="pill str">Strategic Planning</span>
+ </div>
+ <div class="tl-item" data-title="Withrow · Fenwick & West" data-who="Kris Withrow · Chase Spivey" data-cat="Strategic Planning" data-date="Apr 02, 2026" data-sum="Strategic legal framework and investor intros.">
+ <div class="tl-date">APR 02</div>
+ <div class="tl-content"><div class="tl-title">Withrow · Fenwick &amp; West</div><div class="tl-who">Kris Withrow</div><div class="tl-sum">Strategic legal framework and investor intros.</div></div>
+ <span class="pill str">Strategic Planning</span>
+ </div>
+ </div>
+ </div>
+
+ <!-- MARCH 2026 -->
+ <div class="tl-month fade" style="animation-delay:0.52s">
+ <div class="tl-m-band"><div class="tl-m">MAR '26</div><span class="tl-m-count">6 Meetings</span></div>
+ <div class="tl-banner">"Positioning cycle. Comparables filed; case study in motion."</div>
+ <div class="tl-items">
+ <div class="tl-item" data-title="Castillo · Terms" data-who="Tom Castillo · Chase Spivey" data-cat="Investor Update" data-date="Mar 28, 2026" data-sum="Investment terms; timeline for formalizing commitment.">
+ <div class="tl-date">MAR 28</div>
+ <div class="tl-content"><div class="tl-title">Castillo · Terms</div><div class="tl-who">Tom Castillo</div><div class="tl-sum">Investment terms; timeline for formalizing commitment.</div></div>
+ <span class="pill inv">Investor Update</span>
+ </div>
+ <div class="tl-item" data-title="ACIS Positioning Review" data-who="Sheldon McClelland · Chase Spivey" data-cat="Strategic Planning" data-date="Mar 25, 2026" data-sum="Positioning vs. Digital Athlete and Second Spectrum comparables.">
+ <div class="tl-date">MAR 25</div>
+ <div class="tl-content"><div class="tl-title">ACIS Positioning Review</div><div class="tl-who">Sheldon McClelland</div><div class="tl-sum">Positioning vs. Digital Athlete and Second Spectrum comparables.</div></div>
+ <span class="pill str">Strategic Planning</span>
+ </div>
+ <div class="tl-item" data-title="Q1 Board Meeting" data-who="Jeff Newman · Chase Spivey · Sheldon McClelland" data-cat="Board Meeting" data-date="Mar 22, 2026" data-sum="Formal minutes · cap table, runway, hiring plan ratified.">
+ <div class="tl-date">MAR 22</div>
+ <div class="tl-content"><div class="tl-title">Q1 Board Meeting</div><div class="tl-who">Jeff Newman</div><div class="tl-sum">Formal minutes. Cap table, runway, hiring plan ratified.</div></div>
+ <span class="pill brd">Board Meeting</span>
+ </div>
+ <div class="tl-item" data-title="Kunis Quarterly Review" data-who="Tom Kunis · Sheldon McClelland" data-cat="Strategic Planning" data-date="Mar 18, 2026" data-sum="Quarterly GTM review; investor narrative alignment.">
+ <div class="tl-date">MAR 18</div>
+ <div class="tl-content"><div class="tl-title">Kunis Quarterly Review</div><div class="tl-who">Tom Kunis</div><div class="tl-sum">Quarterly GTM review; investor narrative alignment.</div></div>
+ <span class="pill str">Strategic Planning</span>
+ </div>
+ <div class="tl-item" data-title="TrackMan Integration Spec" data-who="Adam Katz · Ramesh Bobba" data-cat="Strategic Planning" data-date="Mar 10, 2026" data-sum="Integration spec confirmed; delivery timeline set.">
+ <div class="tl-date">MAR 10</div>
+ <div class="tl-content"><div class="tl-title">TrackMan Integration Spec</div><div class="tl-who">Adam Katz</div><div class="tl-sum">Integration spec confirmed; delivery timeline set.</div></div>
+ <span class="pill str">Strategic Planning</span>
+ </div>
+ <div class="tl-item" data-title="Engel · Technical Pass" data-who="Rob Engel · Ramesh Bobba" data-cat="Advisory Board" data-date="Mar 05, 2026" data-sum="Second technical pass; signed off on pipeline v2.">
+ <div class="tl-date">MAR 05</div>
+ <div class="tl-content"><div class="tl-title">Engel · Technical Pass</div><div class="tl-who">Rob Engel</div><div class="tl-sum">Second technical pass; signed off on pipeline v2.</div></div>
+ <span class="pill iab">Advisory Board</span>
+ </div>
+ </div>
+ </div>
+
+ <!-- FEBRUARY 2026 -->
+ <div class="tl-month fade" style="animation-delay:0.6s">
+ <div class="tl-m-band"><div class="tl-m">FEB '26</div><span class="tl-m-count">6 Meetings</span></div>
+ <div class="tl-banner">"CTO in, Spring Training validated. Pre-product to pre-LOI."</div>
+ <div class="flag">
+ <div class="k">★ Key Milestone</div>
+ <div class="t">Spring Training Validation. ACIS presented at Tempe Diablo Stadium.</div>
+ </div>
+ <div class="tl-items">
+ <div class="tl-item" data-title="Castillo Follow-Up" data-who="Tom Castillo · Chase Spivey" data-cat="Investor Update" data-date="Feb 26, 2026" data-sum="Commitment timeline and next steps.">
+ <div class="tl-date">FEB 26</div>
+ <div class="tl-content"><div class="tl-title">Castillo Follow-Up</div><div class="tl-who">Tom Castillo</div><div class="tl-sum">Commitment timeline and next steps.</div></div>
+ <span class="pill inv">Investor Update</span>
+ </div>
+ <div class="tl-item" data-title="Spring Training Validation" data-who="Chase Spivey · Sheldon McClelland · 4 MLB officials" data-cat="Strategic Planning" data-date="Feb 23, 2026" data-sum="ACIS presented to four senior officials at Tempe Diablo Stadium.">
+ <div class="tl-date">FEB 23</div>
+ <div class="tl-content"><div class="tl-title">Spring Training Validation</div><div class="tl-who">Chase Spivey</div><div class="tl-sum">ACIS presented to four senior officials at Tempe Diablo Stadium.</div></div>
+ <span class="pill str">Strategic Planning</span>
+ </div>
+ <div class="tl-item" data-title="Board Meeting · Mid Q1" data-who="Jeff Newman · Chase Spivey · Sheldon McClelland" data-cat="Board Meeting" data-date="Feb 19, 2026" data-sum="Mid-quarter review; LOI process outlined.">
+ <div class="tl-date">FEB 19</div>
+ <div class="tl-content"><div class="tl-title">Board Meeting · Mid Q1</div><div class="tl-who">Jeff Newman</div><div class="tl-sum">Mid-quarter review; LOI process outlined.</div></div>
+ <span class="pill brd">Board Meeting</span>
+ </div>
+ <div class="tl-item" data-title="Ramesh Bobba · CTO Offer" data-who="Ramesh Bobba · Chase Spivey · Jeff Newman" data-cat="Strategic Planning" data-date="Feb 16, 2026" data-sum="Offer extended; CTO recruitment closed.">
+ <div class="tl-date">FEB 16</div>
+ <div class="tl-content"><div class="tl-title">Ramesh Bobba · CTO Offer</div><div class="tl-who">Ramesh Bobba</div><div class="tl-sum">Offer extended; CTO recruitment closed.</div></div>
+ <span class="pill str">Strategic Planning</span>
+ </div>
+ <div class="tl-item" data-title="Withrow · IP Structure" data-who="Kris Withrow · Chase Spivey" data-cat="Strategic Planning" data-date="Feb 11, 2026" data-sum="IP structure and licensing framework.">
+ <div class="tl-date">FEB 11</div>
+ <div class="tl-content"><div class="tl-title">Withrow · IP Structure</div><div class="tl-who">Kris Withrow</div><div class="tl-sum">IP structure and licensing framework.</div></div>
+ <span class="pill str">Strategic Planning</span>
+ </div>
+ <div class="tl-item" data-title="Erlin · Case Study Input" data-who="Robbie Erlin · Chase Spivey" data-cat="Advisory Board" data-date="Feb 04, 2026" data-sum="Pitcher workload narrative for Birdsong case study.">
+ <div class="tl-date">FEB 04</div>
+ <div class="tl-content"><div class="tl-title">Erlin · Case Study Input</div><div class="tl-who">Robbie Erlin</div><div class="tl-sum">Pitcher workload narrative for Birdsong case study.</div></div>
+ <span class="pill iab">Advisory Board</span>
+ </div>
+ </div>
+ </div>
+
+ <!-- JANUARY 2026 -->
+ <div class="tl-month fade" style="animation-delay:0.68s">
+ <div class="tl-m-band"><div class="tl-m">JAN '26</div><span class="tl-m-count">4 Meetings</span></div>
+ <div class="tl-banner">"IAB officially seated. Legal framework locks in with Fenwick."</div>
+ <div class="flag">
+ <div class="k">★ Key Milestone</div>
+ <div class="t">Industry Advisory Board officially established.</div>
+ </div>
+ <div class="tl-items">
+ <div class="tl-item" data-title="Engel Technical Review" data-who="Rob Engel · Chase Spivey" data-cat="Advisory Board" data-date="Jan 28, 2026" data-sum="Deep engineering review of model pipeline.">
+ <div class="tl-date">JAN 28</div>
+ <div class="tl-content"><div class="tl-title">Engel Technical Review</div><div class="tl-who">Rob Engel</div><div class="tl-sum">Deep engineering review of model pipeline.</div></div>
+ <span class="pill iab">Advisory Board</span>
+ </div>
+ <div class="tl-item" data-title="Joe Revels · Term Sheet" data-who="Joe Revels · Jeff Newman" data-cat="Investor Update" data-date="Jan 21, 2026" data-sum="Draft term sheet circulated.">
+ <div class="tl-date">JAN 21</div>
+ <div class="tl-content"><div class="tl-title">Joe Revels · Term Sheet</div><div class="tl-who">Joe Revels</div><div class="tl-sum">Draft term sheet circulated.</div></div>
+ <span class="pill inv">Investor Update</span>
+ </div>
+ <div class="tl-item" data-title="Kris Withrow · Fenwick" data-who="Kris Withrow · Chase Spivey" data-cat="Strategic Planning" data-date="Jan 14, 2026" data-sum="Legal framework and investor intro opportunities.">
+ <div class="tl-date">JAN 14</div>
+ <div class="tl-content"><div class="tl-title">Kris Withrow · Fenwick</div><div class="tl-who">Kris Withrow</div><div class="tl-sum">Legal framework and investor intro opportunities.</div></div>
+ <span class="pill str">Strategic Planning</span>
+ </div>
+ <div class="tl-item" data-title="IAB Officially Seated" data-who="Jeff Newman · Rob Engel · Robbie Erlin" data-cat="Board Meeting" data-date="Jan 07, 2026" data-sum="First IAB members formally onboarded.">
+ <div class="tl-date">JAN 07</div>
+ <div class="tl-content"><div class="tl-title">IAB Officially Seated</div><div class="tl-who">Jeff Newman</div><div class="tl-sum">First IAB members formally onboarded.</div></div>
+ <span class="pill brd">Board Meeting</span>
+ </div>
+ </div>
+ </div>
+
+ <!-- DECEMBER 2025 -->
+ <div class="tl-month fade" style="animation-delay:0.76s">
+ <div class="tl-m-band"><div class="tl-m">DEC '25</div><span class="tl-m-count">4 Meetings</span></div>
+ <div class="tl-banner">"Partnership fabric. TrackMan introduction; first term sheet signals."</div>
+ <div class="tl-items">
+ <div class="tl-item" data-title="Q4 Board Meeting" data-who="Jeff Newman · Chase Spivey · Sheldon McClelland" data-cat="Board Meeting" data-date="Dec 22, 2025" data-sum="Formal quarter-end board session; minutes filed.">
+ <div class="tl-date">DEC 22</div>
+ <div class="tl-content"><div class="tl-title">Q4 Board Meeting</div><div class="tl-who">Jeff Newman</div><div class="tl-sum">Formal quarter-end board session; minutes filed.</div></div>
+ <span class="pill brd">Board Meeting</span>
+ </div>
+ <div class="tl-item" data-title="Kunis Strategy Review" data-who="Tom Kunis · Sheldon McClelland" data-cat="Strategic Planning" data-date="Dec 16, 2025" data-sum="Competitive landscape review; comp set gaps identified.">
+ <div class="tl-date">DEC 16</div>
+ <div class="tl-content"><div class="tl-title">Kunis Strategy Review</div><div class="tl-who">Tom Kunis</div><div class="tl-sum">Competitive landscape review; comp set gaps identified.</div></div>
+ <span class="pill str">Strategic Planning</span>
+ </div>
+ <div class="tl-item" data-title="Tom Castillo · First Call" data-who="Tom Castillo · Chase Spivey" data-cat="Investor Update" data-date="Dec 09, 2025" data-sum="Personal investment interest expressed; follow-ups scheduled.">
+ <div class="tl-date">DEC 09</div>
+ <div class="tl-content"><div class="tl-title">Tom Castillo · First Call</div><div class="tl-who">Tom Castillo</div><div class="tl-sum">Personal investment interest expressed; follow-ups scheduled.</div></div>
+ <span class="pill inv">Investor Update</span>
+ </div>
+ <div class="tl-item" data-title="TrackMan Intro · Adam Katz" data-who="Adam Katz · Chase Spivey" data-cat="Strategic Planning" data-date="Dec 02, 2025" data-sum="Data feed integration possibilities within ACIS.">
+ <div class="tl-date">DEC 02</div>
+ <div class="tl-content"><div class="tl-title">TrackMan Intro · Adam Katz</div><div class="tl-who">Adam Katz</div><div class="tl-sum">Data feed integration possibilities within ACIS.</div></div>
+ <span class="pill str">Strategic Planning</span>
+ </div>
+ </div>
+ </div>
+
+ <!-- NOVEMBER 2025 -->
+ <div class="tl-month fade" style="animation-delay:0.84s">
+ <div class="tl-m-band"><div class="tl-m">NOV '25</div><span class="tl-m-count">4 Meetings</span></div>
+ <div class="tl-banner">"Investor lane opens. Joe Revels enters; GTM conversations deepen."</div>
+ <div class="tl-items">
+ <div class="tl-item" data-title="Joe Revels Follow-Up" data-who="Joe Revels · Chase Spivey" data-cat="Investor Update" data-date="Nov 26, 2025" data-sum="Terms exploration; term sheet discussion opened.">
+ <div class="tl-date">NOV 26</div>
+ <div class="tl-content"><div class="tl-title">Joe Revels Follow-Up</div><div class="tl-who">Joe Revels</div><div class="tl-sum">Terms exploration; term sheet discussion opened.</div></div>
+ <span class="pill inv">Investor Update</span>
+ </div>
+ <div class="tl-item" data-title="Board Sync · Q4" data-who="Chase Spivey · Jeff Newman · Sheldon McClelland" data-cat="Board Meeting" data-date="Nov 18, 2025" data-sum="Quarter close, hiring plan, cash position.">
+ <div class="tl-date">NOV 18</div>
+ <div class="tl-content"><div class="tl-title">Board Sync · Q4</div><div class="tl-who">Chase Spivey</div><div class="tl-sum">Quarter close, hiring plan, cash position.</div></div>
+ <span class="pill brd">Board Meeting</span>
+ </div>
+ <div class="tl-item" data-title="Tom Kunis · Strategy Call" data-who="Tom Kunis · Sheldon McClelland" data-cat="Strategic Planning" data-date="Nov 12, 2025" data-sum="GTM framing and league-first positioning.">
+ <div class="tl-date">NOV 12</div>
+ <div class="tl-content"><div class="tl-title">Tom Kunis · Strategy Call</div><div class="tl-who">Tom Kunis</div><div class="tl-sum">GTM framing and league-first positioning.</div></div>
+ <span class="pill str">Strategic Planning</span>
+ </div>
+ <div class="tl-item" data-title="Joe Revels Discovery" data-who="Joe Revels · Chase Spivey" data-cat="Investor Update" data-date="Nov 04, 2025" data-sum="Initial investor conversation · runway, thesis, cap table.">
+ <div class="tl-date">NOV 04</div>
+ <div class="tl-content"><div class="tl-title">Joe Revels Discovery</div><div class="tl-who">Joe Revels</div><div class="tl-sum">Initial investor conversation. Runway, thesis, cap table.</div></div>
+ <span class="pill inv">Investor Update</span>
+ </div>
+ </div>
+ </div>
+
+ <!-- OCTOBER 2025 -->
+ <div class="tl-month fade" style="animation-delay:0.92s">
+ <div class="tl-m-band"><div class="tl-m">OCT '25</div><span class="tl-m-count">3 Meetings</span></div>
+ <div class="tl-banner">"The founding conversations. IAB framework drafted, first invites out."</div>
+ <div class="tl-items">
+ <div class="tl-item" data-title="Robbie Erlin · IAB Invite" data-who="Robbie Erlin · Jeff Newman" data-cat="Advisory Board" data-date="Oct 29, 2025" data-sum="Pitcher perspective on injury detection model · board seat accepted.">
+ <div class="tl-date">OCT 29</div>
+ <div class="tl-content"><div class="tl-title">Robbie Erlin · IAB Invite</div><div class="tl-who">Robbie Erlin</div><div class="tl-sum">Pitcher perspective on injury detection model. Board seat accepted.</div></div>
+ <span class="pill iab">Advisory Board</span>
+ </div>
+ <div class="tl-item" data-title="Rob Engel · IAB Invite" data-who="Rob Engel · Jeff Newman" data-cat="Advisory Board" data-date="Oct 22, 2025" data-sum="Invitation discussion; role expectations and technical review scope agreed.">
+ <div class="tl-date">OCT 22</div>
+ <div class="tl-content"><div class="tl-title">Rob Engel · IAB Invite</div><div class="tl-who">Rob Engel</div><div class="tl-sum">Invitation discussion; role expectations and technical review scope agreed.</div></div>
+ <span class="pill iab">Advisory Board</span>
+ </div>
+ <div class="tl-item" data-title="IAB Framework Kickoff" data-who="Jeff Newman · Chase Spivey · Sheldon McClelland" data-cat="Board Meeting" data-date="Oct 12, 2025" data-sum="Initial draft of IAB program framework · seat terms, honorarium, cadence.">
+ <div class="tl-date">OCT 12</div>
+ <div class="tl-content"><div class="tl-title">IAB Framework Kickoff</div><div class="tl-who">Jeff Newman</div><div class="tl-sum">Initial draft of IAB program framework. Seat terms, honorarium, cadence.</div></div>
+ <span class="pill brd">Board Meeting</span>
+ </div>
+ </div>
+ </div>
+
+ <div class="bottom">
+ <div class="tagline"><em>Every Athlete</em> Deserves a Baseline.</div>
+ <div class="bottom-mono">Baseline Analytics · Investor Portal · 06 · Timeline</div>
+ </div>
+
+</div>
+
+<!-- Meeting detail modal -->
+<div class="modal-backdrop" id="modal">
+ <div class="modal-panel">
+ <button class="modal-close" id="modalClose">×</button>
+ <div class="modal-kicker" id="modalKicker"></div>
+ <div class="modal-title" id="modalTitle"></div>
+ <div class="modal-meta">
+ <div><div class="ml">Date</div><div class="mv" id="modalDate"></div></div>
+ <div><div class="ml">Attendees</div><div class="mv" id="modalWho"></div></div>
+ <div><div class="ml">Category</div><div class="mv" id="modalCat"></div></div>
+ </div>
+ <div class="modal-body" id="modalBody"></div>
+ </div>
+</div>
+
+<script>
+ // Collapsible months · wrap each month's body and wire up toggles
+ const months = Array.from(document.querySelectorAll('.tl-month'));
+ months.forEach((month, idx) => {
+ month.dataset.idx = idx;
+ const band = month.querySelector('.tl-m-band');
+ const body = document.createElement('div');
+ body.className = 'tl-body';
+ const inner = document.createElement('div');
+ inner.className = 'tl-body-inner';
+ let next = band.nextElementSibling;
+ while (next) {
+ const sibling = next;
+ next = next.nextElementSibling;
+ inner.appendChild(sibling);
+ }
+ body.appendChild(inner);
+ month.appendChild(body);
+
+ band.addEventListener('click', () => month.classList.toggle('collapsed'));
+
+ // Default: only current month (first) expanded
+ if (idx !== 0) month.classList.add('collapsed');
+ });
+
+ // Quick-jump chips · expand target and smooth-scroll to it
+ document.querySelectorAll('.tl-chip').forEach(chip => {
+ chip.addEventListener('click', () => {
+ const idx = chip.dataset.idx;
+ const target = document.querySelector('.tl-month[data-idx="' + idx + '"]');
+ if (!target) return;
+ target.classList.remove('collapsed');
+ setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+ });
+ });
+
+ // Expand / Collapse all
+ document.getElementById('expandAll').addEventListener('click', () => {
+ months.forEach(m => m.classList.remove('collapsed'));
+ });
+ document.getElementById('collapseAll').addEventListener('click', () => {
+ months.forEach(m => m.classList.add('collapsed'));
+ });
+
+ // Meeting detail modal
+ const modal = document.getElementById('modal');
+ const mKicker = document.getElementById('modalKicker');
+ const mTitle = document.getElementById('modalTitle');
+ const mDate = document.getElementById('modalDate');
+ const mWho = document.getElementById('modalWho');
+ const mCat = document.getElementById('modalCat');
+ const mBody = document.getElementById('modalBody');
+ const mClose = document.getElementById('modalClose');
+
+ document.querySelectorAll('.tl-item').forEach(item => {
+ item.addEventListener('click', (e) => {
+ e.stopPropagation();
+ mKicker.textContent = '● ' + item.dataset.cat.toUpperCase();
+ mTitle.textContent = item.dataset.title;
+ mDate.textContent = item.dataset.date;
+ mWho.textContent = item.dataset.who;
+ mCat.textContent = item.dataset.cat;
+ mBody.textContent = item.dataset.sum;
+ modal.classList.add('visible');
+ document.body.style.overflow = 'hidden';
+ });
+ });
+
+ function closeModal() {
+ modal.classList.remove('visible');
+ document.body.style.overflow = '';
+ }
+ mClose.addEventListener('click', closeModal);
+ modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+</script>
+
+</body>
+</html>

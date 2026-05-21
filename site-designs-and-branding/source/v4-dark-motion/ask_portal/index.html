@@ -4,13 +4,10 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Baseline Analytics · Ask the Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
- @font-face { font-family: 'GT America'; src: url('../../brand_source/fonts_2/GT-America-Standard-Light-Trial.otf') format('opentype'); font-weight: 300; }
- @font-face { font-family: 'GT America'; src: url('../../brand_source/fonts_2/GT-America-Standard-Regular-Trial.otf') format('opentype'); font-weight: 400; }
- @font-face { font-family: 'GT America'; src: url('../../brand_source/fonts_2/GT-America-Standard-Medium-Trial.otf') format('opentype'); font-weight: 500; }
- @font-face { font-family: 'GT America'; src: url('../../brand_source/fonts_2/GT-America-Standard-Bold-Trial.otf') format('opentype'); font-weight: 700; }
- @font-face { font-family: 'GT America Mono'; src: url('../../brand_source/fonts_1/GT-America-Mono-Regular-Trial.otf') format('opentype'); font-weight: 400; }
- @font-face { font-family: 'GT America Mono'; src: url('../../brand_source/fonts_1/GT-America-Mono-Medium-Trial.otf') format('opentype'); font-weight: 500; }
 
  :root {
  --black: #000; --onyx: #121211; --onyx-2: #1a1916;
@@ -23,10 +20,9 @@
  * { box-sizing: border-box; margin: 0; padding: 0; }
  html, body {
  background: var(--black); color: var(--mercury);
- font-family: 'GT America', -apple-system, sans-serif; font-weight: 300;
+ font-family: 'Manrope', -apple-system, sans-serif; font-weight: 400;
  -webkit-font-smoothing: antialiased;
  }
- .mono { font-family: 'GT America Mono', ui-monospace, monospace; }
  ::selection { background: var(--gold); color: var(--black); }
 
  /* Top nav */
@@ -44,23 +40,23 @@
  .topnav-brand .mark span:nth-child(3) { height: 36px; }
  .topnav-brand .mark span:nth-child(4) { height: 28px; }
  .topnav-brand .mark span:nth-child(5) { height: 20px; background: var(--gold-mid); }
- .topnav-brand .name { font-size: 13px; font-weight: 500; color: var(--mercury); }
- .topnav-brand .sub { font-family: 'GT America Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: var(--gold-mid); text-transform: uppercase; margin-top: 2px; }
+ .topnav-brand .name { font-size: 15px; font-weight: 500; color: var(--mercury); }
+ .topnav-brand .sub { font-family: 'Manrope', -apple-system, sans-serif; font-size: 11px; letter-spacing: 0.2em; color: var(--gold-mid); text-transform: uppercase; margin-top: 2px; }
  .topnav-links { display: flex; gap: 4px; align-items: center; }
- .topnav-links a, .topnav-links .trigger { padding: 8px 16px; border-radius: 4px; text-decoration: none; font-size: 13px; color: var(--mercury-dim); transition: all 0.2s; cursor: pointer; }
+ .topnav-links a, .topnav-links .trigger { padding: 8px 16px; border-radius: 4px; text-decoration: none; font-size: 15px; color: var(--mercury-dim); transition: all 0.2s; cursor: pointer; }
  .topnav-links a:hover, .topnav-links .trigger:hover { color: var(--mercury); }
  .topnav-links a.active, .topnav-links .dropdown.active .trigger { color: var(--gold); background: rgba(255,198,85,0.08); }
  .dropdown { position: relative; }
- .dropdown .trigger { display: inline-flex; align-items: center; gap: 6px; background: transparent; border: none; font-family: inherit; font-size: 13px; letter-spacing: 0.01em; font-weight: 400; }
+ .dropdown .trigger { display: inline-flex; align-items: center; gap: 6px; background: transparent; border: none; font-family: inherit; font-size: 15px; letter-spacing: 0.01em; font-weight: 400; }
  .dropdown .trigger::after { content: ''; width: 6px; height: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); margin-top: -3px; transition: transform 0.2s; }
  .dropdown:hover .trigger::after { transform: rotate(225deg); margin-top: 2px; }
  .dropdown-menu { position: absolute; top: 100%; left: 0; min-width: 180px; padding: 8px 0; background: var(--onyx); border: 1px solid var(--hairline-2); opacity: 0; pointer-events: none; transform: translateY(-4px); transition: opacity 0.18s, transform 0.18s; margin-top: 0; z-index: 200; }
  .dropdown:hover .dropdown-menu { opacity: 1; pointer-events: auto; transform: translateY(0); }
- .dropdown-menu a { display: block; padding: 10px 18px; font-size: 13px; color: var(--mercury-dim); text-decoration: none; transition: all 0.15s; border-radius: 0; }
+ .dropdown-menu a { display: block; padding: 10px 18px; font-size: 15px; color: var(--mercury-dim); text-decoration: none; transition: all 0.15s; border-radius: 0; }
  .dropdown-menu a:hover { background: rgba(255,198,85,0.08); color: var(--gold); }
  .dropdown-menu a.active { color: var(--gold); }
- .topnav-user { display: flex; align-items: center; gap: 8px; font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.16em; color: var(--mercury-dim); text-transform: uppercase; }
- .topnav-user .avatar { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--gold-mid); display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--gold); font-weight: 500; }
+ .topnav-user { display: flex; align-items: center; gap: 8px; font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px; letter-spacing: 0.16em; color: var(--mercury-dim); text-transform: uppercase; }
+ .topnav-user .avatar { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--gold-mid); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--gold); font-weight: 500; }
 
  .page { max-width: 1480px; margin: 0 auto; padding: 72px 60px 120px; }
 
@@ -68,14 +64,14 @@
  display: flex; justify-content: space-between; align-items: flex-start;
  padding-bottom: 20px; border-bottom: 1px solid var(--hairline-2); margin-bottom: 56px;
  }
- .masthead-left .dateline { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.26em; color: var(--gold-mid); text-transform: uppercase; margin-bottom: 8px; }
- .masthead-left .pub { font-size: 13px; color: var(--mercury-dim); }
- .masthead-right { text-align: right; font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--mercury-faint); text-transform: uppercase; }
+ .masthead-left .dateline { font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px; letter-spacing: 0.26em; color: var(--gold-mid); text-transform: uppercase; margin-bottom: 8px; }
+ .masthead-left .pub { font-size: 15px; color: var(--mercury-dim); }
+ .masthead-right { text-align: right; font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px; letter-spacing: 0.2em; color: var(--mercury-faint); text-transform: uppercase; }
  .masthead-right .ed { color: var(--mercury-dim); }
 
  .hero-wrap { position: relative; overflow: hidden; margin-bottom: 28px; padding-bottom: 8px; }
  .hero-headline {
- font-size: 72px; font-weight: 300; line-height: 1.02;
+ font-size: 72px; font-weight: 400; line-height: 1.02;
  letter-spacing: -0.035em; color: var(--mercury); max-width: 1100px;
  position: relative; z-index: 2;
  }
@@ -90,7 +86,7 @@
 
  .standfirst {
  max-width: 760px; font-size: 17px; line-height: 1.55; color: var(--mercury-dim);
- font-weight: 300; margin-bottom: 56px;
+ font-weight: 400; margin-bottom: 56px;
  }
  .standfirst em { color: var(--mercury); font-style: normal; }
 
@@ -101,7 +97,7 @@
  .search-input {
  background: rgba(18,18,17,0.9); border: 1px solid var(--hairline-2);
  color: var(--mercury); padding: 20px 24px;
- font-family: 'GT America', sans-serif; font-size: 16px; font-weight: 300;
+ font-family: 'Manrope', sans-serif; font-size: 16px; font-weight: 400;
  letter-spacing: -0.005em; outline: none;
  transition: all 0.2s;
  }
@@ -109,8 +105,8 @@
  .search-input:focus { border-color: var(--gold); background: rgba(18,18,17,1); }
  .ask-btn {
  background: var(--gold); color: var(--black); border: none;
- padding: 0 32px; font-family: 'GT America Mono', monospace;
- font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+ padding: 0 32px; font-family: 'Manrope', -apple-system, sans-serif;
+ font-size: 13px; letter-spacing: 0.24em; text-transform: uppercase;
  font-weight: 500; cursor: pointer; transition: all 0.2s;
  min-width: 140px;
  }
@@ -119,7 +115,7 @@
 
  /* Prompts */
  .prompts-label {
- font-family: 'GT America Mono', monospace; font-size: 10px;
+ font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px;
  letter-spacing: 0.22em; color: var(--gold-mid); text-transform: uppercase;
  margin-bottom: 16px;
  }
@@ -129,7 +125,7 @@
  .prompt {
  background: rgba(18,18,17,0.7); border: 1px solid var(--hairline-2);
  padding: 20px 22px; cursor: pointer; transition: all 0.2s;
- font-family: 'GT America', sans-serif; font-size: 14px; font-weight: 300;
+ font-family: 'Manrope', sans-serif; font-size: 16px; font-weight: 400;
  color: var(--mercury-dim); text-align: left; line-height: 1.4;
  }
  .prompt:hover {
@@ -149,11 +145,11 @@
  }
  .answer-head {
  display: flex; align-items: baseline; gap: 16px;
- font-family: 'GT America Mono', monospace; font-size: 10px;
+ font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px;
  letter-spacing: 0.22em; color: var(--gold); text-transform: uppercase;
  margin-bottom: 14px;
  }
- .answer-head::before { content: '↳'; color: var(--gold); font-size: 14px; }
+ .answer-head::before { content: '↳'; color: var(--gold); font-size: 16px; }
  .answer-question {
  font-size: 22px; font-weight: 400; color: var(--mercury);
  letter-spacing: -0.015em; line-height: 1.3; margin-bottom: 20px;
@@ -165,13 +161,13 @@
  }
  .answer-body p {
  font-size: 16px; line-height: 1.7; color: var(--mercury);
- font-weight: 300; letter-spacing: -0.005em;
+ font-weight: 400; letter-spacing: -0.005em;
  }
  .answer-body p strong { color: var(--gold); font-weight: 500; }
  .answer-meta {
  display: flex; justify-content: space-between; align-items: center;
  margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--hairline);
- font-family: 'GT America Mono', monospace; font-size: 10px;
+ font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px;
  letter-spacing: 0.18em; color: var(--mercury-faint); text-transform: uppercase;
  }
 
@@ -185,16 +181,16 @@
  .loading-dot:nth-child(2) { animation-delay: 0.2s; }
  .loading-dot:nth-child(3) { animation-delay: 0.4s; }
  @keyframes loadingPulse { 0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); } 40% { opacity: 1; transform: scale(1); } }
- .loading-text { font-family: 'GT America Mono', monospace; font-size: 11px; letter-spacing: 0.18em; color: var(--mercury-faint); text-transform: uppercase; }
+ .loading-text { font-family: 'Manrope', -apple-system, sans-serif; font-size: 13px; letter-spacing: 0.18em; color: var(--mercury-faint); text-transform: uppercase; }
 
  /* Section heading */
  .section-heading {
  display: flex; justify-content: space-between; align-items: baseline;
  padding-bottom: 16px; border-bottom: 1px solid var(--hairline-2); margin-bottom: 24px;
  }
- .section-heading .num { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.22em; color: var(--gold-mid); text-transform: uppercase; }
+ .section-heading .num { font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px; letter-spacing: 0.22em; color: var(--gold-mid); text-transform: uppercase; }
  .section-heading .title { font-size: 22px; font-weight: 400; color: var(--mercury); letter-spacing: -0.01em; flex: 1; padding-left: 24px; }
- .section-heading .meta { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.18em; color: var(--mercury-dim); text-transform: uppercase; }
+ .section-heading .meta { font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px; letter-spacing: 0.18em; color: var(--mercury-dim); text-transform: uppercase; }
 
  /* Example capabilities */
  .capabilities {
@@ -205,20 +201,20 @@
  padding: 20px 0 0;
  }
  .capability .cap-eyebrow {
- font-family: 'GT America Mono', monospace; font-size: 10px;
+ font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px;
  letter-spacing: 0.22em; color: var(--gold); text-transform: uppercase; margin-bottom: 12px;
  }
  .capability .cap-title { font-size: 17px; font-weight: 500; color: var(--mercury); margin-bottom: 8px; letter-spacing: -0.005em; }
- .capability .cap-body { font-size: 13px; line-height: 1.6; color: var(--mercury-dim); font-weight: 300; }
+ .capability .cap-body { font-size: 15px; line-height: 1.6; color: var(--mercury-dim); font-weight: 400; }
 
  /* Bottom */
  .bottom {
  margin-top: 80px; padding-top: 24px; border-top: 1px solid var(--hairline-2);
  display: flex; justify-content: space-between; align-items: center;
  }
- .tagline { font-size: 13px; color: var(--mercury-dim); }
+ .tagline { font-size: 15px; color: var(--mercury-dim); }
  .tagline em { color: var(--gold); font-style: normal; font-weight: 400; }
- .bottom-mono { font-family: 'GT America Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--mercury-faint); text-transform: uppercase; }
+ .bottom-mono { font-family: 'Manrope', -apple-system, sans-serif; font-size: 12px; letter-spacing: 0.2em; color: var(--mercury-faint); text-transform: uppercase; }
 
  @keyframes slideIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
  .fade { animation: slideIn 0.8s ease-out both; }
@@ -264,8 +260,8 @@
  <a href="../ask_portal/index.html" class="active">Ask</a>
  </div>
  <div class="topnav-user">
- <div class="avatar">C</div>
- <span>Chase</span>
+ <div class="avatar" data-cms-field="user_initial">C</div>
+ <span data-cms-field="user_name">Chase</span>
  </div>
 </nav>
 
@@ -278,7 +274,7 @@
  </div>
  <div class="masthead-right">
  <div class="ed">Ask the Portal</div>
- <div>New · Cycle 04</div>
+ <div>New · Q2 2026</div>
  </div>
  </div>
 
@@ -327,7 +323,7 @@
  <div class="answer-body">
  <p id="answerBody"></p>
  <div class="answer-meta">
- <span>Baseline Portal · Cycle 04</span>
+ <span>Baseline Portal · Q2 2026</span>
  <span id="answerSource">Source · Portal Index</span>
  </div>
  </div>
@@ -387,7 +383,7 @@
  },
  "Materials created this cycle?": {
  body: "Six deliverables this cycle. <strong>Birdsong Case Study</strong> (Chase, Apr 14), <strong>Power Statement</strong> (Sheldon, Apr 11), <strong>Deal Comparables Doc</strong> (Sheldon, Apr 8), <strong>IAB Framework</strong> (Jeff, Apr 5), <strong>Brand Guidelines v1.0</strong> (PERKK, Apr 3), <strong>TrackMan Integration Memo</strong> (Chase, Mar 30).",
- source: "Source · Materials Vault · Cycle 04"
+ source: "Source · Materials Vault · Q2 2026"
  },
  "Next advisory board call?": {
  body: "No specific date confirmed. IAB charter is <strong>four quarterly meetings per year</strong> plus individual sessions as needed. Next window is late April to early May 2026. Jeff Newman and Chase Spivey will convene the roster once MLB Letter of Intent signature is confirmed.",
