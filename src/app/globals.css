@@ -1,0 +1,289 @@
+@import "tailwindcss";
+
+/*
+  ====================================================================
+  V4 DESIGN TOKENS — Baseline Stakeholder Portal
+  Locked to https://baselineinteractivev4.netlify.app/
+  Every value here is mirrored from the V4 static deploy. Do not
+  substitute equivalents (Tailwind, Figma exports, etc.). If a token
+  needs to change, update V4 first.
+  ====================================================================
+*/
+
+@theme {
+  /* Surfaces */
+  --color-black: #000000;
+  --color-onyx: #121211;
+  --color-onyx-2: #1a1916;
+
+  /* Gold accents — three steps */
+  --color-gold: #ffc655;
+  --color-gold-mid: #ae8e51;
+  --color-gold-deep: #63553c;
+
+  /* Mercury (text + neutral) */
+  --color-mercury: #e5e5e5;
+
+  /* Category colors — meeting / activity types */
+  --color-cat-investor: #ffc655;
+  --color-cat-advisory: #6cbf8f;
+  --color-cat-strategy: #6ca8e5;
+  --color-cat-board: #c49be5;
+
+  /* Typography — V4 uses Manrope only (Fraunces + JetBrains Mono dropped) */
+  --font-sans: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+/*
+  --------------------------------------------------------------------
+  Raw CSS variables — components reference these by their canonical V4
+  names (--gold, --mercury-dim, --hairline-2, etc.) so the inline
+  <style> blocks ported from V4 work without renaming.
+  --------------------------------------------------------------------
+*/
+:root {
+  --black: #000;
+  --onyx: #121211;
+  --onyx-2: #1a1916;
+
+  --gold: #ffc655;
+  --gold-mid: #ae8e51;
+  --gold-deep: #63553c;
+
+  --mercury: #e5e5e5;
+  --mercury-dim: rgba(229, 229, 229, 0.62);
+  --mercury-faint: rgba(229, 229, 229, 0.32);
+
+  /* Hairlines are mercury-tinted in V4, not gold-tinted */
+  --hairline: rgba(229, 229, 229, 0.08);
+  --hairline-2: rgba(229, 229, 229, 0.14);
+
+  --cat-investor: #ffc655;
+  --cat-advisory: #6cbf8f;
+  --cat-strategy: #6ca8e5;
+  --cat-board: #c49be5;
+}
+
+/*
+  --------------------------------------------------------------------
+  Base resets
+  --------------------------------------------------------------------
+*/
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--black);
+  color: var(--mercury);
+  font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+}
+
+input {
+  font: inherit;
+  color: inherit;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--black);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--black);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--mercury-faint);
+  border-radius: 3px;
+}
+
+/* Focus states (accessibility) */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Skip-to-content (accessibility) */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--gold);
+  color: var(--black);
+  padding: 8px 16px;
+  text-decoration: none;
+  z-index: 1000;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/*
+  ====================================================================
+  Shared animations — V4 reuses these across multiple pages
+  ====================================================================
+*/
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroSlide {
+  from {
+    opacity: 0;
+    transform: translateY(100%) rotate(2deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+  }
+}
+
+@keyframes lineSlide {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes logoFade {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes progressFill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.fade {
+  animation: slideIn 0.8s ease-out both;
+}
+
+/*
+  ====================================================================
+  Brand divider — 5 vertical gold bars (used between major sections)
+  ====================================================================
+*/
+
+.brand-divider {
+  display: flex;
+  gap: 3px;
+  align-items: flex-end;
+  height: 20px;
+  margin: 40px 0;
+  padding: 0;
+  opacity: 0.6;
+}
+.brand-divider span {
+  width: 3px;
+  background: var(--gold);
+  display: block;
+}
+.brand-divider span:nth-child(1) {
+  height: 10px;
+  background: var(--gold-mid);
+}
+.brand-divider span:nth-child(2) {
+  height: 16px;
+}
+.brand-divider span:nth-child(3) {
+  height: 20px;
+}
+.brand-divider span:nth-child(4) {
+  height: 14px;
+}
+.brand-divider span:nth-child(5) {
+  height: 8px;
+  background: var(--gold-mid);
+}
